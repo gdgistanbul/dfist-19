@@ -3,8 +3,9 @@ import 'package:flutter/services.dart';
 import 'screens/home.dart';
 import 'utils/const.dart';
 
-void main() async{
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+void main() async {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
     runApp(MyApp());
   });
 }
@@ -15,7 +16,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isDark = true;
+  bool isDark = false;
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: isDark ? Constants.darkPrimary : Constants.lightPrimary,
-      statusBarIconBrightness: isDark?Brightness.light:Brightness.dark,
+      statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
     ));
   }
 

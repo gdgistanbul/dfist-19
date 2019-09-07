@@ -19,3 +19,9 @@ dev_dependencies:
 flutter:
 
   uses-material-design: true
+
+  assets:
+      - assets/logo.png
+      - assets/info.png
+      - assets/notifications.png
+      - assets/tickets.png
