@@ -9,7 +9,7 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
   int _page = 0;
-s
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
