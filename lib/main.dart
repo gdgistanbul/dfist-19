@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/home.dart';
@@ -23,9 +24,11 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: isDark ? Constants.darkPrimary : Constants.lightPrimary,
-      statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
     ));
+    imageCache.clear();
+    FirebaseAnalytics().logAppOpen();
   }
 
   @override

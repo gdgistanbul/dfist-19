@@ -11,6 +11,7 @@ class Constants{
   static Color lightBG = Color(0xfffcfcff);
   static Color darkBG = Colors.black;
   static Color timeBG = Color(0xff5563ff);
+  static Color transparent = Colors.transparent;
 
   static ThemeData lightTheme = ThemeData(
     backgroundColor: lightBG,

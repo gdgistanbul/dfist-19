@@ -4,14 +4,22 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
 
   flutter:
     sdk: flutter
 
+  url_launcher: 3.0.0
+
   cupertino_icons: ^0.1.2
+
+  add_2_calendar: ^1.3.0
+
+  firebase_core: ^0.4.0+1
+
+  firebase_analytics: ^4.0.2
 
 dev_dependencies:
   flutter_test:
@@ -20,8 +28,28 @@ flutter:
 
   uses-material-design: true
 
+  fonts:
+    - family: RedHatDisplay
+      fonts:
+        - asset: fonts/RedHatDisplay-Black.ttf
+        - asset: fonts/RedHatDisplay-BlackItalic.ttf
+        - asset: fonts/RedHatDisplay-Bold.ttf
+        - asset: fonts/RedHatDisplay-BoldItalic.ttf
+        - asset: fonts/RedHatDisplay-Medium.ttf
+        - asset: fonts/RedHatDisplay-MediumItalic.ttf
+        - asset: fonts/RedHatDisplay-Regular.ttf
+        - asset: fonts/RedHatDisplay-RegularItalic.ttf
+
   assets:
       - assets/logo.png
       - assets/info.png
       - assets/notifications.png
       - assets/tickets.png
+      - assets/uniq_map.png
+      - assets/gdg_istanbul_logo.png
+      - assets/facebook.png
+      - assets/instagram.png
+      - assets/linkedin.png
+      - assets/twitter.png
+      - assets/youtube.png
+
