@@ -1,3 +1,4 @@
+import 'package:dfist19/screens/information.dart';
 import 'package:flutter/material.dart';
 
 class MainScreen extends StatefulWidget {
@@ -13,8 +14,8 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(children: <Widget>[
-      Padding(
-      padding: EdgeInsets.only(top: 0.0),
+        Padding(
+          padding: EdgeInsets.only(top: 0.0),
           child: new Image.asset(
             'assets/tickets.png',
             fit: BoxFit.fill,
@@ -26,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
 //              image: new ExactAssetImage('assets/tickets.png'), fit: BoxFit.cover),
 //        ),
           child: Padding(
-            padding: EdgeInsets.only(top: 75.0, left: 24, right: 24),
+            padding: EdgeInsets.only(top: 65.0, left: 16, right: 16),
             child: Row(
 //            mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,7 +44,9 @@ class _MainScreenState extends State<MainScreen> {
                       tooltip: 'Increase volume by 10',
                       onPressed: () {
                         setState(() {
-                          _page = 1;
+                          _page ++;
+                          Navigator.push(context, new MaterialPageRoute(
+                              builder: (context) => new InformationScreen()),);
                         });
                       },
                     ),
