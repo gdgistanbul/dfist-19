@@ -1,5 +1,8 @@
 import 'package:dfist19/screens/information.dart';
+import 'package:dfist19/utils/const.dart' as prefix0;
+import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
+import 'package:dfist19/utils/sessions.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -44,9 +47,12 @@ class _MainScreenState extends State<MainScreen> {
                       tooltip: 'Increase volume by 10',
                       onPressed: () {
                         setState(() {
-                          _page ++;
-                          Navigator.push(context, new MaterialPageRoute(
-                              builder: (context) => new InformationScreen()),);
+                          _page++;
+                          Navigator.push(
+                            context,
+                            new MaterialPageRoute(
+                                builder: (context) => new InformationScreen()),
+                          );
                         });
                       },
                     ),
@@ -74,6 +80,30 @@ class _MainScreenState extends State<MainScreen> {
                 ),
               ],
             ),
+          ),
+        ),
+        new Container(
+          height: MediaQuery.of(context).size.height / 2.4,
+          width: MediaQuery.of(context).size.width,
+          child: ListView.builder(
+            primary: false,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: sessions == null ? 0 : sessions.length,
+            itemBuilder: (BuildContext context, int index) {
+              Map _sessions = sessions[index];
+
+              return Padding(
+                padding: EdgeInsets.only(right: 10.0),
+                child: SessionItem(
+                  speaker: _sessions["name"],
+                  title: _sessions["title"],
+                  time: _sessions["time"],
+                  track: _sessions["track"],
+                  type: prefix0.Type.RED,
+                ),
+              );
+            },
           ),
         ),
       ]),
