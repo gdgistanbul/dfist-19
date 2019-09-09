@@ -21,6 +21,9 @@ dependencies:
 
   firebase_analytics: ^4.0.2
 
+  fit_image: ^0.1.2
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

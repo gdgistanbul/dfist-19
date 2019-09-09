@@ -53,5 +53,4 @@ enum Type{
   RED,
   BLUE,
   YELLOW
-
 }
