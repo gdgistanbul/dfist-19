@@ -1,6 +1,7 @@
 import 'package:dfist19/screens/information.dart';
 import 'package:flutter/material.dart';
 import 'package:dfist19/screens/sessions.dart';
+import 'package:dfist19/screens/speakers.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -114,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
                     Navigator.push(
                       context,
                       new MaterialPageRoute(
-                          builder: (context) => new SessionsScreen()),
+                          builder: (context) => new SpeakerScreen()),
                     );
                   });
                 },
