@@ -1,16 +1,16 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
+//import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InformationScreen extends StatelessWidget {
-  final Event event = Event(
-    title: 'DevFest Istanbul 2019',
-    description: 'DevFest Istanbul 2019 at Uniq Hall',
-    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
-    startDate: DateTime(2019, 11, 24, 10, 00),
-    endDate: DateTime(2019, 11, 24, 18, 00),
-  );
+//  final Event event = Event(
+//    title: 'DevFest Istanbul 2019',
+//    description: 'DevFest Istanbul 2019 at Uniq Hall',
+//    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
+//    startDate: DateTime(2019, 11, 24, 10, 00),
+//    endDate: DateTime(2019, 11, 24, 18, 00),
+//  );
 
   @override
   Widget build(BuildContext context) {
@@ -125,7 +125,7 @@ class InformationScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Add2Calendar.addEvent2Cal(event);
+//                  Add2Calendar.addEvent2Cal(event);
                 },
               ),
             ),

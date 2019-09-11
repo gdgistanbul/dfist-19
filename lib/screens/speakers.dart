@@ -8,7 +8,7 @@ class SpeakerScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Sessions",
+        title: new Text("Speakers",
             style: TextStyle(
               fontFamily: 'RedHatDisplay',
               color: Color(0xff333d47),

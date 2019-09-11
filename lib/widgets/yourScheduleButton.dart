@@ -2,10 +2,17 @@ import 'package:fit_image/fit_image.dart';
 import 'package:flutter/material.dart';
 
 class YourScheduleButton extends StatelessWidget {
+  final GestureTapCallback onPressed;
+
+  YourScheduleButton({
+    Key key,
+    @required this.onPressed,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
+    return MaterialButton(
+      padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 100.0,
         width: MediaQuery.of(context).size.width,
@@ -24,30 +31,29 @@ class YourScheduleButton extends StatelessWidget {
                     color: Color(0xfffd8369),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
-                      padding:
-                          const EdgeInsets.only(bottom: 11, top: 11, left: 16),
-                      child: Row(
-                        children: <Widget>[
-                          Text(
-                            "Your Schedule",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w700,
-                                fontFamily: "RedHatDisplay",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 18.0,
-                            letterSpacing: 0),
-                            textAlign: TextAlign.left,
-                          ),
-                          new IconButton(
-                            alignment: Alignment.centerLeft,
-                            iconSize: 28,
-                            icon: Icon(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: Container(
+                        height: 70,
+                        child: Row(
+                          children: <Widget>[
+                            Text(
+                              "Your Schedule",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w700,
+                                  fontFamily: "RedHatDisplay",
+                                  fontStyle: FontStyle.normal,
+                                  fontSize: 18.0,
+                                  letterSpacing: 0),
+                              textAlign: TextAlign.left,
+                            ),
+                            new Icon(
                               Icons.arrow_forward,
                               color: Colors.white,
+                              size: 28.0,
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -73,6 +79,7 @@ class YourScheduleButton extends StatelessWidget {
           ),
         ),
       ),
+      onPressed: onPressed,
     );
   }
 }
