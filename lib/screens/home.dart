@@ -1,4 +1,5 @@
 import 'package:dfist19/screens/information.dart';
+import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
 import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/screens/speakers.dart';
@@ -86,41 +87,41 @@ class _MainScreenState extends State<MainScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: new Container(
-              height: 50,
-              width: 200,
-              child: MaterialButton(
-                color: Colors.redAccent,
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: new Image.asset('assets/notifications.png'),
-                      onPressed: () {
-                        setState(() {});
-                      },
-                    ),
-                    Text("Sessions",
-                        style: TextStyle(
-                          fontFamily: 'RedHatDisplay',
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 0,
-                        ))
-                  ],
+                color: Colors.transparent,
+                child: YourScheduleButton()
+//              MaterialButton(
+//                color: Colors.redAccent,
+//                child: Row(
+//                  children: <Widget>[
+//                    IconButton(
+//                      icon: new Image.asset('assets/notifications.png'),
+//                      onPressed: () {
+//                        setState(() {});
+//                      },
+//                    ),
+//                    Text("Sessions",
+//                        style: TextStyle(
+//                          fontFamily: 'RedHatDisplay',
+//                          color: Colors.white,
+//                          fontSize: 18,
+//                          fontWeight: FontWeight.w700,
+//                          fontStyle: FontStyle.normal,
+//                          letterSpacing: 0,
+//                        ))
+//                  ],
+//                ),
+//                onPressed: () {
+//                  setState(() {
+//                    _page++;
+//                    Navigator.push(
+//                      context,
+//                      new MaterialPageRoute(
+//                          builder: (context) => new SpeakerScreen()),
+//                    );
+//                  });
+//                },
+//              ),
                 ),
-                onPressed: () {
-                  setState(() {
-                    _page++;
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new SpeakerScreen()),
-                    );
-                  });
-                },
-              ),
-            ),
           ),
         ),
       ]),
