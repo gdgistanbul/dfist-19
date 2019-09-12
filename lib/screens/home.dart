@@ -1,4 +1,6 @@
 import 'package:dfist19/screens/information.dart';
+import 'package:dfist19/widgets/rectangleButton.dart';
+import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
 import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/screens/speakers.dart';
@@ -24,10 +26,6 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         new Container(
-//        decoration: new BoxDecoration(
-//          image: new DecorationImage(
-//              image: new ExactAssetImage('assets/tickets.png'), fit: BoxFit.cover),
-//        ),
           child: Padding(
             padding: EdgeInsets.only(top: 65.0, left: 16, right: 16),
             child: Row(
@@ -84,42 +82,65 @@ class _MainScreenState extends State<MainScreen> {
         Align(
           alignment: Alignment.bottomCenter,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: new Container(
-              height: 50,
-              width: 200,
-              child: MaterialButton(
-                color: Colors.redAccent,
-                child: Row(
-                  children: <Widget>[
-                    IconButton(
-                      icon: new Image.asset('assets/notifications.png'),
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                new Container(
+                    color: Colors.transparent,
+                    child: YourScheduleButton(
                       onPressed: () {
-                        setState(() {});
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new SessionsScreen()),
+                        );
                       },
-                    ),
-                    Text("Sessions",
-                        style: TextStyle(
-                          fontFamily: 'RedHatDisplay',
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                          letterSpacing: 0,
-                        ))
+                    )),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    new Container(
+                        color: Colors.transparent,
+                        child: RectangleButton(
+                          key: null,
+                          color: Color(0xff74d5de),
+                          text1: "Event",
+                          text2: "Schedule",
+                          width: 80,
+                          height: 90,
+                          image: 'assets/newspaper.png',
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) =>
+                                      new SessionsScreen()),
+                            );
+                          },
+                        )),
+                    new Container(
+                        color: Colors.transparent,
+                        child: RectangleButton(
+                          key: null,
+                          color: Color(0xfffecc92),
+                          text1: "All",
+                          text2: "Speakers",
+                          width: 60,
+                          height: 90,
+                          image: 'assets/question.png',
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) =>
+                                      new SpeakerScreen()),
+                            );
+                          },
+                        )),
                   ],
                 ),
-                onPressed: () {
-                  setState(() {
-                    _page++;
-                    Navigator.push(
-                      context,
-                      new MaterialPageRoute(
-                          builder: (context) => new SpeakerScreen()),
-                    );
-                  });
-                },
-              ),
+              ],
             ),
           ),
         ),

@@ -150,7 +150,7 @@ class _SessionItemState extends State<SessionItem> {
   _cardType(type) {
     switch (type) {
       case Type.RED:
-        return "assets/design.png";
+        return "assets/red.png";
       case Type.BLUE:
         return "assets/red.png";
       case Type.YELLOW:
