@@ -68,22 +68,22 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                       child: Center(
-                    child: SpeakerItem(
-                      name: _sessions["name"],
-                      img: "assets/tickets.png",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => new SpeakerDetail(
-                                  name: _sessions["name"],
-                                  description: "Lorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseyler",
-                                  img: "assets/tickets.png",
-                                  title: "simyaci")),
-                        );
-                      },
-                    ),
-                  )),
+                        child: SpeakerItem(
+                          name: _sessions["name"],
+                          img: "assets/tickets.png",
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) => new SpeakerDetail(
+                                      name: _sessions["name"],
+                                      description: "Lorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseyler",
+                                      img: "assets/tickets.png",
+                                      title: "simyaci")),
+                            );
+                          },
+                        ),
+                      )),
                 );
               }),
         ),
