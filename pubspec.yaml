@@ -23,6 +23,9 @@ dependencies:
 
   fit_image: ^0.1.2
 
+  scrollable_bottom_sheet: ^0.2.1
+
+
 
 dev_dependencies:
   flutter_test:
