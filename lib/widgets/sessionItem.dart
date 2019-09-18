@@ -25,11 +25,11 @@ class SessionItem extends StatefulWidget {
 class _SessionItemState extends State<SessionItem> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return MaterialButton(
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 147.0,
-        width: MediaQuery.of(context).size.width / 1.2,
+        width: MediaQuery.of(context).size.width / 1.0,
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
@@ -82,7 +82,6 @@ class _SessionItemState extends State<SessionItem> {
                                       fontStyle: FontStyle.normal)),
                             ]),
                             textAlign: TextAlign.left,
-
                           ),
                         ),
                         Padding(
@@ -96,11 +95,11 @@ class _SessionItemState extends State<SessionItem> {
                               fontSize: 18,
                               fontWeight: FontWeight.w700,
                               fontStyle: FontStyle.normal,
-                              letterSpacing: 0,),
+                              letterSpacing: 0,
+                            ),
                             textAlign: TextAlign.left,
                           ),
                         ),
-
                       ],
                     ),
                   ),
@@ -108,9 +107,9 @@ class _SessionItemState extends State<SessionItem> {
                     child: Container(
                       height: 139,
                       alignment: Alignment.bottomLeft,
-                      child:  Padding(
+                      child: Padding(
                         padding: const EdgeInsets.only(
-                            right:  16, left: 16, bottom: 16),
+                            right: 16, left: 16, bottom: 16),
                         child: Row(
                           children: <Widget>[
                             Container(
@@ -144,6 +143,9 @@ class _SessionItemState extends State<SessionItem> {
           ),
         ),
       ),
+      onPressed: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
     );
   }
 
