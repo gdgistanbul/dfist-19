@@ -12,12 +12,12 @@ class _bottomSheetState extends State<bottomSheet> {
   Widget build(BuildContext context) {
     return Container(
       child: new GridView.builder(
-          itemCount: 10,
+          itemCount: 20,
           gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
               childAspectRatio: 3, crossAxisCount: 2),
           itemBuilder: (BuildContext context, int index) {
             return Padding(
-              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0),
               child: Container(child: Center(child: bottomSheetItem())),
             );
           }),

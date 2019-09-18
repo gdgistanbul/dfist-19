@@ -1,4 +1,5 @@
 import 'package:dfist19/screens/information.dart';
+import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/widgets/rectangleButton.dart';
 import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';

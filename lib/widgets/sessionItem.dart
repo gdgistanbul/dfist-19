@@ -29,7 +29,7 @@ class _SessionItemState extends State<SessionItem> {
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 147.0,
-        width: MediaQuery.of(context).size.width / 1.2,
+        width: MediaQuery.of(context).size.width / 1.0,
         child: Card(
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),

@@ -23,23 +23,24 @@ class SpeakerScreen extends StatelessWidget {
       body: new Container(
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
-        child: ListView.builder(
-          primary: false,
-          shrinkWrap: true,
-          scrollDirection: Axis.vertical,
-          itemCount: sessions == null ? 0 : sessions.length,
-          itemBuilder: (BuildContext context, int index) {
-            Map _sessions = sessions[index];
+        child: new GridView.builder(
+            itemCount: sessions.length,
+            gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
+                childAspectRatio: 1, crossAxisCount: 2),
+            itemBuilder: (BuildContext context, int index) {
+              Map _sessions = sessions[index];
 
-            return Padding(
-              padding: EdgeInsets.only(right: 10.0),
-              child: SpeakerItem(
-                name: _sessions["name"],
-                img: "assets/tickets.png",
-              ),
-            );
-          },
-        ),
+              return Padding(
+                padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+                child: Container(
+                    child: Center(
+                  child: SpeakerItem(
+                    name: _sessions["name"],
+                    img: "assets/tickets.png",
+                  ),
+                )),
+              );
+            }),
       ),
     );
   }
