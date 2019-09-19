@@ -4,11 +4,14 @@ import 'package:fit_image/fit_image.dart';
 class SpeakerItem extends StatefulWidget {
   final String img;
   final String name;
+  final GestureTapCallback onPressed;
+
 
   SpeakerItem({
     Key key,
     @required this.img,
     @required this.name,
+    @required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -26,53 +29,57 @@ class _SpeakerItemState extends State<SpeakerItem> {
           child: Container(
             height: MediaQuery.of(context).size.height / 2.5,
             width: MediaQuery.of(context).size.width,
-            child: Card(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12.0)),
-              elevation: 3.0,
-              child: Stack(
-                children: <Widget>[
-                  Align(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                      child: new SizedBox(
-                        child: new FitImage(
-                          child: new Image.asset('assets/tickets.png'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomLeft,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10),
-                      ),
-                      child: Container(
-                        color: Color(0xffcc333d47),
-                        width: MediaQuery.of(context).size.width,
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              bottom: 25, top: 25, left: 16),
-                          child: Text(
-                            "${widget.name}",
-                            style: TextStyle(
-                              fontFamily: 'RedHatDisplay',
-                              color: Color(0xffffffff),
-                              fontSize: 14,
-                              fontWeight: FontWeight.w900,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0,
-                            ),
-                            textAlign: TextAlign.left,
+            child: GestureDetector(
+              onTap: widget.onPressed,
+              child: Card(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12.0)),
+                elevation: 3.0,
+                child: Stack(
+                  children: <Widget>[
+                    Align(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                        child: new SizedBox(
+                          child: new FitImage(
+                            child: new Image.asset('assets/tickets.png'),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                        child: Container(
+                          height: 52.0,
+                          color: Color(0xffcc333d47),
+                          width: MediaQuery.of(context).size.width,
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 10, left: 16, right: 16),
+                            child: Text(
+                              "${widget.name}",
+                              style: TextStyle(
+                                fontFamily: 'RedHatDisplay',
+                                color: Color(0xffffffff),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w900,
+                                fontStyle: FontStyle.normal,
+                                letterSpacing: 0,
+                              ),
+                              textAlign: TextAlign.left,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

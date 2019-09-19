@@ -2,12 +2,12 @@ import 'package:dfist19/widgets/bottomSheetItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
-class bottomSheet extends StatefulWidget {
+class BottomSheetList extends StatefulWidget {
   @override
-  _bottomSheetState createState() => _bottomSheetState();
+  _BottomSheetListState createState() => _BottomSheetListState();
 }
 
-class _bottomSheetState extends State<bottomSheet> {
+class _BottomSheetListState extends State<BottomSheetList> {
   @override
   Widget build(BuildContext context) {
     return Container(

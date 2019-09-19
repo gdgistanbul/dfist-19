@@ -1,5 +1,6 @@
 import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/bottomSheet.dart';
+import 'package:dfist19/widgets/bottomSheet.dart' as prefix0;
 import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
@@ -133,6 +134,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                     time: _sessions["time"],
                     track: _sessions["track"],
                     type: Type.RED,
+                    onPressed: () {},
                   );
                 },
               ),
@@ -193,7 +195,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 50.0),
-                  child: new bottomSheet(),
+                  child: new BottomSheetList(),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -202,7 +204,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
                     height: MediaQuery.of(context).size.height / 11,
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 16.0, right: 16.0,bottom: 8.0),
+                      padding: const EdgeInsets.only(
+                          left: 16.0, right: 16.0, bottom: 8.0),
                       child: Card(
                         color: Color(0xff3196f6),
                         shape: RoundedRectangleBorder(
