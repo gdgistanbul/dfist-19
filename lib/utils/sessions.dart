@@ -1,4 +1,4 @@
-List sessions = [
+List /**/sessions = [
   {
     "name": "Nilay Yener",
     "title": "Building Flutter Apps for iOS, Android and Web",

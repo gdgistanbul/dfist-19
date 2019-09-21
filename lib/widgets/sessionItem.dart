@@ -8,6 +8,8 @@ class SessionItem extends StatefulWidget {
   final String time;
   final String track;
   final Type type;
+  final GestureTapCallback onPressed;
+
 
   SessionItem({
     Key key,
@@ -16,6 +18,7 @@ class SessionItem extends StatefulWidget {
     @required this.time,
     @required this.track,
     @required this.type,
+    @required this.onPressed,
   }) : super(key: key);
 
   @override
@@ -143,9 +146,7 @@ class _SessionItemState extends State<SessionItem> {
           ),
         ),
       ),
-      onPressed: () {
-        FocusScope.of(context).requestFocus(new FocusNode());
-      },
+      onPressed: widget.onPressed,
     );
   }
 
