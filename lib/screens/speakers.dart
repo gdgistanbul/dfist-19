@@ -1,3 +1,4 @@
+import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:flutter/cupertino.dart';

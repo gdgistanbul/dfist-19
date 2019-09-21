@@ -1,3 +1,4 @@
+import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/bottomSheet.dart';
 import 'package:dfist19/widgets/bottomSheet.dart' as prefix0;
@@ -134,7 +135,22 @@ class _SessionsScreenState extends State<SessionsScreen> {
                     time: _sessions["time"],
                     track: _sessions["track"],
                     type: Type.RED,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new SessionDetail(
+                                onPressed: () {},
+                                speaker: "Caner",
+                                time: "19:00",
+                                track: "Bosphorous",
+                                name: _sessions["name"],
+                                description:
+                                    "Lorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseyler",
+                                img: "assets/tickets.png",
+                                title: "simyaci")),
+                      );
+                    },
                   );
                 },
               ),
