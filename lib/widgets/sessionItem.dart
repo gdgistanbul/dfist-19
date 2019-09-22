@@ -76,12 +76,12 @@ class _SessionItemState extends State<SessionItem> {
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal)),
                               new TextSpan(
-                                  text: " //" + widget.track,
+                                  text: " // " + widget.track,
                                   style: TextStyle(
                                       fontFamily: 'RedHatDisplay',
                                       color: Color(0xffffffff),
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w900,
+                                      fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal)),
                             ]),
                             textAlign: TextAlign.left,

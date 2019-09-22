@@ -1,33 +1,24 @@
-import 'package:dfist19/widgets/sessionItem.dart';
-import 'package:dfist19/widgets/socialMediaList.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'dart:io' show Platform;
+
+import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/utils/sessions.dart';
-import 'package:dfist19/utils/const.dart';
+
+bool isAndorid = Platform.isAndroid;
 
 class SessionDetail extends StatefulWidget {
-  final String img;
-  final String name;
-  final String title;
-  final String description;
-  final String speaker;
-  final String time;
-  final String track;
-
-//  var session = new Session();
+  final Session session;
   final GestureTapCallback onPressed;
-  Map _sessions = sessions[0];
 
   SessionDetail({
     Key key,
-    @required this.img,
-    @required this.name,
-    @required this.title,
-    @required this.description,
+    @required this.session,
     @required this.onPressed,
-    @required this.speaker,
-    @required this.time,
-    @required this.track,
   }) : super(key: key);
 
   @override
@@ -35,9 +26,26 @@ class SessionDetail extends StatefulWidget {
 }
 
 class _SessionDetailState extends State<SessionDetail> {
+   FirebaseDatabase database = FirebaseDatabase.instance;
+
+  DatabaseReference speakerRef;
+
+  Speaker speaker;
+
   @override
   void initState() {
     super.initState();
+    database = FirebaseDatabase.instance;
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000);
+    speakerRef =
+        database.reference().child('speakers/${widget.session.speakerId}');
+    _getData();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   @override
@@ -49,7 +57,7 @@ class _SessionDetailState extends State<SessionDetail> {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 116.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: new SingleChildScrollView(
                 child: Stack(
                   children: <Widget>[
@@ -58,18 +66,19 @@ class _SessionDetailState extends State<SessionDetail> {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top:100.0),
-                            child: new Text(
-                                "Let's assume you have a product that is already working. This product has different problems or aspects that it has accomplished quite well.But at the end of the day, you needed to redesign your existing product because of the aesthetic concerns, or because of the new needs that arise over time. How will you manage this process?Should you change the current product in one go? Or is it better to spread this process over time? What will your users like in your new design? Is there really such an action needed? In this talk, let's learn how to manage a redesign process!Let's assume you have a product that is already working. This product has different problems or aspects that it has accomplished quite well.But at the end of the day, you needed to redesign your existing product because of the aesthetic concerns, or because of the new needs that arise over time. How will you manage this process?Should you change the current product in one go? Or is it better to spread this process over time? What will your users like in your new design? Is there really such an action needed? In this talk, let's learn how to manage a redesign process!Let's assume you have a product that is already working. This product has different problems or aspects that it has accomplished quite well.But at the end of the day, you needed to redesign your existing product because of the aesthetic concerns, or because of the new needs that arise over time. How will you manage this process?Should you change the current product in one go? Or is it better to spread this process over time? What will your users like in your new design? Is there really such an action needed? In this talk, let's learn how to manage a redesign process!Let's assume you have a product that is already working. This product has different problems or aspects that it has accomplished quite well.But at the end of the day, you needed to redesign your existing product because of the aesthetic concerns, or because of the new needs that arise over time. How will you manage this process?Should you change the current product in one go? Or is it better to spread this process over time? What will your users like in your new design? Is there really such an action needed? In this talk, let's learn how to manage a redesign process!",
-                                style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
-                                  color: Color(0xff333d47),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                )),
+                          SizedBox(
+                            height: isAndorid ? 116 : 130,
                           ),
+                          Padding(
+                              padding: const EdgeInsets.only(top: 100.0),
+                              child: new Text(widget.session.description,
+                                  style: TextStyle(
+                                    fontFamily: 'RedHatDisplay',
+                                    color: Color(0xff333d47),
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                  ))),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Container(
@@ -83,7 +92,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                   color: Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(14.0)),
+                                          BorderRadius.circular(14.0)),
                                   child: Center(
                                     child: new Text("Add Your Schedule",
                                         style: TextStyle(
@@ -110,17 +119,28 @@ class _SessionDetailState extends State<SessionDetail> {
                                   fontStyle: FontStyle.normal,
                                 )),
                           ),
-                          Container(
-                            height: 144.0,
-                            width: 144.0,
-                            child: Center(
-                              child: SpeakerItem(
-                                name: widget.name,
-                                img: "assets/tickets.png",
-                                onPressed: () {},
-                              ),
-                            ),
-                          ),
+                          speaker == null
+                              ? Container()
+                              : Container(
+                                  height: 144.0,
+                                  width: 144.0,
+                                  child: Center(
+                                    child: SpeakerItem(
+                                      name:
+                                          "${speaker.name}  ${speaker.surname}",
+                                      img: speaker.image,
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new SpeakerDetail(
+                                                      speaker: speaker)),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
                         ],
                       ),
                     ),
@@ -128,13 +148,15 @@ class _SessionDetailState extends State<SessionDetail> {
                 ),
               ),
             ),
-
             Container(
               child: Align(
                 alignment: Alignment.topCenter,
                 child: ClipPath(
                   child: Container(
-                    height: MediaQuery.of(context).size.height / 2.1,
+                    height: 350,
+//                    isAndorid
+//                        ? MediaQuery.of(context).size.height / 2.1
+//                        : MediaQuery.of(context).size.height / 2.5,
                     width: MediaQuery.of(context).size.width,
                     color: Color(0xffdc5144),
                     child: Align(
@@ -158,42 +180,54 @@ class _SessionDetailState extends State<SessionDetail> {
                 ),
               ),
             ),
-            Container(
-              height: 70,
-              child: AppBar(
-                centerTitle: true,
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                title: new Text("Session Detail",
-                    style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
-                      color: Color(0xffffffff),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 0,
-                    )),
-                leading: Builder(
-                  builder: (BuildContext context) {
-                    return IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      color: Colors.white,
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      tooltip:
-                          MaterialLocalizations.of(context).backButtonTooltip,
-                    );
-                  },
+            SafeArea(
+              bottom: false,
+              left: false,
+              right: false,
+              child: Container(
+                height: 70,
+                child: AppBar(
+                  centerTitle: true,
+                  elevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  title: new Text("Session Detail",
+                      style: TextStyle(
+                        fontFamily: 'RedHatDisplay',
+                        color: Color(0xffffffff),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 0,
+                      )),
+                  leading: Builder(
+                    builder: (BuildContext context) {
+                      return IconButton(
+                        icon: Icon(isAndorid
+                            ? Icons.arrow_back
+                            : Icons.arrow_back_ios),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        tooltip:
+                            MaterialLocalizations.of(context).backButtonTooltip,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
             Column(
               children: <Widget>[
+                Container(
+                  child: SizedBox(
+                    height: isAndorid ? 0 : 20,
+                  ),
+                ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
-                  child: new Text(
-                      "How to Understand Product Design Process as a Developer?",
+                  padding:
+                      const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                  child: new Text(widget.session.title,
                       style: TextStyle(
                         fontFamily: 'RedHatDisplay',
                         color: Color(0xffffffff),
@@ -205,11 +239,12 @@ class _SessionDetailState extends State<SessionDetail> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 24.0, top: 16.0, bottom: 16.0),
+                    padding: const EdgeInsets.only(
+                        left: 24.0, top: 16.0, bottom: 16.0),
                     child: RichText(
                       text: new TextSpan(children: [
                         new TextSpan(
-                            text: widget.time,
+                            text: widget.session.startTime,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
@@ -217,7 +252,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal)),
                         new TextSpan(
-                            text: " //" + widget.track,
+                            text: " //" + widget.session.track,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
@@ -236,6 +271,14 @@ class _SessionDetailState extends State<SessionDetail> {
       ),
     );
   }
+
+  void _getData() {
+    speakerRef.once().then((DataSnapshot snapshot) {
+      setState(() {
+        speaker = new Speaker.fromJson(jsonDecode(jsonEncode(snapshot.value)));
+      });
+    });
+  }
 }
 
 class BottomWaveClipper extends CustomClipper<Path> {
@@ -243,7 +286,8 @@ class BottomWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = new Path();
     path.lineTo(0.0, size.height / 2);
-    path.lineTo(size.width / 2, size.height - 150);
+    path.lineTo(
+        size.width / 2, isAndorid ? size.height - 150 : size.height - 140);
     path.lineTo(size.width, size.height / 2);
     path.lineTo(size.width, 0.0);
     path.close();

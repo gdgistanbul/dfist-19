@@ -1,29 +1,26 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/screens/sessionDetail.dart';
+import 'package:dfist19/utils/const.dart';
+import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/utils/sessions.dart';
-import 'package:dfist19/utils/const.dart';
 
 class SpeakerDetail extends StatefulWidget {
-  final String img;
-  final String name;
-  final String title;
-  final String description;
+  final Speaker speaker;
 
-//  var session = new Session();
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
   Map _sessions = sessions[0];
 
-  SpeakerDetail({
-    Key key,
-    @required this.img,
-    @required this.name,
-    @required this.title,
-    @required this.description,
-    @required this.namesGrowable,
-    @required this.onPressed,
-  }) : super(key: key);
+  SpeakerDetail(
+      {Key key,
+      @required this.namesGrowable,
+      @required this.onPressed,
+      @required this.speaker})
+      : super(key: key);
 
   @override
   _SpeakerDetailState createState() => _SpeakerDetailState();
@@ -36,11 +33,12 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    widget.namesGrowable = new List<String>();
-    widget.namesGrowable.add("https://www.twitter.com/GDGIstanbul/");
-    widget.namesGrowable.add("https://www.facebook.com/GDGIstanbul/");
-    widget.namesGrowable.add("https://www.instagram.com/gdgistanbul/?hl=tr");
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Speaker Detail",
@@ -65,23 +63,27 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 16),
                 child: ClipRRect(
                     borderRadius: new BorderRadius.circular(12),
-                    child: Image.asset(
-                      widget.img,
-                      fit: BoxFit.cover,
-                    )),
+                    child: new CachedNetworkImage(
+                        imageUrl: widget.speaker.image,
+                        placeholder: (context, url) => SizedBox(
+                              child: CircularProgressIndicator(),
+                              height: 20.0,
+                              width: 20.0,
+                            ))),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: new Text(widget.name,
-                    style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
-                      color: Color(0xff333d47),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                    )),
+                child:
+                    new Text(widget.speaker.name + " " + widget.speaker.surname,
+                        style: TextStyle(
+                          fontFamily: 'RedHatDisplay',
+                          color: Color(0xff333d47),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                        )),
               ),
-              new Text(widget.title,
+              new Text(widget.speaker.title,
                   style: TextStyle(
                     fontFamily: 'RedHatDisplay',
                     color: Color(0xff333d47),
@@ -91,11 +93,11 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                   )),
               Padding(
                 padding: const EdgeInsets.only(top: 24.0),
-                child: new Text(widget.description,
+                child: new Text(widget.speaker.bio,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -116,28 +118,108 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       )),
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SocialMediaList(linkList: widget.namesGrowable)),
+              Visibility(
+                visible: widget.speaker.socialMedia != null,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+                      Visibility(
+                        visible: widget.speaker.socialMedia.facebook != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.facebook != null
+                                        ? widget.speaker.socialMedia.facebook
+                                        : "",
+                                icon: "assets/facebook.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.twitter != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.twitter != null
+                                        ? widget.speaker.socialMedia.twitter
+                                        : "",
+                                icon: "assets/twitter.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.instagram != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.instagram != null
+                                        ? widget.speaker.socialMedia.instagram
+                                        : "",
+                                icon: "assets/instagram.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.linkedin != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.linkedin != null
+                                        ? widget.speaker.socialMedia.linkedin
+                                        : "",
+                                icon: "assets/linkedin.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.github != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.github != null
+                                        ? widget.speaker.socialMedia.github
+                                        : "",
+                                icon: "assets/github.png")),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: new Text("Sessions",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
                     )),
               ),
               Center(
-                child: SessionItem(
-                  speaker: widget.name,
-                  title: widget._sessions["name"],
-                  time: widget._sessions["time"],
-                  track: widget._sessions["track"],
-                  type: Type.RED,
-                  onPressed: () {},
+                child: ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: widget.speaker.sessions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Session _sessions = widget.speaker.sessions[index];
+                    return SessionItem(
+                      speaker: _sessions.speakerName,
+                      title: _sessions.title,
+                      time: _sessions.startTime,
+                      track: _sessions.track,
+                      type: Type.RED,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new SessionDetail(
+                                    onPressed: () {},
+                                    session: _sessions,
+                                  )),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],
@@ -146,5 +228,4 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
       ),
     );
   }
-
 }

@@ -1,5 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fit_image/fit_image.dart';
+import 'package:flutter/widgets.dart';
 
 class SpeakerItem extends StatefulWidget {
   final String img;
@@ -21,6 +22,7 @@ class SpeakerItem extends StatefulWidget {
 class _SpeakerItemState extends State<SpeakerItem> {
   @override
   Widget build(BuildContext context) {
+    print(widget.img);
     return Padding(
       padding: EdgeInsets.only(top: 5.0, bottom: 5.0),
       child: Align(
@@ -40,12 +42,20 @@ class _SpeakerItemState extends State<SpeakerItem> {
                     Align(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                        child: new SizedBox(
-                          child: new FitImage(
-                            child: new Image.asset('assets/tickets.png'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
+                        child: new CachedNetworkImage(
+                            imageUrl: widget.img,
+                            placeholder: (context, url) =>
+                                SizedBox(
+                                  child: CircularProgressIndicator(),
+                                  height: 20.0,
+                                  width: 20.0,
+                                ),
+                            imageBuilder: (context, imageProvider) =>
+                                Container(
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover)))),
                       ),
                     ),
                     Align(

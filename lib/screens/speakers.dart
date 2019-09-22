@@ -1,10 +1,13 @@
-import 'package:dfist19/screens/sessionDetail.dart';
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/widgets/searchWidget.dart';
+import 'package:dfist19/widgets/speakerItem.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/utils/sessions.dart';
-import 'package:dfist19/widgets/speakerItem.dart';
 
 class SpeakerScreen extends StatefulWidget {
   @override
@@ -12,11 +15,29 @@ class SpeakerScreen extends StatefulWidget {
 }
 
 class _SpeakerScreenState extends State<SpeakerScreen> {
-  FocusNode focus = new FocusNode();
+  final FocusNode focus = new FocusNode();
+
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+
+  DatabaseReference speakerRef;
+
+  List<Speaker> speakers;
+
+  StreamSubscription<Event> _onSpeakerAddedSubscription;
 
   @override
   void initState() {
     super.initState();
+    speakers = new List();
+    speakerRef = database.reference().child('speakers');
+    _onSpeakerAddedSubscription =
+        speakerRef.onChildAdded.listen(_onSpeakerAdded);
+  }
+
+  @override
+  void dispose() {
+    _onSpeakerAddedSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -58,36 +79,41 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
         child: Padding(
           padding: const EdgeInsets.only(left: 12.0, right: 12.0),
           child: new GridView.builder(
-              itemCount: sessions.length,
+              itemCount: speakers.length,
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1, crossAxisCount: 2),
               itemBuilder: (BuildContext context, int index) {
-                Map _sessions = sessions[index];
+                Speaker speaker = speakers[index];
 
                 return Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                       child: Center(
-                    child: SpeakerItem(
-                      name: _sessions["name"],
-                      img: "assets/tickets.png",
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => new SpeakerDetail(
-                                  name: _sessions["name"],
-                                  description: "Lorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseyler",
-                                  img: "assets/tickets.png",
-                                  title: "simyaci")),
-                        );
-                      },
-                    ),
-                  )),
+                        child: SpeakerItem(
+                          name: "${speaker.name}  ${speaker.surname}",
+                          img: speaker.image,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              new MaterialPageRoute(
+                                  builder: (context) =>
+                                  new SpeakerDetail(speaker: speaker)),
+                            );
+                          },
+                        ),
+                      )),
                 );
               }),
         ),
       ),
     );
+  }
+
+  void _onSpeakerAdded(Event event) {
+    setState(() {
+      Speaker speaker = new Speaker.fromJson(
+          jsonDecode(jsonEncode(event.snapshot.value)));
+      speakers.add(speaker);
+    });
   }
 }
