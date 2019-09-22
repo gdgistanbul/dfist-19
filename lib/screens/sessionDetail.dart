@@ -1,9 +1,12 @@
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:flutter/material.dart';
+import 'dart:io' show Platform;
+
+
+bool isAndorid = Platform.isAndroid;
 
 class SessionDetail extends StatefulWidget {
-
   final Session session;
   final GestureTapCallback onPressed;
 
@@ -32,7 +35,7 @@ class _SessionDetailState extends State<SessionDetail> {
         child: Stack(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(top: 116.0),
+              padding: const EdgeInsets.only(top: 0.0),
               child: new SingleChildScrollView(
                 child: Stack(
                   children: <Widget>[
@@ -41,18 +44,19 @@ class _SessionDetailState extends State<SessionDetail> {
                       child: new Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
+                          SizedBox(
+                            height: isAndorid ? 116 : 130,
+                          ),
                           Padding(
                               padding: const EdgeInsets.only(top: 100.0),
-                            child: new Text(
-                                widget.session.description,
-                                style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
-                                  color: Color(0xff333d47),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w400,
-                                  fontStyle: FontStyle.normal,
-                                ))
-                          ),
+                              child: new Text(widget.session.description,
+                                  style: TextStyle(
+                                    fontFamily: 'RedHatDisplay',
+                                    color: Color(0xff333d47),
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    fontStyle: FontStyle.normal,
+                                  ))),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Container(
@@ -66,7 +70,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                   color: Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(14.0)),
+                                          BorderRadius.circular(14.0)),
                                   child: Center(
                                     child: new Text("Add Your Schedule",
                                         style: TextStyle(
@@ -116,7 +120,10 @@ class _SessionDetailState extends State<SessionDetail> {
                 alignment: Alignment.topCenter,
                 child: ClipPath(
                   child: Container(
-                    height: MediaQuery.of(context).size.height / 2.1,
+                    height: 350,
+//                    isAndorid
+//                        ? MediaQuery.of(context).size.height / 2.1
+//                        : MediaQuery.of(context).size.height / 2.5,
                     width: MediaQuery.of(context).size.width,
                     color: Color(0xffdc5144),
                     child: Align(
@@ -174,9 +181,8 @@ class _SessionDetailState extends State<SessionDetail> {
               children: <Widget>[
                 Padding(
                   padding:
-                  const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
-                  child: new Text(
-                      widget.session.title,
+                      const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                  child: new Text(widget.session.title,
                       style: TextStyle(
                         fontFamily: 'RedHatDisplay',
                         color: Color(0xffffffff),
@@ -227,7 +233,7 @@ class BottomWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = new Path();
     path.lineTo(0.0, size.height / 2);
-    path.lineTo(size.width / 2, size.height - 150);
+    path.lineTo(size.width / 2, isAndorid? size.height - 150: size.height - 140);
     path.lineTo(size.width, size.height / 2);
     path.lineTo(size.width, 0.0);
     path.close();

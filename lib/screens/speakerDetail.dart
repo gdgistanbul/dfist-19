@@ -106,64 +106,67 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Visibility(
                 visible: widget.speaker.socialMedia != null,
-                child: Row(
-                  children: <Widget>[
-                    Visibility(
-                      visible: widget.speaker.socialMedia.facebook != null,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SocialMediaList(
-                              socialMedia:
-                                  widget.speaker.socialMedia.facebook != null
-                                      ? widget.speaker.socialMedia.facebook
-                                      : "",
-                              icon: "assets/facebook.png")),
-                    ),
-                    Visibility(
-                      visible: widget.speaker.socialMedia.twitter != null,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SocialMediaList(
-                              socialMedia:
-                                  widget.speaker.socialMedia.twitter != null
-                                      ? widget.speaker.socialMedia.twitter
-                                      : "",
-                              icon: "assets/twitter.png")),
-                    ),
-                    Visibility(
-                      visible: widget.speaker.socialMedia.instagram != null,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SocialMediaList(
-                              socialMedia:
-                                  widget.speaker.socialMedia.instagram != null
-                                      ? widget.speaker.socialMedia.instagram
-                                      : "",
-                              icon: "assets/instagram.png")),
-                    ),
-                    Visibility(
-                      visible: widget.speaker.socialMedia.linkedin != null,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SocialMediaList(
-                              socialMedia:
-                                  widget.speaker.socialMedia.linkedin != null
-                                      ? widget.speaker.socialMedia.linkedin
-                                      : "",
-                              icon: "assets/linkedin.png")),
-                    ),
-                    Visibility(
-                      visible: widget.speaker.socialMedia.github != null,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16),
-                          child: SocialMediaList(
-                              socialMedia:
-                                  widget.speaker.socialMedia.github != null
-                                      ? widget.speaker.socialMedia.github
-                                      : "",
-                              icon: "assets/github.png")),
-                    ),
-                  ],
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+                      Visibility(
+                        visible: widget.speaker.socialMedia.facebook != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.facebook != null
+                                        ? widget.speaker.socialMedia.facebook
+                                        : "",
+                                icon: "assets/facebook.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.twitter != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.twitter != null
+                                        ? widget.speaker.socialMedia.twitter
+                                        : "",
+                                icon: "assets/twitter.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.instagram != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.instagram != null
+                                        ? widget.speaker.socialMedia.instagram
+                                        : "",
+                                icon: "assets/instagram.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.linkedin != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.linkedin != null
+                                        ? widget.speaker.socialMedia.linkedin
+                                        : "",
+                                icon: "assets/linkedin.png")),
+                      ),
+                      Visibility(
+                        visible: widget.speaker.socialMedia.github != null,
+                        child: Padding(
+                            padding: const EdgeInsets.only(top: 16),
+                            child: SocialMediaList(
+                                socialMedia:
+                                    widget.speaker.socialMedia.github != null
+                                        ? widget.speaker.socialMedia.github
+                                        : "",
+                                icon: "assets/github.png")),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Padding(
