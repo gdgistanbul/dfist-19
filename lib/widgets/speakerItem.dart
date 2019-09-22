@@ -42,7 +42,7 @@ class _SpeakerItemState extends State<SpeakerItem> {
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
                         child: new SizedBox(
                           child: new FitImage(
-                            child: new Image.asset('assets/tickets.png'),
+                            child: new Image.network(widget.img),
                             fit: BoxFit.cover,
                           ),
                         ),

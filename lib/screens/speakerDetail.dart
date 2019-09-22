@@ -1,3 +1,4 @@
+import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
@@ -5,24 +6,17 @@ import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/utils/const.dart';
 
 class SpeakerDetail extends StatefulWidget {
-  final String img;
-  final String name;
-  final String title;
-  final String description;
+  final Speaker speaker;
 
-//  var session = new Session();
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
   Map _sessions = sessions[0];
 
   SpeakerDetail({
     Key key,
-    @required this.img,
-    @required this.name,
-    @required this.title,
-    @required this.description,
     @required this.namesGrowable,
     @required this.onPressed,
+    @required this.speaker
   }) : super(key: key);
 
   @override
@@ -41,6 +35,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
     widget.namesGrowable.add("https://www.twitter.com/GDGIstanbul/");
     widget.namesGrowable.add("https://www.facebook.com/GDGIstanbul/");
     widget.namesGrowable.add("https://www.instagram.com/gdgistanbul/?hl=tr");
+
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Speaker Detail",
@@ -65,14 +60,11 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 16),
                 child: ClipRRect(
                     borderRadius: new BorderRadius.circular(12),
-                    child: Image.asset(
-                      widget.img,
-                      fit: BoxFit.cover,
-                    )),
+                    child: Image.network(widget.speaker.image)),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: new Text(widget.name,
+                child: new Text(widget.speaker.name + widget.speaker.surname,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -81,7 +73,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       fontStyle: FontStyle.normal,
                     )),
               ),
-              new Text(widget.title,
+              new Text(widget.speaker.title,
                   style: TextStyle(
                     fontFamily: 'RedHatDisplay',
                     color: Color(0xff333d47),
@@ -91,7 +83,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                   )),
               Padding(
                 padding: const EdgeInsets.only(top: 24.0),
-                child: new Text(widget.description,
+                child: new Text(widget.speaker.bio,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -132,7 +124,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Center(
                 child: SessionItem(
-                  speaker: widget.name,
+                  speaker: widget.speaker.name + widget.speaker.surname,
                   title: widget._sessions["name"],
                   time: widget._sessions["time"],
                   track: widget._sessions["track"],

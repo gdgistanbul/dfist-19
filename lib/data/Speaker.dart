@@ -1,31 +1,26 @@
 import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/SocialMedia.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:json_annotation/json_annotation.dart';
 
+part 'Speaker.g.dart';
+
+@JsonSerializable()
 class Speaker {
   String id = "";
   String name = "";
   String surname = "";
+  String image = "";
   String bio = "";
   String title = "";
   String company = "";
-  String twitter = "";
+  SocialMedia socialMedia;
   List<Session> sessions;
 
 
-  Speaker.fromDataSnapshot(DataSnapshot data) {
-    id = data.key;
-    name = data.value['name'];
-    surname = data.value['surname'];
-    bio = data.value['bio'];
-    title = data.value['title'];
-    company = data.value['company'];
-    twitter = data.value['twitter'];
+  Speaker();
 
-    sessions = new List();
+  factory Speaker.fromJson(Map<String, dynamic> json) => _$SpeakerFromJson(json);
 
-    Map<dynamic, dynamic> sessionsMap = data.value['sessions'];
-    sessionsMap.forEach((key, value) {
-      sessions.add(Session(key, value['title'], value['venue'], value['startTime'], value['endTime']));
-    });
-  }
+  Map<String, dynamic> toJson() => _$SpeakerToJson(this);
 }

@@ -1,11 +1,14 @@
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
-import 'package:dfist19/utils/sessions.dart';
+import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/bottomSheet.dart';
-import 'package:dfist19/widgets/bottomSheet.dart' as prefix0;
 import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/utils/const.dart';
 
 class SessionsScreen extends StatefulWidget {
   @override
@@ -15,9 +18,21 @@ class SessionsScreen extends StatefulWidget {
 class _SessionsScreenState extends State<SessionsScreen> {
   FocusNode focus = new FocusNode();
 
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+
+  DatabaseReference sessionsRef;
+
+  List<Session> sessions;
+
+  StreamSubscription<Event> _onSessionAddedSubscription;
+
   @override
   void initState() {
     super.initState();
+    sessions = new List();
+    sessionsRef = database.reference().child('sessions');
+    _onSessionAddedSubscription =
+        sessionsRef.onChildAdded.listen(_onSessionAdded);
   }
 
   @override
@@ -46,7 +61,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 Container(
                   child: Padding(
                     padding:
-                        EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
+                    EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
                     child: SearchWidget(focus1: focus),
                   ),
                 ),
@@ -126,14 +141,14 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 primary: false,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: sessions == null ? 0 : sessions.length,
+                itemCount: sessions.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Map _sessions = sessions[index];
+                  Session _sessions = sessions[index];
                   return SessionItem(
-                    speaker: _sessions["name"],
-                    title: _sessions["title"],
-                    time: _sessions["time"],
-                    track: _sessions["track"],
+                    speaker: _sessions.speakerName,
+                    title: _sessions.title,
+                    time: _sessions.startTime,
+                    track: _sessions.track,
                     type: Type.RED,
                     onPressed: () {
                       Navigator.push(
@@ -141,12 +156,11 @@ class _SessionsScreenState extends State<SessionsScreen> {
                         new MaterialPageRoute(
                             builder: (context) => new SessionDetail(
                                 onPressed: () {},
-                                speaker: "Caner",
-                                time: "19:00",
-                                track: "Bosphorous",
-                                name: _sessions["name"],
-                                description:
-                                    "Lorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseylerLorem ipsum biseyler",
+                                speaker: _sessions.speakerName,
+                                time: _sessions.startTime,
+                                track: _sessions.track,
+                                name: _sessions.title,
+                                description: _sessions.description,
                                 img: "assets/tickets.png",
                                 title: "simyaci")),
                       );
@@ -165,9 +179,9 @@ class _SessionsScreenState extends State<SessionsScreen> {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(32.0),
-          topRight: Radius.circular(32.0),
-        )),
+              topLeft: Radius.circular(32.0),
+              topRight: Radius.circular(32.0),
+            )),
         context: context,
         builder: (context) {
           return new Container(
@@ -246,4 +260,11 @@ class _SessionsScreenState extends State<SessionsScreen> {
           );
         });
   }
+
+  void _onSessionAdded(Event event) {
+    setState(() {
+      Session session = new Session.fromJson(jsonDecode(jsonEncode(event.snapshot.value)));sessions.add(session);
+    });
+  }
+
 }
