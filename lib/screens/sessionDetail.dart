@@ -3,6 +3,7 @@ import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
+import 'package:font_awesome_flutter/icon_data.dart';
 
 bool isAndorid = Platform.isAndroid;
 
@@ -147,38 +148,51 @@ class _SessionDetailState extends State<SessionDetail> {
                 ),
               ),
             ),
-            Container(
-              height: 70,
-              child: AppBar(
-                centerTitle: true,
-                elevation: 0.0,
-                backgroundColor: Colors.transparent,
-                title: new Text("Session Detail",
-                    style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
-                      color: Color(0xffffffff),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                      letterSpacing: 0,
-                    )),
-                leading: Builder(
-                  builder: (BuildContext context) {
-                    return IconButton(
-                      icon: const Icon(Icons.arrow_back),
-                      color: Colors.white,
-                      onPressed: () {
-                        Navigator.of(context).pop(true);
-                      },
-                      tooltip:
-                          MaterialLocalizations.of(context).backButtonTooltip,
-                    );
-                  },
+            SafeArea(
+              bottom: false,
+              left: false,
+              right: false,
+              child: Container(
+                height: 70,
+                child: AppBar(
+                  centerTitle: true,
+                  elevation: 0.0,
+                  backgroundColor: Colors.transparent,
+                  title: new Text("Session Detail",
+                      style: TextStyle(
+                        fontFamily: 'RedHatDisplay',
+                        color: Color(0xffffffff),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal,
+                        letterSpacing: 0,
+                      )),
+                  leading: Builder(
+                    builder: (BuildContext context) {
+                      return IconButton(
+                        icon: Icon(isAndorid
+                            ? Icons.arrow_back
+                            : Icons.arrow_back_ios),
+                        color: Colors.white,
+                        onPressed: () {
+                          Navigator.of(context).pop(true);
+                        },
+                        tooltip:
+                            MaterialLocalizations.of(context).backButtonTooltip,
+                      );
+                    },
+                  ),
                 ),
               ),
             ),
             Column(
               children: <Widget>[
+                Container(
+
+                  child: SizedBox(
+                    height: isAndorid ? 0 : 20,
+                  ),
+                ),
                 Padding(
                   padding:
                       const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
@@ -233,7 +247,8 @@ class BottomWaveClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     var path = new Path();
     path.lineTo(0.0, size.height / 2);
-    path.lineTo(size.width / 2, isAndorid? size.height - 150: size.height - 140);
+    path.lineTo(
+        size.width / 2, isAndorid ? size.height - 150 : size.height - 140);
     path.lineTo(size.width, size.height / 2);
     path.lineTo(size.width, 0.0);
     path.close();
