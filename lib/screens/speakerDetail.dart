@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
@@ -188,13 +190,30 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     )),
               ),
               Center(
-                child: SessionItem(
-                  speaker: widget.speaker.name + widget.speaker.surname,
-                  title: widget._sessions["name"],
-                  time: widget._sessions["time"],
-                  track: widget._sessions["track"],
-                  type: Type.RED,
-                  onPressed: () {},
+                child: ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: widget.speaker.sessions.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    Session _sessions = widget.speaker.sessions[index];
+                    return SessionItem(
+                      speaker: _sessions.speakerName,
+                      title: _sessions.title,
+                      time: _sessions.startTime,
+                      track: _sessions.track,
+                      type: Type.RED,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new SessionDetail(
+                                onPressed: () {},
+                                session: _sessions,)),
+                        );
+                      },
+                    );
+                  },
                 ),
               ),
             ],

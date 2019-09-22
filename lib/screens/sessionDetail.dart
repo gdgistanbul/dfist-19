@@ -1,9 +1,13 @@
-import 'package:dfist19/data/Session.dart';
-import 'package:dfist19/widgets/speakerItem.dart';
-import 'package:flutter/material.dart';
+import 'dart:async';
+import 'dart:convert';
 import 'dart:io' show Platform;
 
-import 'package:font_awesome_flutter/icon_data.dart';
+import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/screens/speakerDetail.dart';
+import 'package:dfist19/widgets/speakerItem.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter/material.dart';
 
 bool isAndorid = Platform.isAndroid;
 
@@ -22,9 +26,27 @@ class SessionDetail extends StatefulWidget {
 }
 
 class _SessionDetailState extends State<SessionDetail> {
+
+  final FirebaseDatabase database = FirebaseDatabase.instance;
+
+  DatabaseReference speakerRef;
+
+  Speaker speaker;
+
+  StreamSubscription<Event> _onSpeakerAddedSubscription;
+
   @override
   void initState() {
     super.initState();
+    speakerRef =
+        database.reference().child('speakers/${widget.session.speakerId}');
+    _getData();
+  }
+
+  @override
+  void dispose() {
+    _onSpeakerAddedSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -71,7 +93,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                   color: Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(14.0)),
+                                      BorderRadius.circular(14.0)),
                                   child: Center(
                                     child: new Text("Add Your Schedule",
                                         style: TextStyle(
@@ -98,14 +120,21 @@ class _SessionDetailState extends State<SessionDetail> {
                                   fontStyle: FontStyle.normal,
                                 )),
                           ),
-                          Container(
+                          speaker == null ? Container() : Container(
                             height: 144.0,
                             width: 144.0,
                             child: Center(
                               child: SpeakerItem(
-                                name: widget.session.speakerName,
-                                img: "assets/tickets.png",
-                                onPressed: () {},
+                                name: "${speaker.name}  ${speaker.surname}",
+                                img: speaker.image,
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    new MaterialPageRoute(
+                                        builder: (context) =>
+                                        new SpeakerDetail(speaker: speaker)),
+                                  );
+                                },
                               ),
                             ),
                           ),
@@ -178,7 +207,9 @@ class _SessionDetailState extends State<SessionDetail> {
                           Navigator.of(context).pop(true);
                         },
                         tooltip:
-                            MaterialLocalizations.of(context).backButtonTooltip,
+                        MaterialLocalizations
+                            .of(context)
+                            .backButtonTooltip,
                       );
                     },
                   ),
@@ -195,7 +226,7 @@ class _SessionDetailState extends State<SessionDetail> {
                 ),
                 Padding(
                   padding:
-                      const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                  const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
                   child: new Text(widget.session.title,
                       style: TextStyle(
                         fontFamily: 'RedHatDisplay',
@@ -239,6 +270,14 @@ class _SessionDetailState extends State<SessionDetail> {
         ),
       ),
     );
+  }
+
+  void _getData() {
+    speakerRef.once().then((DataSnapshot snapshot) {
+      setState(() {
+        speaker = new Speaker.fromJson(jsonDecode(jsonEncode(snapshot.value)));
+      });
+    });
   }
 }
 
