@@ -33,6 +33,11 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(

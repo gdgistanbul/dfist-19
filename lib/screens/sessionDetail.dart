@@ -33,19 +33,15 @@ class _SessionDetailState extends State<SessionDetail> {
 
   Speaker speaker;
 
-  StreamSubscription<Event> _onSpeakerAddedSubscription;
-
   @override
   void initState() {
     super.initState();
-    speakerRef =
-        database.reference().child('speakers/${widget.session.speakerId}');
+    speakerRef = database.reference().child('speakers/${widget.session.speakerId}');
     _getData();
   }
 
   @override
   void dispose() {
-    _onSpeakerAddedSubscription.cancel();
     super.dispose();
   }
 
