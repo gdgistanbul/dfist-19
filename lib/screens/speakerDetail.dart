@@ -1,10 +1,10 @@
-import 'package:dfist19/data/SocialMedia.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/utils/const.dart';
+import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/utils/sessions.dart';
-import 'package:dfist19/utils/const.dart';
 
 class SpeakerDetail extends StatefulWidget {
   final Speaker speaker;
@@ -56,7 +56,14 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 16),
                 child: ClipRRect(
                     borderRadius: new BorderRadius.circular(12),
-                    child: Image.network(widget.speaker.image)),
+                    child: new CachedNetworkImage(
+                        imageUrl: widget.speaker.image,
+                        placeholder: (context, url) =>
+                            SizedBox(
+                              child: CircularProgressIndicator(),
+                              height: 20.0,
+                              width: 20.0,
+                            ))),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
