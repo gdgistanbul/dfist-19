@@ -156,13 +156,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                         new MaterialPageRoute(
                             builder: (context) => new SessionDetail(
                                 onPressed: () {},
-                                speaker: _sessions.speakerName,
-                                time: _sessions.startTime,
-                                track: _sessions.track,
-                                name: _sessions.title,
-                                description: _sessions.description,
-                                img: "assets/tickets.png",
-                                title: "simyaci")),
+                              session: _sessions,)),
                       );
                     },
                   );
