@@ -26,8 +26,7 @@ class SessionDetail extends StatefulWidget {
 }
 
 class _SessionDetailState extends State<SessionDetail> {
-
-  final FirebaseDatabase database = FirebaseDatabase.instance;
+   FirebaseDatabase database = FirebaseDatabase.instance;
 
   DatabaseReference speakerRef;
 
@@ -36,7 +35,11 @@ class _SessionDetailState extends State<SessionDetail> {
   @override
   void initState() {
     super.initState();
-    speakerRef = database.reference().child('speakers/${widget.session.speakerId}');
+    database = FirebaseDatabase.instance;
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000);
+    speakerRef =
+        database.reference().child('speakers/${widget.session.speakerId}');
     _getData();
   }
 
@@ -72,7 +75,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                   style: TextStyle(
                                     fontFamily: 'RedHatDisplay',
                                     color: Color(0xff333d47),
-                                    fontSize: 14,
+                                    fontSize: 16,
                                     fontWeight: FontWeight.w400,
                                     fontStyle: FontStyle.normal,
                                   ))),
@@ -89,7 +92,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                   color: Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                      BorderRadius.circular(14.0)),
+                                          BorderRadius.circular(14.0)),
                                   child: Center(
                                     child: new Text("Add Your Schedule",
                                         style: TextStyle(
@@ -116,24 +119,28 @@ class _SessionDetailState extends State<SessionDetail> {
                                   fontStyle: FontStyle.normal,
                                 )),
                           ),
-                          speaker == null ? Container() : Container(
-                            height: 144.0,
-                            width: 144.0,
-                            child: Center(
-                              child: SpeakerItem(
-                                name: "${speaker.name}  ${speaker.surname}",
-                                img: speaker.image,
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                        new SpeakerDetail(speaker: speaker)),
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
+                          speaker == null
+                              ? Container()
+                              : Container(
+                                  height: 144.0,
+                                  width: 144.0,
+                                  child: Center(
+                                    child: SpeakerItem(
+                                      name:
+                                          "${speaker.name}  ${speaker.surname}",
+                                      img: speaker.image,
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new SpeakerDetail(
+                                                      speaker: speaker)),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
                         ],
                       ),
                     ),
@@ -203,9 +210,7 @@ class _SessionDetailState extends State<SessionDetail> {
                           Navigator.of(context).pop(true);
                         },
                         tooltip:
-                        MaterialLocalizations
-                            .of(context)
-                            .backButtonTooltip,
+                            MaterialLocalizations.of(context).backButtonTooltip,
                       );
                     },
                   ),
@@ -215,14 +220,13 @@ class _SessionDetailState extends State<SessionDetail> {
             Column(
               children: <Widget>[
                 Container(
-
                   child: SizedBox(
                     height: isAndorid ? 0 : 20,
                   ),
                 ),
                 Padding(
                   padding:
-                  const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                      const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
                   child: new Text(widget.session.title,
                       style: TextStyle(
                         fontFamily: 'RedHatDisplay',

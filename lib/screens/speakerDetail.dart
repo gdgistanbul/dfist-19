@@ -65,8 +65,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     borderRadius: new BorderRadius.circular(12),
                     child: new CachedNetworkImage(
                         imageUrl: widget.speaker.image,
-                        placeholder: (context, url) =>
-                            SizedBox(
+                        placeholder: (context, url) => SizedBox(
                               child: CircularProgressIndicator(),
                               height: 20.0,
                               width: 20.0,
@@ -74,14 +73,15 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: new Text(widget.speaker.name + widget.speaker.surname,
-                    style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
-                      color: Color(0xff333d47),
-                      fontSize: 16,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                    )),
+                child:
+                    new Text(widget.speaker.name + " " + widget.speaker.surname,
+                        style: TextStyle(
+                          fontFamily: 'RedHatDisplay',
+                          color: Color(0xff333d47),
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                        )),
               ),
               new Text(widget.speaker.title,
                   style: TextStyle(
@@ -97,7 +97,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -189,7 +189,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
                     )),
@@ -213,8 +213,9 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                           context,
                           new MaterialPageRoute(
                               builder: (context) => new SessionDetail(
-                                onPressed: () {},
-                                session: _sessions,)),
+                                    onPressed: () {},
+                                    session: _sessions,
+                                  )),
                         );
                       },
                     );

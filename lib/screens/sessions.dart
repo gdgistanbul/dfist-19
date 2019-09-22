@@ -18,7 +18,7 @@ class SessionsScreen extends StatefulWidget {
 class _SessionsScreenState extends State<SessionsScreen> {
   FocusNode focus = new FocusNode();
 
-  final FirebaseDatabase database = FirebaseDatabase.instance;
+   FirebaseDatabase database = FirebaseDatabase.instance;
 
   DatabaseReference sessionsRef;
 
@@ -29,6 +29,9 @@ class _SessionsScreenState extends State<SessionsScreen> {
   @override
   void initState() {
     super.initState();
+    database = FirebaseDatabase.instance;
+    database.setPersistenceEnabled(true);
+    database.setPersistenceCacheSizeBytes(10000000);
     sessions = new List();
     sessionsRef = database.reference().child('sessions');
     _onSessionAddedSubscription =
