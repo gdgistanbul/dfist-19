@@ -1,3 +1,4 @@
+import 'package:dfist19/data/SocialMedia.dart';
 import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
@@ -12,12 +13,12 @@ class SpeakerDetail extends StatefulWidget {
   final GestureTapCallback onPressed;
   Map _sessions = sessions[0];
 
-  SpeakerDetail({
-    Key key,
-    @required this.namesGrowable,
-    @required this.onPressed,
-    @required this.speaker
-  }) : super(key: key);
+  SpeakerDetail(
+      {Key key,
+      @required this.namesGrowable,
+      @required this.onPressed,
+      @required this.speaker})
+      : super(key: key);
 
   @override
   _SpeakerDetailState createState() => _SpeakerDetailState();
@@ -31,11 +32,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
 
   @override
   Widget build(BuildContext context) {
-    widget.namesGrowable = new List<String>();
-    widget.namesGrowable.add("https://www.twitter.com/GDGIstanbul/");
-    widget.namesGrowable.add("https://www.facebook.com/GDGIstanbul/");
-    widget.namesGrowable.add("https://www.instagram.com/gdgistanbul/?hl=tr");
-
     return new Scaffold(
       appBar: new AppBar(
         title: new Text("Speaker Detail",
@@ -108,9 +104,68 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       )),
                 ),
               ),
-              Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: SocialMediaList(linkList: widget.namesGrowable)),
+              Visibility(
+                visible: widget.speaker.socialMedia != null,
+                child: Row(
+                  children: <Widget>[
+                    Visibility(
+                      visible: widget.speaker.socialMedia.facebook != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia:
+                                  widget.speaker.socialMedia.facebook != null
+                                      ? widget.speaker.socialMedia.facebook
+                                      : "",
+                              icon: "assets/facebook.png")),
+                    ),
+                    Visibility(
+                      visible: widget.speaker.socialMedia.twitter != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia:
+                                  widget.speaker.socialMedia.twitter != null
+                                      ? widget.speaker.socialMedia.twitter
+                                      : "",
+                              icon: "assets/twitter.png")),
+                    ),
+                    Visibility(
+                      visible: widget.speaker.socialMedia.instagram != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia:
+                                  widget.speaker.socialMedia.instagram != null
+                                      ? widget.speaker.socialMedia.instagram
+                                      : "",
+                              icon: "assets/instagram.png")),
+                    ),
+                    Visibility(
+                      visible: widget.speaker.socialMedia.linkedin != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia:
+                                  widget.speaker.socialMedia.linkedin != null
+                                      ? widget.speaker.socialMedia.linkedin
+                                      : "",
+                              icon: "assets/linkedin.png")),
+                    ),
+                    Visibility(
+                      visible: widget.speaker.socialMedia.github != null,
+                      child: Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia:
+                                  widget.speaker.socialMedia.github != null
+                                      ? widget.speaker.socialMedia.github
+                                      : "",
+                              icon: "assets/github.png")),
+                    ),
+                  ],
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 24),
                 child: new Text("Sessions",
@@ -138,5 +193,4 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
       ),
     );
   }
-
 }
