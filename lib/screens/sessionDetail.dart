@@ -121,8 +121,8 @@ class _SessionDetailState extends State<SessionDetail> {
                           speaker == null
                               ? Container()
                               : Container(
-                            height: 180,
-                            width: 180,
+                                  height: 180,
+                                  width: 180,
                                   child: Center(
                                     child: SpeakerItem(
                                       name:
@@ -217,14 +217,16 @@ class _SessionDetailState extends State<SessionDetail> {
               children: <Widget>[
                 Container(
                   child: SizedBox(
-                    height: isAndorid ? 0 : 20,
+                    height: isAndorid
+                        ? MediaQuery.of(context).size.height / 60
+                        : 20,
                   ),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding:
-                        const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                    padding: const EdgeInsets.only(
+                        top: 80.0, left: 24.0, right: 24.0),
                     child: new Text(widget.session.title,
                         style: TextStyle(
                           fontFamily: 'RedHatDisplay',

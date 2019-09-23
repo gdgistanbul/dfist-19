@@ -54,7 +54,9 @@ class _SessionItemState extends State<SessionItem> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return FlatButton(
+      highlightColor: Colors.transparent,
+      splashColor:Colors.transparent ,
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 147.0,

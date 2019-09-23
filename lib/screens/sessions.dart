@@ -99,6 +99,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       FlatButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           child: Row(
                             children: <Widget>[
                               Text(
@@ -124,6 +126,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
                             _showModalSheet(context);
                           }),
                       FlatButton(
+                          highlightColor: Colors.transparent,
+                          splashColor: Colors.transparent,
                           child: Row(
                             children: <Widget>[
                               Text(
@@ -210,10 +214,12 @@ class _SessionsScreenState extends State<SessionsScreen> {
         context: context,
         builder: (context) {
           return new Container(
+            height: 430,
             child: new Stack(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(bottom: 24.0, top: 14.0, right: 16),
+                  padding:
+                      const EdgeInsets.only(bottom: 24.0, top: 14.0, right: 6),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
@@ -229,7 +235,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                             )),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(right: 20.0),
+                        padding: const EdgeInsets.only(right: 30.0),
                         child: new Text("Categories",
                             style: TextStyle(
                               fontFamily: 'RedHatDisplay',
@@ -252,8 +258,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50.0),
-                  child: MultiSelectChip(reportList),
+                  padding: const EdgeInsets.only(top: 64.0),
+                  child: BottomSheetList(),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
