@@ -78,7 +78,7 @@ class _SpeakerItemState extends State<SpeakerItem> {
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
                                 fontSize: 14,
-                                fontWeight: FontWeight.w900,
+                                fontWeight: FontWeight.w700,
                                 fontStyle: FontStyle.normal,
                                 letterSpacing: 0,
                               ),

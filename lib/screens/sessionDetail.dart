@@ -26,7 +26,7 @@ class SessionDetail extends StatefulWidget {
 }
 
 class _SessionDetailState extends State<SessionDetail> {
-   FirebaseDatabase database = FirebaseDatabase.instance;
+  FirebaseDatabase database = FirebaseDatabase.instance;
 
   DatabaseReference speakerRef;
 
@@ -86,8 +86,7 @@ class _SessionDetailState extends State<SessionDetail> {
                               height: MediaQuery.of(context).size.height / 11,
                               width: MediaQuery.of(context).size.width,
                               child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 16.0, right: 16.0, bottom: 8.0),
+                                padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Card(
                                   color: Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
@@ -98,7 +97,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                         style: TextStyle(
                                           fontFamily: 'RedHatDisplay',
                                           color: Color(0xffffffff),
-                                          fontSize: 14,
+                                          fontSize: 16,
                                           fontWeight: FontWeight.w900,
                                           fontStyle: FontStyle.normal,
                                           letterSpacing: 0,
@@ -114,7 +113,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                 style: TextStyle(
                                   fontFamily: 'RedHatDisplay',
                                   color: Color(0xff333d47),
-                                  fontSize: 16,
+                                  fontSize: 20,
                                   fontWeight: FontWeight.w700,
                                   fontStyle: FontStyle.normal,
                                 )),
@@ -122,8 +121,8 @@ class _SessionDetailState extends State<SessionDetail> {
                           speaker == null
                               ? Container()
                               : Container(
-                                  height: 144.0,
-                                  width: 144.0,
+                            height: 180,
+                            width: 180,
                                   child: Center(
                                     child: SpeakerItem(
                                       name:
@@ -154,9 +153,6 @@ class _SessionDetailState extends State<SessionDetail> {
                 child: ClipPath(
                   child: Container(
                     height: 350,
-//                    isAndorid
-//                        ? MediaQuery.of(context).size.height / 2.1
-//                        : MediaQuery.of(context).size.height / 2.5,
                     width: MediaQuery.of(context).size.width,
                     color: Color(0xffdc5144),
                     child: Align(
@@ -224,17 +220,20 @@ class _SessionDetailState extends State<SessionDetail> {
                     height: isAndorid ? 0 : 20,
                   ),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
-                  child: new Text(widget.session.title,
-                      style: TextStyle(
-                        fontFamily: 'RedHatDisplay',
-                        color: Color(0xffffffff),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal,
-                      )),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Padding(
+                    padding:
+                        const EdgeInsets.only(top: 80.0, left: 24.0, right: 24.0),
+                    child: new Text(widget.session.title,
+                        style: TextStyle(
+                          fontFamily: 'RedHatDisplay',
+                          color: Color(0xffffffff),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                          fontStyle: FontStyle.normal,
+                        )),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.centerLeft,
@@ -248,16 +247,16 @@ class _SessionDetailState extends State<SessionDetail> {
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
-                                fontSize: 12,
+                                fontSize: 16,
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal)),
                         new TextSpan(
-                            text: " //" + widget.session.track,
+                            text: " // " + widget.session.track,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w900,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
                                 fontStyle: FontStyle.normal)),
                       ]),
                       textAlign: TextAlign.left,

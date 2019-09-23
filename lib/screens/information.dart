@@ -4,14 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class InformationScreen extends StatelessWidget {
-//  final Event event = Event(
-//    title: 'DevFest Istanbul 2019',
-//    description: 'DevFest Istanbul 2019 at Uniq Hall',
-//    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
-//    startDate: DateTime(2019, 11, 24, 10, 00),
-//    endDate: DateTime(2019, 11, 24, 18, 00),
-//  );
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -33,14 +25,14 @@ class InformationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
+              padding: const EdgeInsets.only(right: 24, left: 24, top: 16),
               child: Center(
                 child: new Text(
                     "GDG DevFests are large, community-run events that can offer speaker sessions across multiple product areas, all-day hack-a-thons, code labs, and more. ",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -53,7 +45,7 @@ class InformationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
@@ -69,7 +61,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -78,7 +70,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
                     )),
@@ -87,7 +79,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -96,7 +88,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w700,
                       fontStyle: FontStyle.normal,
                     )),
@@ -136,7 +128,7 @@ class InformationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
@@ -148,30 +140,34 @@ class InformationScreen extends StatelessWidget {
               child: Container(
                   height: 219,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(12))),
-                  child: Stack(children: [
-                    ClipRRect(
-                        borderRadius: new BorderRadius.circular(12),
-                        child: Image.asset(
-                          "assets/uniq_map.png",
-                          fit: BoxFit.cover,
-                        )),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                          height: 50,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12)),
-                              color: const Color(0xcc333d47)))
+                    image: DecorationImage(
+                      image: ExactAssetImage('assets/uniq.jpeg'),
+                      fit: BoxFit.cover,
                     ),
+                    color: Colors.white,
+                    boxShadow: [
+                      new BoxShadow(color: Colors.grey[200], blurRadius: 10.0)
+                    ],
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(12.0),
+                    ),
+                  ),
+                  child: Stack(children: [
+                    Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Container(
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12)),
+                                color: const Color(0xcc333d47)))),
                     PositionedDirectional(
                       top: 185,
                       start: 16,
                       child: Container(
                         height: 50,
-                        child: Text("Uniq Hall // Uniq Istanbul",
+                        child: Text("UNIQ HALL // UNIQ Istanbul",
                             style: const TextStyle(
                                 color: const Color(0xffffffff),
                                 fontWeight: FontWeight.w700,
@@ -215,7 +211,7 @@ class InformationScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
@@ -240,7 +236,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
@@ -251,9 +247,9 @@ class InformationScreen extends StatelessWidget {
               child: new Text(
                 "Social Media Accounts",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay-Regular',
+                  fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
@@ -261,67 +257,74 @@ class InformationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 16),
+              padding: const EdgeInsets.only( left: 24.0,top: 16),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   GestureDetector(
-                      child: ClipOval(
-                          child: Container(
-                              height: 48.0, // height of the button
-                              width: 48.0, // width of the button
-                              child: Image.asset("assets/facebook.png",
-                                  fit: BoxFit.fill))),
+                      child: Container(
+                          height: 44.0, // height of the button
+                          width: 44.0, // width of the button
+                          child: Image.asset("assets/facebook.png",
+                              fit: BoxFit.fill)),
                       onTap: () {
                         _launchURL("https://www.facebook.com/GDGIstanbul/");
                       }),
-                  GestureDetector(
-                      child: ClipOval(
-                          child: Container(
-                        height: 48.0, // height of the button
-                        width: 48.0, // width of the button
-                        child: Image.asset("assets/instagram.png",
-                            fit: BoxFit.fill),
-                      )),
-                      onTap: () {
-                        _launchURL(
-                            "https://www.instagram.com/gdgistanbul/?hl=tr");
-                      }),
-                  GestureDetector(
-                      child: ClipOval(
-                          child: Container(
-                        height: 48.0, // height of the button
-                        width: 48.0, // width of the button
-                        child:
-                            Image.asset("assets/twitter.png", fit: BoxFit.fill),
-                      )),
-                      onTap: () {
-                        _launchURL("https://twitter.com/GDGIstanbul/");
-                      }),
-                  GestureDetector(
-                      child: ClipOval(
-                          child: Container(
-                        height: 48.0, // height of the button
-                        width: 48.0, // width of the button
-                        child: Image.asset("assets/linkedin.png",
-                            fit: BoxFit.fill),
-                      )),
-                      onTap: () {
-                        _launchURL(
-                            "https://www.linkedin.com/company/2943205/admin/");
-                      }),
-                  GestureDetector(
-                      child: ClipOval(
-                          child: Container(
-                        height: 48.0, // height of the button
-                        width: 48.0, // width of the button
-                        child:
-                            Image.asset("assets/youtube.png", fit: BoxFit.fill),
-                      )),
-                      onTap: () {
-                        _launchURL(
-                            "https://www.youtube.com/channel/UCY0yxph6mFEfzvY4_6GYArg");
-                      })
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          width: 44.0, // width of the button
+                          child: Image.asset("assets/instagram.png",
+                          fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.instagram.com/gdgistanbul/?hl=tr");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          width: 44.0, // width of the button
+                          child:
+                          Image.asset("assets/twitter.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL("https://twitter.com/GDGIstanbul/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          width: 44.0, // width of the button
+                          child: Image.asset("assets/linkedin.png",
+                          fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.linkedin.com/company/2943205/admin/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          width: 44.0, // width of the button
+                          child:
+                          Image.asset("assets/youtube.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.youtube.com/channel/UCY0yxph6mFEfzvY4_6GYArg");
+                        }),
+                  )
                 ],
               ),
             ),
@@ -330,9 +333,9 @@ class InformationScreen extends StatelessWidget {
               child: new Text(
                 "Event Sponsors",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay-Regular',
+                  fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
-                  fontSize: 16,
+                  fontSize: 20,
                   fontWeight: FontWeight.w700,
                   fontStyle: FontStyle.normal,
                 ),
@@ -348,7 +351,7 @@ class InformationScreen extends StatelessWidget {
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
-                      fontSize: 14,
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),

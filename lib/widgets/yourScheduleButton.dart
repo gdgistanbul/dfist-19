@@ -14,7 +14,7 @@ class YourScheduleButton extends StatelessWidget {
     return MaterialButton(
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
-        height: 100.0,
+        height: 120.0,
         width: MediaQuery.of(context).size.width,
         child: Card(
           elevation: 0,
@@ -33,7 +33,7 @@ class YourScheduleButton extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16),
                       child: Container(
-                        height: 70,
+                        height: 90,
                         child: Row(
                           children: <Widget>[
                             Text(

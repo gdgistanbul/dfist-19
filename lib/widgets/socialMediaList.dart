@@ -26,16 +26,15 @@ class _SocialMediaListState extends State<SocialMediaList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 50,
+      height: 44,
       child: GestureDetector(
           child: Padding(
             padding: const EdgeInsets.only(right: 16.0),
-            child: ClipOval(
-                child: Container(
-              height: 48.0, // height of the button
-              width: 48.0, // width of the button
+            child: Container(
+              height: 44.0, // height of the button
+              width: 44.0, // width of the button
               child: Image.asset("${widget.icon}", fit: BoxFit.fill),
-            )),
+            ),
           ),
           onTap: () {
             _launchURL(widget.socialMedia);
