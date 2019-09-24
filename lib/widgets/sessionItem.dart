@@ -1,6 +1,9 @@
 import 'package:dfist19/utils/const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttie/fluttie.dart';
+
+
 
 class SessionItem extends StatefulWidget {
   final String speaker;
@@ -9,11 +12,20 @@ class SessionItem extends StatefulWidget {
   final String track;
   final Type type;
   final GestureTapCallback onPressed;
+  var instance = Fluttie();
+  FluttieAnimationController shockedEmoji;
 
+  prepareAnimation() async {
+    var emojiComposition =
+    await instance.loadAnimationFromAsset("assets/animations/anim.json");
+    shockedEmoji = await instance.prepareAnimation(emojiComposition);
+  }
 
   SessionItem({
     Key key,
     @required this.speaker,
+    @required this.shockedEmoji,
+    @required this.instance,
     @required this.title,
     @required this.time,
     @required this.track,
@@ -26,9 +38,25 @@ class SessionItem extends StatefulWidget {
 }
 
 class _SessionItemState extends State<SessionItem> {
+  bool isAnimated = false;
+
+  initState() {
+    super.initState();
+    widget.prepareAnimation();
+  }
+
+  @override
+  dispose() {
+    super.dispose();
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return FlatButton(
+      highlightColor: Colors.transparent,
+      splashColor:Colors.transparent ,
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 147.0,
@@ -42,29 +70,34 @@ class _SessionItemState extends State<SessionItem> {
             children: <Widget>[
               Stack(
                 children: <Widget>[
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      height: 120,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10),
-                          topRight: Radius.circular(10),
-                        ),
-                        child: Image.asset(
-                          "${_cardType(widget.type)}",
-                          fit: BoxFit.cover,
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: 120,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10),
+                          ),
+                          child:
+                          Image.asset(
+                            "${_cardType(widget.type)}",
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  new Container(
+
+                  Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(
-                              right: 16, left: 16, top: 16),
+                              right: 16, left: 16, top: 15),
                           child: RichText(
                             text: new TextSpan(children: [
                               new TextSpan(
@@ -72,7 +105,7 @@ class _SessionItemState extends State<SessionItem> {
                                   style: TextStyle(
                                       fontFamily: 'RedHatDisplay',
                                       color: Color(0xffffffff),
-                                      fontSize: 12,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w500,
                                       fontStyle: FontStyle.normal)),
                               new TextSpan(
@@ -80,7 +113,7 @@ class _SessionItemState extends State<SessionItem> {
                                   style: TextStyle(
                                       fontFamily: 'RedHatDisplay',
                                       color: Color(0xffffffff),
-                                      fontSize: 12,
+                                      fontSize: 14,
                                       fontWeight: FontWeight.w700,
                                       fontStyle: FontStyle.normal)),
                             ]),
@@ -103,41 +136,59 @@ class _SessionItemState extends State<SessionItem> {
                             textAlign: TextAlign.left,
                           ),
                         ),
+
+                        Align(
+                          child: Container(
+                            height: 65,
+                            alignment: Alignment.bottomLeft,
+                            child: Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 16, left: 16, bottom: 16),
+                              child: Row(
+                                children: <Widget>[
+                                  Container(
+                                    width: 16,
+                                    child: Image.asset(
+                                      "${"assets/people.png"}",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 5),
+                                    child: Text(
+                                      widget.speaker,
+                                      style: TextStyle(
+                                          fontFamily: 'RedHatDisplay',
+                                          color: Color(0xffffffff),
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w500,
+                                          fontStyle: FontStyle.normal),
+                                      textAlign: TextAlign.left,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Align(
-                    child: Container(
-                      height: 139,
-                      alignment: Alignment.bottomLeft,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            right: 16, left: 16, bottom: 16),
-                        child: Row(
-                          children: <Widget>[
-                            Container(
-                              width: 26,
-                              child: Image.asset(
-                                "${"assets/people.png"}",
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 5),
-                              child: Text(
-                                widget.speaker,
-                                style: TextStyle(
-                                    fontFamily: 'RedHatDisplay',
-                                    color: Color(0xffffffff),
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    fontStyle: FontStyle.normal),
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          child: FluttieAnimation(widget.shockedEmoji,size: Size(50,43),),
+                          onTap: () {
+                            if(!isAnimated) {
+                              widget.shockedEmoji.start();
+                              isAnimated = true;
+                            }else {
+                              isAnimated = false;
+                              widget.shockedEmoji.stopAndReset(rewind: true);
+                            }
+                          }),
                     ),
                   ),
                 ],

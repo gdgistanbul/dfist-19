@@ -3,8 +3,8 @@ import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/widgets/rectangleButton.dart';
 import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
-import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/screens/speakers.dart';
+import 'package:flutter/services.dart';
 
 class MainScreen extends StatefulWidget {
   @override
@@ -13,7 +13,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
-  int _page = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +29,6 @@ class _MainScreenState extends State<MainScreen> {
           child: Padding(
             padding: EdgeInsets.only(top: 65.0, left: 16, right: 16),
             child: Row(
-//            mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Padding(
@@ -45,7 +43,6 @@ class _MainScreenState extends State<MainScreen> {
                       tooltip: 'Increase volume by 10',
                       onPressed: () {
                         setState(() {
-                          _page++;
                           Navigator.push(
                             context,
                             new MaterialPageRoute(
@@ -94,7 +91,7 @@ class _MainScreenState extends State<MainScreen> {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new SessionsScreen()),
+                              builder: (context) => new SessionsScreen(false)),
                         );
                       },
                     )),
@@ -115,8 +112,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) =>
-                                      new SessionsScreen()),
+                                  builder: (context) => new SessionsScreen(true)),
                             );
                           },
                         )),
@@ -134,8 +130,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) =>
-                                      new SpeakerScreen()),
+                                  builder: (context) => new SpeakerScreen()),
                             );
                           },
                         )),
@@ -156,7 +151,23 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     super.initState();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
     _pageController = PageController();
+  }
+
+  @override
+  void reassemble() {
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
+    super.reassemble();
   }
 
   @override
@@ -166,8 +177,6 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   void onPageChanged(int page) {
-    setState(() {
-      this._page = page;
-    });
+    setState(() {});
   }
 }

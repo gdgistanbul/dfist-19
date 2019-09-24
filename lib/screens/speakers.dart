@@ -2,8 +2,10 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/widgets/searchWidget.dart';
+import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +38,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
 
   @override
   void dispose() {
+    SessionItem().prepareAnimation();
     _onSpeakerAddedSubscription.cancel();
     super.dispose();
   }

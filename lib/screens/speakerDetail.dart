@@ -7,6 +7,7 @@ import 'package:dfist19/utils/sessions.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttie/fluttie.dart';
 
 class SpeakerDetail extends StatefulWidget {
   final Speaker speaker;
@@ -27,14 +28,24 @@ class SpeakerDetail extends StatefulWidget {
 }
 
 class _SpeakerDetailState extends State<SpeakerDetail> {
+  FluttieAnimationController shockedEmoji;
+  var instance = Fluttie();
+
   @override
   void initState() {
+    prepareAnimation();
     super.initState();
   }
 
   @override
   void dispose() {
     super.dispose();
+  }
+
+  prepareAnimation() async {
+    var emojiComposition =
+        await instance.loadAnimationFromAsset("assets/animations/anim.json");
+    shockedEmoji = await instance.prepareAnimation(emojiComposition);
   }
 
   @override
@@ -92,7 +103,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     fontStyle: FontStyle.normal,
                   )),
               Padding(
-                padding: const EdgeInsets.only(top: 24.0),
+                padding: const EdgeInsets.only(top: 16.0),
                 child: new Text(widget.speaker.bio,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
@@ -203,6 +214,8 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                   itemBuilder: (BuildContext context, int index) {
                     Session _sessions = widget.speaker.sessions[index];
                     return SessionItem(
+                      shockedEmoji: shockedEmoji,
+                      instance: instance,
                       speaker: _sessions.speakerName,
                       title: _sessions.title,
                       time: _sessions.startTime,

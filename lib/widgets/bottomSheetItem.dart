@@ -9,6 +9,7 @@ class _bottomSheetItemState extends State<bottomSheetItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 100,
       child: Card(
         elevation: 0.0,
         shape:
@@ -31,10 +32,13 @@ class _bottomSheetItemState extends State<bottomSheetItem> {
             padding: const EdgeInsets.all(8.0),
             child: Row(
               children: <Widget>[
-                Icon(
-                  Icons.brightness_1,
-                  color: Colors.lightGreenAccent,
-                  size: 10,
+                Padding(
+                  padding: const EdgeInsets.only(right : 8.0),
+                  child: Icon(
+                    Icons.brightness_1,
+                    color: Colors.lightGreenAccent,
+                    size: 10,
+                  ),
                 ),
                 Text("Android")
               ],

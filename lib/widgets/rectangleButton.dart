@@ -25,7 +25,9 @@ class RectangleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialButton(
+    return FlatButton(
+      highlightColor: Colors.transparent,
+      splashColor:Colors.transparent ,
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 144.0,
