@@ -23,7 +23,7 @@ dependencies:
   firebase_core: 0.4.0+9
 
   firebase_analytics: 5.0.2
-
+  http: ^0.12.0+2
   fit_image: ^0.1.2
   font_awesome_flutter: 8.5.0
   firebase_database: 3.0.7
@@ -36,38 +36,36 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 flutter:
-
-  uses-material-design: true
-
-  fonts:
-    - family: RedHatDisplay
-      fonts:
-        - asset: fonts/RedHatDisplay-Black.ttf
-        - asset: fonts/RedHatDisplay-BlackItalic.ttf
-        - asset: fonts/RedHatDisplay-Bold.ttf
-        - asset: fonts/RedHatDisplay-BoldItalic.ttf
-        - asset: fonts/RedHatDisplay-Medium.ttf
-        - asset: fonts/RedHatDisplay-MediumItalic.ttf
-        - asset: fonts/RedHatDisplay-Regular.ttf
-        - asset: fonts/RedHatDisplay-RegularItalic.ttf
-
-  assets:
-    - assets/logo.png
-    - assets/info.png
-    - assets/notifications.png
-    - assets/tickets.png
-    - assets/uniq_map.png
-    - assets/gdg_istanbul_logo.png
-    - assets/facebook.png
-    - assets/instagram.png
-    - assets/linkedin.png
-    - assets/twitter.png
-    - assets/youtube.png
-    - assets/red.png
-    - assets/people.png
-    - assets/cat.png
-    - assets/question.png
-    - assets/newspaper.png
-    - assets/uniq.jpeg
-    - assets/path.png
-    - assets/animations/anim.json
+    uses-material-design: true
+    fonts:
+        - family: RedHatDisplay
+          fonts:
+            - asset: fonts/RedHatDisplay-Black.ttf
+            - asset: fonts/RedHatDisplay-BlackItalic.ttf
+            - asset: fonts/RedHatDisplay-Bold.ttf
+            - asset: fonts/RedHatDisplay-BoldItalic.ttf
+            - asset: fonts/RedHatDisplay-Medium.ttf
+            - asset: fonts/RedHatDisplay-MediumItalic.ttf
+            - asset: fonts/RedHatDisplay-Regular.ttf
+            - asset: fonts/RedHatDisplay-RegularItalic.ttf
+    assets:
+      - assets/logo.png
+      - assets/info.png
+      - assets/notifications.png
+      - assets/tickets.png
+      - assets/uniq_map.png
+      - assets/gdg_istanbul_logo.png
+      - assets/facebook.png
+      - assets/github.png
+      - assets/instagram.png
+      - assets/linkedin.png
+      - assets/twitter.png
+      - assets/youtube.png
+      - assets/red.png
+      - assets/people.png
+      - assets/cat.png
+      - assets/question.png
+      - assets/newspaper.png
+      - assets/uniq.jpeg
+      - assets/path.png
+      - assets/animations/anim.json

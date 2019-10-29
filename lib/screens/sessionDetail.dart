@@ -3,16 +3,15 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/SessionData.dart';
 import 'package:dfist19/data/Speaker.dart';
-import 'package:dfist19/screens/speakerDetail.dart';
-import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 bool isAndorid = Platform.isAndroid;
 
 class SessionDetail extends StatefulWidget {
-  final Session session;
+  final SessionData session;
   final GestureTapCallback onPressed;
 
   SessionDetail({
@@ -38,9 +37,10 @@ class _SessionDetailState extends State<SessionDetail> {
     database = FirebaseDatabase.instance;
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000);
-    speakerRef =
-        database.reference().child('speakers/${widget.session.speakerId}');
-    _getData();
+
+//    speakerRef =
+//        database.reference().child('speakers/${widget.session.speakerId}');
+//    _getData();
   }
 
   @override
@@ -124,20 +124,20 @@ class _SessionDetailState extends State<SessionDetail> {
                                   height: 180,
                                   width: 180,
                                   child: Center(
-                                    child: SpeakerItem(
-                                      name:
-                                          "${speaker.name}  ${speaker.surname}",
-                                      img: speaker.image,
-                                      onPressed: () {
-                                        Navigator.push(
-                                          context,
-                                          new MaterialPageRoute(
-                                              builder: (context) =>
-                                                  new SpeakerDetail(
-                                                      speaker: speaker)),
-                                        );
-                                      },
-                                    ),
+//                                    child: SpeakerItem(
+//                                      name:
+//                                          "${speaker.name}  ${speaker.surname}",
+//                                      img: speaker.image,
+//                                      onPressed: () {
+//                                        Navigator.push(
+//                                          context,
+//                                          new MaterialPageRoute(
+//                                              builder: (context) =>
+//                                                  new SpeakerDetail(
+//                                                      speaker: speaker)),
+//                                        );
+//                                      },
+//                                    ),
                                   ),
                                 ),
                         ],
@@ -245,7 +245,7 @@ class _SessionDetailState extends State<SessionDetail> {
                     child: RichText(
                       text: new TextSpan(children: [
                         new TextSpan(
-                            text: widget.session.startTime,
+                            text: widget.session.language,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
@@ -253,7 +253,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal)),
                         new TextSpan(
-                            text: " // " + widget.session.track,
+                            text: " // " + widget.session.presentation,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),

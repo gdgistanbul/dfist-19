@@ -1,20 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dfist19/data/Session.dart';
-import 'package:dfist19/data/Speaker.dart';
-import 'package:dfist19/screens/sessionDetail.dart';
-import 'package:dfist19/utils/const.dart';
-import 'package:dfist19/utils/sessions.dart';
-import 'package:dfist19/widgets/sessionItem.dart';
+import 'package:dfist19/data/SpeakerData.dart';
+import 'package:dfist19/data/Social.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
 
 class SpeakerDetail extends StatefulWidget {
-  final Speaker speaker;
+  final SpeakerData speaker;
 
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
-  Map _sessions = sessions[0];
 
   SpeakerDetail(
       {Key key,
@@ -75,7 +70,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 child: ClipRRect(
                     borderRadius: new BorderRadius.circular(12),
                     child: new CachedNetworkImage(
-                        imageUrl: widget.speaker.image,
+                        imageUrl: widget.speaker.photoUrl,
                         placeholder: (context, url) => SizedBox(
                               child: CircularProgressIndicator(),
                               height: 20.0,
@@ -84,15 +79,14 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child:
-                    new Text(widget.speaker.name + " " + widget.speaker.surname,
-                        style: TextStyle(
-                          fontFamily: 'RedHatDisplay',
-                          color: Color(0xff333d47),
-                          fontSize: 24,
-                          fontWeight: FontWeight.w700,
-                          fontStyle: FontStyle.normal,
-                        )),
+                child: new Text(widget.speaker.name,
+                    style: TextStyle(
+                      fontFamily: 'RedHatDisplay',
+                      color: Color(0xff333d47),
+                      fontSize: 24,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    )),
               ),
               new Text(widget.speaker.title,
                   style: TextStyle(
@@ -129,70 +123,21 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       )),
                 ),
               ),
-              Visibility(
-                visible: widget.speaker.socialMedia != null,
-                child: SingleChildScrollView(
-                  scrollDirection: Axis.horizontal,
-                  child: Row(
-                    children: <Widget>[
-                      Visibility(
-                        visible: widget.speaker.socialMedia.facebook != null,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: SocialMediaList(
-                                socialMedia:
-                                    widget.speaker.socialMedia.facebook != null
-                                        ? widget.speaker.socialMedia.facebook
-                                        : "",
-                                icon: "assets/facebook.png")),
-                      ),
-                      Visibility(
-                        visible: widget.speaker.socialMedia.twitter != null,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: SocialMediaList(
-                                socialMedia:
-                                    widget.speaker.socialMedia.twitter != null
-                                        ? widget.speaker.socialMedia.twitter
-                                        : "",
-                                icon: "assets/twitter.png")),
-                      ),
-                      Visibility(
-                        visible: widget.speaker.socialMedia.instagram != null,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: SocialMediaList(
-                                socialMedia:
-                                    widget.speaker.socialMedia.instagram != null
-                                        ? widget.speaker.socialMedia.instagram
-                                        : "",
-                                icon: "assets/instagram.png")),
-                      ),
-                      Visibility(
-                        visible: widget.speaker.socialMedia.linkedin != null,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: SocialMediaList(
-                                socialMedia:
-                                    widget.speaker.socialMedia.linkedin != null
-                                        ? widget.speaker.socialMedia.linkedin
-                                        : "",
-                                icon: "assets/linkedin.png")),
-                      ),
-                      Visibility(
-                        visible: widget.speaker.socialMedia.github != null,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16),
-                            child: SocialMediaList(
-                                socialMedia:
-                                    widget.speaker.socialMedia.github != null
-                                        ? widget.speaker.socialMedia.github
-                                        : "",
-                                icon: "assets/github.png")),
-                      ),
-                    ],
-                  ),
-                ),
+              Container(
+                height: 50,
+                child: new ListView.builder(
+                    primary: false,
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: widget.speaker.socials.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      Social social = widget.speaker.socials[index];
+                      return Padding(
+                          padding: const EdgeInsets.only(top: 16),
+                          child: SocialMediaList(
+                              socialMedia: social.link,
+                              icon: "assets/${social.icon}.png"));
+                    }),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 24),
@@ -205,36 +150,36 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       fontStyle: FontStyle.normal,
                     )),
               ),
-              Center(
-                child: ListView.builder(
-                  primary: false,
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                  itemCount: widget.speaker.sessions.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    Session _sessions = widget.speaker.sessions[index];
-                    return SessionItem(
-                      shockedEmoji: shockedEmoji,
-                      instance: instance,
-                      speaker: _sessions.speakerName,
-                      title: _sessions.title,
-                      time: _sessions.startTime,
-                      track: _sessions.track,
-                      type: Type.RED,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          new MaterialPageRoute(
-                              builder: (context) => new SessionDetail(
-                                    onPressed: () {},
-                                    session: _sessions,
-                                  )),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
+//              Center(
+//                child: ListView.builder(
+//                  primary: false,
+//                  shrinkWrap: true,
+//                  scrollDirection: Axis.vertical,
+//                  itemCount: widget.speaker.sessions.length,
+//                  itemBuilder: (BuildContext context, int index) {
+//                    Session _sessions = widget.speaker.sessions[index];
+//                    return SessionItem(
+//                      shockedEmoji: shockedEmoji,
+//                      instance: instance,
+//                      speaker: _sessions.speakerName,
+//                      title: _sessions.title,
+//                      time: _sessions.startTime,
+//                      track: _sessions.track,
+//                      type: Type.RED,
+//                      onPressed: () {
+//                        Navigator.push(
+//                          context,
+//                          new MaterialPageRoute(
+//                              builder: (context) => new SessionDetail(
+//                                    onPressed: () {},
+//                                    session: _sessions,
+//                                  )),
+//                        );
+//                      },
+//                    );
+//                  },
+//                ),
+//              ),
             ],
           ),
         ),

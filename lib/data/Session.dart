@@ -1,19 +1,14 @@
-import 'package:dfist19/data/SessionType.dart';
 import 'package:json_annotation/json_annotation.dart';
+
+import 'SessionData.dart';
 
 part 'Session.g.dart';
 
 @JsonSerializable()
-class Session {
+class Session{
   String id;
-  String title;
-  String description;
-  String startTime;
-  String endTime;
-  String track;
-  List<SessionType> sessionTypes;
-  String speakerId;
-  String speakerName;
+  SessionData data;
+
 
   Session();
 

@@ -1,24 +1,14 @@
-import 'dart:async';
-import 'dart:convert';
-
 import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/SessionData.dart';
+import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
+import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/bottomSheet.dart';
-import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
-
-List<String> reportList = [
-  "Not relevant",
-  "Illegal",
-  "Spam",
-  "Offensive",
-  "Uncivil"
-];
 
 class SessionsScreen extends StatefulWidget {
   final bool isSessions;
@@ -33,22 +23,25 @@ class _SessionsScreenState extends State<SessionsScreen> {
   FluttieAnimationController shockedEmoji;
   var instance = Fluttie();
   FocusNode focus = new FocusNode();
-  FirebaseDatabase database = FirebaseDatabase.instance;
-  DatabaseReference sessionsRef;
+
+  SessionsResponse data = new SessionsResponse();
   List<Session> sessions;
 
-  StreamSubscription<Event> _onSessionAddedSubscription;
+  _getUsers() {
+    API.getSessions().then((response) {
+      setState(() {
+        data = response;
+        print("blaalsd" + data.sessions.toString());
+        sessions = response.sessions;
+      });
+    });
+  }
 
   @override
   void initState() {
-    database = FirebaseDatabase.instance;
-    database.setPersistenceEnabled(true);
-    database.setPersistenceCacheSizeBytes(10000000);
-    sessions = new List();
-    sessionsRef = database.reference().child('sessions');
-    _onSessionAddedSubscription =
-        sessionsRef.onChildAdded.listen(_onSessionAdded);
     prepareAnimation();
+    sessions = new List();
+    _getUsers();
     super.initState();
   }
 
@@ -175,14 +168,14 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 scrollDirection: Axis.vertical,
                 itemCount: sessions.length,
                 itemBuilder: (BuildContext context, int index) {
-                  Session _sessions = sessions[index];
+                  SessionData _session = sessions[index].data;
                   return SessionItem(
                     shockedEmoji: shockedEmoji,
                     instance: instance,
-                    speaker: _sessions.speakerName,
-                    title: _sessions.title,
-                    time: _sessions.startTime,
-                    track: _sessions.track,
+                    speaker: _session.speakers[0],
+                    title: _session.title,
+                    time: _session.language,
+                    track: _session.complexity,
                     type: Type.RED,
                     onPressed: () {
                       Navigator.push(
@@ -190,7 +183,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                         new MaterialPageRoute(
                             builder: (context) => new SessionDetail(
                                   onPressed: () {},
-                                  session: _sessions,
+                                  session: _session,
                                 )),
                       );
                     },
@@ -293,13 +286,5 @@ class _SessionsScreenState extends State<SessionsScreen> {
             ),
           );
         });
-  }
-
-  void _onSessionAdded(Event event) {
-    setState(() {
-      Session session =
-          new Session.fromJson(jsonDecode(jsonEncode(event.snapshot.value)));
-      sessions.add(session);
-    });
   }
 }

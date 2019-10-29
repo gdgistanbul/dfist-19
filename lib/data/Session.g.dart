@@ -9,27 +9,10 @@ part of 'Session.dart';
 Session _$SessionFromJson(Map<String, dynamic> json) {
   return Session()
     ..id = json['id'] as String
-    ..title = json['title'] as String
-    ..description = json['description'] as String
-    ..startTime = json['startTime'] as String
-    ..endTime = json['endTime'] as String
-    ..track = json['track'] as String
-    ..sessionTypes = (json['sessionTypes'] as List)
-        ?.map((e) =>
-            e == null ? null : SessionType.fromJson(e as Map<String, dynamic>))
-        ?.toList()
-    ..speakerId = json['speakerId'] as String
-    ..speakerName = json['speakerName'] as String;
+    ..data = json['data'] == null
+        ? null
+        : SessionData.fromJson(json['data'] as Map<String, dynamic>);
 }
 
-Map<String, dynamic> _$SessionToJson(Session instance) => <String, dynamic>{
-      'id': instance.id,
-      'title': instance.title,
-      'description': instance.description,
-      'startTime': instance.startTime,
-      'endTime': instance.endTime,
-      'track': instance.track,
-      'sessionTypes': instance.sessionTypes,
-      'speakerId': instance.speakerId,
-      'speakerName': instance.speakerName
-    };
+Map<String, dynamic> _$SessionToJson(Session instance) =>
+    <String, dynamic>{'id': instance.id, 'data': instance.data};

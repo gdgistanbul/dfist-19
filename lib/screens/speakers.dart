@@ -1,17 +1,17 @@
-import 'dart:async';
-import 'dart:convert';
-
+import 'package:dfist19/data/SpeakerData.dart';
+import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/data/Speaker.dart';
-import 'package:dfist19/screens/sessions.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
+import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class SpeakerScreen extends StatefulWidget {
+
   @override
   _SpeakerScreenState createState() => _SpeakerScreenState();
 }
@@ -19,27 +19,28 @@ class SpeakerScreen extends StatefulWidget {
 class _SpeakerScreenState extends State<SpeakerScreen> {
   final FocusNode focus = new FocusNode();
 
-  final FirebaseDatabase database = FirebaseDatabase.instance;
-
-  DatabaseReference speakerRef;
-
+  SpeakerResponse data = new SpeakerResponse();
   List<Speaker> speakers;
 
-  StreamSubscription<Event> _onSpeakerAddedSubscription;
+  _getSpeakers() {
+    API.getSpeakers().then((response) {
+      setState(() {
+        data = response;
+        speakers = response.speakers;
+      });
+    });
+  }
 
   @override
   void initState() {
     super.initState();
+    _getSpeakers();
     speakers = new List();
-    speakerRef = database.reference().child('speakers');
-    _onSpeakerAddedSubscription =
-        speakerRef.onChildAdded.listen(_onSpeakerAdded);
   }
 
   @override
   void dispose() {
     SessionItem().prepareAnimation();
-    _onSpeakerAddedSubscription.cancel();
     super.dispose();
   }
 
@@ -64,7 +65,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
             children: <Widget>[
               Container(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
+                  padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0,bottom: 16.0),
                   child: SearchWidget(focus1: focus),
                 ),
               ),
@@ -86,15 +87,15 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1, crossAxisCount: 2),
               itemBuilder: (BuildContext context, int index) {
-                Speaker speaker = speakers[index];
+                SpeakerData speaker = speakers[index].data;
 
                 return Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                       child: Center(
                         child: SpeakerItem(
-                          name: "${speaker.name}  ${speaker.surname}",
-                          img: speaker.image,
+                          name: "${speaker.name}",
+                          img: speaker.photoUrl,
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -110,13 +111,5 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
         ),
       ),
     );
-  }
-
-  void _onSpeakerAdded(Event event) {
-    setState(() {
-      Speaker speaker = new Speaker.fromJson(
-          jsonDecode(jsonEncode(event.snapshot.value)));
-      speakers.add(speaker);
-    });
   }
 }

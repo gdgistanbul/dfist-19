@@ -1,5 +1,8 @@
+import 'package:dfist19/data/SessionsResponse.dart';
+import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/screens/information.dart';
 import 'package:dfist19/screens/sessions.dart';
+import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/rectangleButton.dart';
 import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +16,9 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
+
+  SpeakerResponse data = new SpeakerResponse();
+  SessionsResponse sessions = new SessionsResponse();
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +118,8 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => new SessionsScreen(true)),
+                                  builder: (context) =>
+                                      new SessionsScreen(true)),
                             );
                           },
                         )),
@@ -130,7 +137,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) => new SpeakerScreen()),
+                                  builder: (context) =>  SpeakerScreen()),
                             );
                           },
                         )),
@@ -148,6 +155,22 @@ class _MainScreenState extends State<MainScreen> {
     _pageController.jumpToPage(page);
   }
 
+  _getSpeakers() {
+    API.getSpeakers().then((response) {
+      setState(() {
+        data = response;
+      });
+    });
+  }
+
+  _getSessions() {
+    API.getSessions().then((response) {
+      setState(() {
+        sessions = response;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -156,12 +179,13 @@ class _MainScreenState extends State<MainScreen> {
       statusBarIconBrightness: Brightness.light,
       systemNavigationBarIconBrightness: Brightness.light, // works
     ));
+    _getSessions();
+    _getSpeakers();
     _pageController = PageController();
   }
 
   @override
   void reassemble() {
-
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
