@@ -65,7 +65,7 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
             children: <Widget>[
               Container(
                 child: Padding(
-                  padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0,bottom: 16.0),
+                  padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
                   child: SearchWidget(focus1: focus),
                 ),
               ),
@@ -81,21 +81,21 @@ class _SpeakerScreenState extends State<SpeakerScreen> {
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: Padding(
-          padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+          padding: const EdgeInsets.only(left: 12.0, right: 12.0,top: 12),
           child: new GridView.builder(
               itemCount: speakers.length,
               gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                   childAspectRatio: 1, crossAxisCount: 2),
               itemBuilder: (BuildContext context, int index) {
-                SpeakerData speaker = speakers[index].data;
+                Speaker speaker = speakers[index];
 
                 return Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Container(
                       child: Center(
                         child: SpeakerItem(
-                          name: "${speaker.name}",
-                          img: speaker.photoUrl,
+                          name: "${speaker.data.name}",
+                          img: speaker.data.photoUrl,
                           onPressed: () {
                             Navigator.push(
                               context,

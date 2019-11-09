@@ -163,7 +163,7 @@ SPEC CHECKSUMS:
   GoogleUtilities: e7dc37039b19df7fe543479d3e4a02ac8d11bb69
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  path_provider: f96fff6166a8867510d2c25fdcc346327cc4b259
+  path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
   url_launcher: 0067ddb8f10d36786672aa0722a21717dba3a298
 

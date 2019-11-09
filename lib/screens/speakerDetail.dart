@@ -1,21 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/SessionsResponse.dart';
+import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/SpeakerData.dart';
 import 'package:dfist19/data/Social.dart';
+import 'package:dfist19/screens/sessionDetail.dart';
+import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/utils/const.dart';
+import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
 
 class SpeakerDetail extends StatefulWidget {
-  final SpeakerData speaker;
+  final Speaker speaker;
 
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
 
-  SpeakerDetail(
-      {Key key,
-      @required this.namesGrowable,
-      @required this.onPressed,
-      @required this.speaker})
+  SpeakerDetail({Key key,
+    @required this.namesGrowable,
+    @required this.onPressed,
+    @required this.speaker})
       : super(key: key);
 
   @override
@@ -26,9 +32,23 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   FluttieAnimationController shockedEmoji;
   var instance = Fluttie();
 
+  SessionsResponse data = new SessionsResponse();
+  List<Session> sessions;
+
+  _getSpeakerSessions() {
+    API.getSpeakerSessions(widget.speaker.id).then((response) {
+      setState(() {
+        print("olamaaz" + response.toString());
+        data = response;
+        sessions = response.sessions;
+      });
+    });
+  }
+
   @override
   void initState() {
     prepareAnimation();
+    _getSpeakerSessions();
     super.initState();
   }
 
@@ -39,7 +59,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
 
   prepareAnimation() async {
     var emojiComposition =
-        await instance.loadAnimationFromAsset("assets/animations/anim.json");
+    await instance.loadAnimationFromAsset("assets/animations/anim.json");
     shockedEmoji = await instance.prepareAnimation(emojiComposition);
   }
 
@@ -70,8 +90,9 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 child: ClipRRect(
                     borderRadius: new BorderRadius.circular(12),
                     child: new CachedNetworkImage(
-                        imageUrl: widget.speaker.photoUrl,
-                        placeholder: (context, url) => SizedBox(
+                        imageUrl: widget.speaker.data.photoUrl,
+                        placeholder: (context, url) =>
+                            SizedBox(
                               child: CircularProgressIndicator(),
                               height: 20.0,
                               width: 20.0,
@@ -79,7 +100,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
-                child: new Text(widget.speaker.name,
+                child: new Text(widget.speaker.data.name,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -88,7 +109,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       fontStyle: FontStyle.normal,
                     )),
               ),
-              new Text(widget.speaker.title,
+              new Text(widget.speaker.data.title,
                   style: TextStyle(
                     fontFamily: 'RedHatDisplay',
                     color: Color(0xff333d47),
@@ -98,7 +119,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                   )),
               Padding(
                 padding: const EdgeInsets.only(top: 16.0),
-                child: new Text(widget.speaker.bio,
+                child: new Text(widget.speaker.data.bio,
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -129,9 +150,9 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     primary: false,
                     shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
-                    itemCount: widget.speaker.socials.length,
+                    itemCount: widget.speaker.data.socials.length,
                     itemBuilder: (BuildContext context, int index) {
-                      Social social = widget.speaker.socials[index];
+                      Social social = widget.speaker.data.socials[index];
                       return Padding(
                           padding: const EdgeInsets.only(top: 16),
                           child: SocialMediaList(
@@ -139,47 +160,57 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                               icon: "assets/${social.icon}.png"));
                     }),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 24),
-                child: new Text("Sessions",
-                    style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
-                      color: Color(0xff333d47),
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                      fontStyle: FontStyle.normal,
-                    )),
+              Visibility(
+                visible: sessions == null ? false : true,
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: new Text("Sessions",
+                      style: TextStyle(
+                        fontFamily: 'RedHatDisplay',
+                        color: Color(0xff333d47),
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        fontStyle: FontStyle.normal,
+                      )),
+                ),
               ),
-//              Center(
-//                child: ListView.builder(
-//                  primary: false,
-//                  shrinkWrap: true,
-//                  scrollDirection: Axis.vertical,
-//                  itemCount: widget.speaker.sessions.length,
-//                  itemBuilder: (BuildContext context, int index) {
-//                    Session _sessions = widget.speaker.sessions[index];
-//                    return SessionItem(
-//                      shockedEmoji: shockedEmoji,
-//                      instance: instance,
-//                      speaker: _sessions.speakerName,
-//                      title: _sessions.title,
-//                      time: _sessions.startTime,
-//                      track: _sessions.track,
-//                      type: Type.RED,
-//                      onPressed: () {
-//                        Navigator.push(
-//                          context,
-//                          new MaterialPageRoute(
-//                              builder: (context) => new SessionDetail(
-//                                    onPressed: () {},
-//                                    session: _sessions,
-//                                  )),
-//                        );
-//                      },
-//                    );
-//                  },
-//                ),
-//              ),
+
+              Center(
+                child: ListView.builder(
+                  primary: false,
+                  shrinkWrap: true,
+                  scrollDirection: Axis.vertical,
+                  itemCount: sessions == null
+                      ? 0
+                      : sessions.length > 0 ? sessions.length : 0,
+                  itemBuilder: (BuildContext context, int index) {
+                    Session _sessions = sessions[index];
+                    return SessionItem(
+                      shockedEmoji: shockedEmoji,
+                      instance: instance,
+                      speaker: _sessions.data.speakers[0],
+                      title: _sessions.data.title,
+                      time: _sessions.data.title,
+                      track: _sessions.data.tags[0],
+                      type: Type.RED,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) =>
+                              new SessionDetail(
+                                onPressed: () {},
+                                session: _sessions,
+                              )),
+                        );
+                      },
+                    );
+                  },
+                ),
+              ),
+              Container(
+                height: 50,
+              ),
             ],
           ),
         ),

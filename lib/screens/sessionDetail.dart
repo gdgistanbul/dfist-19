@@ -3,15 +3,18 @@ import 'dart:convert';
 import 'dart:io' show Platform;
 
 import 'package:dfist19/data/Session.dart';
-import 'package:dfist19/data/SessionData.dart';
 import 'package:dfist19/data/Speaker.dart';
+import 'package:dfist19/data/SpeakerResponse.dart';
+import 'package:dfist19/screens/speakerDetail.dart';
+import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 
 bool isAndorid = Platform.isAndroid;
 
 class SessionDetail extends StatefulWidget {
-  final SessionData session;
+  final Session session;
   final GestureTapCallback onPressed;
 
   SessionDetail({
@@ -31,9 +34,22 @@ class _SessionDetailState extends State<SessionDetail> {
 
   Speaker speaker;
 
+  SpeakerResponse data = new SpeakerResponse();
+  List<Speaker> speakers;
+
+  _getSessionSpaker() {
+    API.getSessionSpaker(widget.session.data.speakers[0]).then((response) {
+      setState(() {
+        data = response;
+        speakers = response.speakers;
+      });
+    });
+  }
+
   @override
   void initState() {
     super.initState();
+    _getSessionSpaker();
     database = FirebaseDatabase.instance;
     database.setPersistenceEnabled(true);
     database.setPersistenceCacheSizeBytes(10000000);
@@ -71,7 +87,7 @@ class _SessionDetailState extends State<SessionDetail> {
                           ),
                           Padding(
                               padding: const EdgeInsets.only(top: 100.0),
-                              child: new Text(widget.session.description,
+                              child: new Text(widget.session.data.description,
                                   style: TextStyle(
                                     fontFamily: 'RedHatDisplay',
                                     color: Color(0xff333d47),
@@ -118,26 +134,26 @@ class _SessionDetailState extends State<SessionDetail> {
                                   fontStyle: FontStyle.normal,
                                 )),
                           ),
-                          speaker == null
+                          speakers == null
                               ? Container()
                               : Container(
                                   height: 180,
                                   width: 180,
                                   child: Center(
-//                                    child: SpeakerItem(
-//                                      name:
-//                                          "${speaker.name}  ${speaker.surname}",
-//                                      img: speaker.image,
-//                                      onPressed: () {
-//                                        Navigator.push(
-//                                          context,
-//                                          new MaterialPageRoute(
-//                                              builder: (context) =>
-//                                                  new SpeakerDetail(
-//                                                      speaker: speaker)),
-//                                        );
-//                                      },
-//                                    ),
+                                    child: SpeakerItem(
+                                      name:
+                                          "${speakers[0].data.name}",
+                                      img: speakers[0].data.photoUrl,
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          new MaterialPageRoute(
+                                              builder: (context) =>
+                                                  new SpeakerDetail(
+                                                      speaker: speakers[0])),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
                         ],
@@ -227,7 +243,7 @@ class _SessionDetailState extends State<SessionDetail> {
                   child: Padding(
                     padding: const EdgeInsets.only(
                         top: 80.0, left: 24.0, right: 24.0),
-                    child: new Text(widget.session.title,
+                    child: new Text(widget.session.data.title,
                         style: TextStyle(
                           fontFamily: 'RedHatDisplay',
                           color: Color(0xffffffff),
@@ -245,7 +261,7 @@ class _SessionDetailState extends State<SessionDetail> {
                     child: RichText(
                       text: new TextSpan(children: [
                         new TextSpan(
-                            text: widget.session.language,
+                            text: widget.session.data.language,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),
@@ -253,7 +269,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                 fontWeight: FontWeight.w500,
                                 fontStyle: FontStyle.normal)),
                         new TextSpan(
-                            text: " // " + widget.session.presentation,
+                            text: " // " + widget.session.data.complexity,
                             style: TextStyle(
                                 fontFamily: 'RedHatDisplay',
                                 color: Color(0xffffffff),

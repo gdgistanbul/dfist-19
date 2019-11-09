@@ -1,6 +1,8 @@
+import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/SessionData.dart';
 import 'package:dfist19/data/SessionsResponse.dart';
+import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
@@ -24,15 +26,27 @@ class _SessionsScreenState extends State<SessionsScreen> {
   var instance = Fluttie();
   FocusNode focus = new FocusNode();
 
-  SessionsResponse data = new SessionsResponse();
-  List<Session> sessions;
+  SessionsResponse dataSessions = new SessionsResponse();
+  ScheduleResponse dataSchedule = new ScheduleResponse();
+  List<Session> _sessions;
+  List<Schedule> _schedule;
 
-  _getUsers() {
+  _getSessions() {
     API.getSessions().then((response) {
       setState(() {
-        data = response;
-        print("blaalsd" + data.sessions.toString());
-        sessions = response.sessions;
+        dataSessions = response;
+        print("blaalsd" + response.toString());
+        _sessions = response.sessions;
+      });
+    });
+  }
+
+  _getSchedule() {
+    API.getSchedule().then((response) {
+      setState(() {
+        dataSchedule = response;
+        print("blaalsd" + response.toString());
+        _schedule = response.schedule;
       });
     });
   }
@@ -40,8 +54,10 @@ class _SessionsScreenState extends State<SessionsScreen> {
   @override
   void initState() {
     prepareAnimation();
-    sessions = new List();
-    _getUsers();
+    _schedule = new List();
+    _sessions = new List();
+    _getSchedule();
+    _getSessions();
     super.initState();
   }
 
@@ -166,16 +182,16 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 primary: false,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: sessions.length,
+                itemCount: _sessions.length,
                 itemBuilder: (BuildContext context, int index) {
-                  SessionData _session = sessions[index].data;
+                  Session _session = _sessions[index];
                   return SessionItem(
                     shockedEmoji: shockedEmoji,
                     instance: instance,
-                    speaker: _session.speakers[0],
-                    title: _session.title,
-                    time: _session.language,
-                    track: _session.complexity,
+                    speaker: _session.data.speakers[0],
+                    title: _session.data.title,
+                    time: _session.data.language,
+                    track: _session.data.title,
                     type: Type.RED,
                     onPressed: () {
                       Navigator.push(
