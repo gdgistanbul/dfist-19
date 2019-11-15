@@ -2,11 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/Speaker.dart';
-import 'package:dfist19/data/SpeakerData.dart';
 import 'package:dfist19/data/Social.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
-import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +12,8 @@ import 'package:fluttie/fluttie.dart';
 
 class SpeakerDetail extends StatefulWidget {
   final Speaker speaker;
+  final String time;
+  final String track;
 
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
@@ -21,6 +21,8 @@ class SpeakerDetail extends StatefulWidget {
   SpeakerDetail({Key key,
     @required this.namesGrowable,
     @required this.onPressed,
+    @required this.time,
+    @required this.track,
     @required this.speaker})
       : super(key: key);
 
@@ -29,7 +31,7 @@ class SpeakerDetail extends StatefulWidget {
 }
 
 class _SpeakerDetailState extends State<SpeakerDetail> {
-  FluttieAnimationController shockedEmoji;
+//  FluttieAnimationController shockedEmoji;
   var instance = Fluttie();
 
   SessionsResponse data = new SessionsResponse();
@@ -38,7 +40,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   _getSpeakerSessions() {
     API.getSpeakerSessions(widget.speaker.id).then((response) {
       setState(() {
-        print("olamaaz" + response.toString());
         data = response;
         sessions = response.sessions;
       });
@@ -47,7 +48,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
 
   @override
   void initState() {
-    prepareAnimation();
+//    prepareAnimation();
     _getSpeakerSessions();
     super.initState();
   }
@@ -57,11 +58,11 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
     super.dispose();
   }
 
-  prepareAnimation() async {
-    var emojiComposition =
-    await instance.loadAnimationFromAsset("assets/animations/anim.json");
-    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-  }
+//  prepareAnimation() async {
+//    var emojiComposition =
+//    await instance.loadAnimationFromAsset("assets/animations/anim.json");
+//    shockedEmoji = await instance.prepareAnimation(emojiComposition);
+//  }
 
   @override
   Widget build(BuildContext context) {
@@ -85,18 +86,21 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(top: 16),
-                child: ClipRRect(
-                    borderRadius: new BorderRadius.circular(12),
-                    child: new CachedNetworkImage(
-                        imageUrl: widget.speaker.data.photoUrl,
-                        placeholder: (context, url) =>
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 16),
+                  child: ClipRRect(
+                      borderRadius: new BorderRadius.circular(12),
+                      child: new CachedNetworkImage(
+                          imageUrl: widget.speaker.data.photoUrl,
+                          placeholder: (context, url) =>
                             SizedBox(
                               child: CircularProgressIndicator(),
                               height: 20.0,
                               width: 20.0,
-                            ))),
+                            )
+                      )),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
@@ -185,14 +189,15 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       : sessions.length > 0 ? sessions.length : 0,
                   itemBuilder: (BuildContext context, int index) {
                     Session _sessions = sessions[index];
+
                     return SessionItem(
-                      shockedEmoji: shockedEmoji,
-                      instance: instance,
-                      speaker: _sessions.data.speakers[0],
+//                      shockedEmoji: shockedEmoji,
+//                      instance: instance,
+                      speaker: _sessions.data.speakers,
                       title: _sessions.data.title,
-                      time: _sessions.data.title,
-                      track: _sessions.data.tags[0],
-                      type: Type.RED,
+                      time: widget.time,
+                      track: widget.track,
+                      type: _sessions.data.tags[0],
                       onPressed: () {
                         Navigator.push(
                           context,
@@ -201,6 +206,8 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                               new SessionDetail(
                                 onPressed: () {},
                                 session: _sessions,
+                                time: widget.time,
+                                track: widget.track,
                               )),
                         );
                       },

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class SearchWidget extends StatefulWidget {
   FocusNode focus1;
+  TextEditingController controller;
 
   SearchWidget({
     Key key,
     @required this.focus1,
+    @required this.controller,
   }) : super(key: key);
 
   @override
@@ -15,7 +17,6 @@ class SearchWidget extends StatefulWidget {
 class _SearchWidgetState extends State<SearchWidget> {
   FocusNode focus = new FocusNode();
   bool isVisible = false;
-  final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -33,14 +34,14 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   void dispose() {
     this.focus.dispose();
-    this.controller.clear();
-    this.controller.clearComposing();
+    this.widget.controller.clear();
+    this.widget.controller.clearComposing();
     this.isVisible = false;
     this.widget.focus1.addListener(() {
       if (widget.focus1.hasFocus) {
         isVisible = false;
-        controller.clear();
-        controller.clearComposing();
+        widget.controller.clear();
+        widget.controller.clearComposing();
       }
     });
     super.dispose();
@@ -70,7 +71,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             ),
             child: TextField(
               focusNode: focus,
-              controller: controller,
+              controller: widget.controller,
               autocorrect: true,
               onTap: () {
                 FocusScope.of(context).requestFocus(focus);
@@ -116,7 +117,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                       Icons.clear,
                       color: Colors.grey,
                     ),
-                    onPressed: controller.clear,
+                    onPressed: widget.controller.clear,
                   ),
                 ),
                 hintStyle: TextStyle(

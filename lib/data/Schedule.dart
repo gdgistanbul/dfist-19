@@ -1,12 +1,12 @@
+import 'package:dfist19/data/ScheduleData.dart';
 import 'package:json_annotation/json_annotation.dart';
-import 'SessionData.dart';
 
 part 'Schedule.g.dart';
 
 @JsonSerializable()
 class Schedule {
   String id;
-  SessionData data;
+  ScheduleData data;
 
   Schedule();
 

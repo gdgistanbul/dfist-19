@@ -11,7 +11,7 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) {
     ..id = json['id'] as String
     ..data = json['data'] == null
         ? null
-        : SessionData.fromJson(json['data'] as Map<String, dynamic>);
+        : ScheduleData.fromJson(json['data'] as Map<String, dynamic>);
 }
 
 Map<String, dynamic> _$ScheduleToJson(Schedule instance) =>

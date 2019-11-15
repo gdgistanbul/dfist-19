@@ -52,13 +52,14 @@ class API {
   }
 
   static Future<ScheduleResponse> getSchedule() async {
-    final response = await http.get(baseUrl+"schedule");
+    final response = await http.get(baseUrl+"/schedule");
 
     if (response.statusCode == 200) {
-      print("200 donderdimSchedule");
       return ScheduleResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load post');
     }
   }
+
+
 }

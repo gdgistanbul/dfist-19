@@ -45,11 +45,13 @@ class _SpeakerItemState extends State<SpeakerItem> {
                         child: new CachedNetworkImage(
                             imageUrl: widget.img,
                             placeholder: (context, url) =>
-                                SizedBox(
-                                  child: CircularProgressIndicator(),
+                                new SizedBox(
+                                  child: new CircularProgressIndicator(),
                                   height: 20.0,
                                   width: 20.0,
                                 ),
+                            errorWidget: (context, url, error) => Icon(Icons.error),
+
                             imageBuilder: (context, imageProvider) =>
                                 Container(
                                     decoration: BoxDecoration(
