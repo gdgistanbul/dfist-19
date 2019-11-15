@@ -7,6 +7,7 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
+  flutter_launcher_icons: ^0.7.4
 
   flutter:
     sdk: flutter
@@ -35,42 +36,51 @@ dependencies:
 
 
 
+
 dev_dependencies:
+  flutter_launcher_icons: "^0.7.3"
   build_runner:
   json_serializable: ^2.0.0
   flutter_test:
     sdk: flutter
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/app_logo.png"
+
 flutter:
-    uses-material-design: true
-    fonts:
-        - family: RedHatDisplay
-          fonts:
-            - asset: fonts/RedHatDisplay-Black.ttf
-            - asset: fonts/RedHatDisplay-BlackItalic.ttf
-            - asset: fonts/RedHatDisplay-Bold.ttf
-            - asset: fonts/RedHatDisplay-BoldItalic.ttf
-            - asset: fonts/RedHatDisplay-Medium.ttf
-            - asset: fonts/RedHatDisplay-MediumItalic.ttf
-            - asset: fonts/RedHatDisplay-Regular.ttf
-            - asset: fonts/RedHatDisplay-RegularItalic.ttf
-    assets:
-      - assets/logo.png
-      - assets/info.png
-      - assets/notifications.png
-      - assets/tickets.png
-      - assets/uniq_map.png
-      - assets/gdg_istanbul_logo.png
-      - assets/facebook.png
-      - assets/github.png
-      - assets/instagram.png
-      - assets/linkedin.png
-      - assets/twitter.png
-      - assets/youtube.png
-      - assets/red.png
-      - assets/people.png
-      - assets/cat.png
-      - assets/question.png
-      - assets/newspaper.png
-      - assets/uniq.jpeg
-      - assets/path.png
-      - assets/animations/anim.json
+  uses-material-design: true
+  fonts:
+    - family: RedHatDisplay
+      fonts:
+        - asset: fonts/RedHatDisplay-Black.ttf
+        - asset: fonts/RedHatDisplay-BlackItalic.ttf
+        - asset: fonts/RedHatDisplay-Bold.ttf
+        - asset: fonts/RedHatDisplay-BoldItalic.ttf
+        - asset: fonts/RedHatDisplay-Medium.ttf
+        - asset: fonts/RedHatDisplay-MediumItalic.ttf
+        - asset: fonts/RedHatDisplay-Regular.ttf
+        - asset: fonts/RedHatDisplay-RegularItalic.ttf
+  assets:
+    - assets/logo.png
+    - assets/info.png
+    - assets/notifications.png
+    - assets/tickets.png
+    - assets/uniq_map.png
+    - assets/gdg_istanbul_logo.png
+    - assets/facebook.png
+    - assets/github.png
+    - assets/instagram.png
+    - assets/linkedin.png
+    - assets/twitter.png
+    - assets/youtube.png
+    - assets/red.png
+    - assets/people.png
+    - assets/cat.png
+    - assets/question.png
+    - assets/newspaper.png
+    - assets/uniq.jpeg
+    - assets/path.png
+    - assets/app_logo.png
+    - assets/animations/anim.json
