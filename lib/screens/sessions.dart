@@ -48,6 +48,13 @@ class _SessionsScreenState extends State<SessionsScreen> {
           .where(((session) =>
               session.data.title.toLowerCase().contains(value.toLowerCase())))
           .toList();
+
+      _sessions
+          .where(((session) =>
+          session.data.speakers[0].toLowerCase().contains(value.toLowerCase())))
+          .toList();
+
+      _newSessionss.addAll(_sessions);
     });
   }
 
@@ -367,8 +374,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
 //                                                        shockedEmoji:
 //                                                            shockedEmoji,
 //                                                        instance: instance,
-                                                        speaker: _session.data
-                                                                .speakers,
+                                                        speaker: _session.data.speakers!=null? _session.data.speakers : null ,
                                                         title:
                                                             _session.data.title,
                                                         time: '$starts - $ends',
@@ -455,11 +461,9 @@ class _SessionsScreenState extends State<SessionsScreen> {
 //                                                shockedEmoji: shockedEmoji,
 //                                                instance: instance,
                                         speaker: _session.data.speakers !=
-                                                    null &&
-                                                _session.data.speakers.length >
-                                                    0
+                                                    null
                                             ? _session.data.speakers
-                                            : "",
+                                            : null,
                                         title: _session.data.title,
                                         time: _time != null ? _time : " ",
                                         track: _track != null ? _track : " ",
