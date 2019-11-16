@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:809461454117:android:867bcf900ce70e219d36cc",
         "android_client_info": {
-          "package_name": "com.example.dfist19"
+          "package_name": "com.devfestistanbul.devfest19"
         }
       },
       "oauth_client": [
@@ -35,7 +35,7 @@
               "client_id": "809461454117-7ogb3erdh31cs5c17o71l4menepf5vub.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.example.dfist19"
+                "bundle_id": "com.devfestistanbul.devfest19"
               }
             }
           ]

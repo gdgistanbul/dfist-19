@@ -1,9 +1,7 @@
-import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 
 class SessionItem extends StatefulWidget {
   final List<String> speaker;
