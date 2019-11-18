@@ -2,10 +2,13 @@ import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttie/fluttie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionItem extends StatefulWidget {
   final List<String> speaker;
   final String title;
+  final String id;
   final String time;
   final String track;
   final String type;
@@ -13,6 +16,7 @@ class SessionItem extends StatefulWidget {
 
   SessionItem({
     Key key,
+    @required this.id,
     @required this.speaker,
     @required this.title,
     @required this.time,
@@ -25,47 +29,75 @@ class SessionItem extends StatefulWidget {
   _SessionItemState createState() => _SessionItemState();
 }
 
-class _SessionItemState extends State<SessionItem> {
+class _SessionItemState extends State<SessionItem> with AutomaticKeepAliveClientMixin<SessionItem> {
+  @override
+  bool get wantKeepAlive => true;
+
   bool isAnimated = false;
   SpeakerResponse data = new SpeakerResponse();
 
-//  FluttieAnimationController shockedEmoji;
-//
-//  var instance = Fluttie();
-//  prepareAnimation() async {
-//
-//    var emojiComposition =
-//    await instance.loadAnimationFromAsset("assets/animations/anim.json");
-//    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-//  }
   var buffer = new StringBuffer();
 
   _getSessionSpaker() async {
     buffer.clear();
-    if(widget.speaker !=null && widget.speaker.isNotEmpty) {
+    if (widget.speaker != null && widget.speaker.isNotEmpty) {
       for (String speaker in widget.speaker)
         API.getSessionSpaker(speaker).then((response) {
           setState(() {
             data = response;
             buffer.write(data.speakers[0].data.name);
-          if(widget.speaker.length >1 ) buffer.write(" ");
+            if (widget.speaker.length > 1) buffer.write(" ");
           });
         });
     }
   }
 
+  List<String> favList;
+
+  _addIdToSF(List<String> value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("favList", value);
+    print(prefs.getStringList("favList").length);
+    print(favList.length);
+  }
+  _getSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    favList = prefs.getStringList("favList");
+    print(favList.length);
+  }
+
+  FluttieAnimationController shockedEmoji;
+
+  prepareAnimation() async {
+    bool canBeUsed = await Fluttie.isAvailable();
+    if (!canBeUsed) {
+      print("Animations are not supported on this platform");
+      return;
+    }
+    var instance = Fluttie();
+    var emojiComposition =
+        await instance.loadAnimationFromAsset("assets/animations/anim.json");
+    shockedEmoji = await instance.prepareAnimation(emojiComposition);
+  }
+
+  @override
   initState() {
     super.initState();
+    prepareAnimation();
     _getSessionSpaker();
+    favList = new List();
+    _getSF();
   }
 
   @override
   dispose() {
+    buffer.clear();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    setState(() => context);
     return FlatButton(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
@@ -151,7 +183,8 @@ class _SessionItemState extends State<SessionItem> {
                           ),
                         ),
                         Visibility(
-                          visible: widget.speaker !=null && widget.speaker.length > 0,
+                          visible: widget.speaker != null &&
+                              widget.speaker.length > 0,
                           child: Align(
                             child: Container(
                               height: 55,
@@ -170,7 +203,8 @@ class _SessionItemState extends State<SessionItem> {
                                     ),
                                     new Padding(
                                       padding: const EdgeInsets.only(left: 5),
-                                      child: Text(buffer != null? buffer.toString() : "",
+                                      child: Text(
+                                        buffer != null ? buffer.toString() : "",
                                         style: TextStyle(
                                             fontFamily: 'RedHatDisplay',
                                             color: Color(0xffffffff),
@@ -189,26 +223,35 @@ class _SessionItemState extends State<SessionItem> {
                       ],
                     ),
                   ),
-//                  Align(
-//                    alignment: Alignment.bottomRight,
-//                    child: Padding(
-//                      padding: const EdgeInsets.all(8.0),
-//                      child: GestureDetector(
-//                          child: FluttieAnimation(
-//                            shockedEmoji,
-//                            size: Size(50, 43),
-//                          ),
-//                          onTap: () {
-//                            if (!isAnimated) {
-//                              shockedEmoji.start();
-//                              isAnimated = true;
-//                            } else {
-//                              isAnimated = false;
-//                              shockedEmoji.stopAndReset(rewind: true);
-//                            }
-//                          }),
-//                    ),
-//                  ),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: GestureDetector(
+                          child: FluttieAnimation(
+                            shockedEmoji,
+                            size: Size(50, 43),
+                          ),
+                          onTap: () {
+                            _getSF();
+                            if (!isAnimated) {
+                              shockedEmoji.start();
+                              if (favList.contains(widget.id)) {
+                                favList.remove(widget.id);
+                                _addIdToSF(favList);
+                              } else {
+                                favList.add(widget.id);
+                                print(widget.id);
+                                _addIdToSF(favList);
+                              }
+                              isAnimated = true;
+                            } else {
+                              isAnimated = false;
+                              shockedEmoji.stopAndReset(rewind: true);
+                            }
+                          }),
+                    ),
+                  ),
                 ],
               ),
             ],
@@ -223,15 +266,22 @@ class _SessionItemState extends State<SessionItem> {
     switch (type) {
       case "Mobile Technologies":
         return "assets/red.png";
+      case "Flutter":
+        return "assets/red.png";
       case "Design":
         return "assets/red.png";
       case "Machine Learning & AI":
-        return "assets/red.png";
+        return "assets/cloud.png";
+      case "Machine Learning & Ai":
+        return "assets/cloud.png";
       case "Cloud":
-        return "assets/red.png";
+        return "assets/cloud.png";
       case "Web Technologies":
+        return "assets/web.png";
+      case "Robotics & assistant":
         return "assets/red.png";
-
+      case "Firebase":
+        return "assets/web.png";
       default:
         return "assets/red.png";
     }
@@ -240,17 +290,25 @@ class _SessionItemState extends State<SessionItem> {
   _cardColor(type) {
     switch (type) {
       case "Mobile Technologies":
-        return Color(0xffdc5144);
+        return Color(0xff84E07A);
+      case "Flutter":
+        return Color(0xff84E07A);
       case "Design":
-        return Color(0xffdc5144);
+        return Color(0xffE07AB3);
       case "Cloud":
-        return Color(0xff3196f6);
+        return Color(0xff7A9DE0);
       case "Machine Learning & AI":
-        return Color(0xff3196f6);
+        return Color(0xffE17F7F);
+      case "Machine Learning & Ai":
+        return Color(0xffE17F7F);
       case "Web Technologies":
-        return Color(0xfff8bb15);
+        return Color(0xffFECC92);
+      case "Robotics & assistant":
+        return Color(0xff7AD7E0);
+      case "Firebase":
+        return Color(0xffFECC92);
       default:
-        return Color(0xffdc5144);
+        return Color(0xff333d47);
     }
   }
 }

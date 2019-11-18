@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class BottomSheetList extends StatefulWidget {
+
+
   @override
   _BottomSheetListState createState() => _BottomSheetListState();
 }
@@ -31,8 +33,8 @@ class _BottomSheetListState extends State<BottomSheetList> {
       Color(0xffdc5144),
       Color(0xff74d5de),
     ];
-
     List<String> selectedReportList = List();
+
 
     return Container(
       child: new GridView.builder(

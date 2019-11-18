@@ -9,6 +9,8 @@ environment:
 dependencies:
   flutter_launcher_icons: ^0.7.4
 
+  shared_preferences: ^0.5.4+5
+
   flutter:
     sdk: flutter
 
@@ -76,6 +78,8 @@ flutter:
     - assets/twitter.png
     - assets/youtube.png
     - assets/red.png
+    - assets/web.png
+    - assets/cloud.png
     - assets/people.png
     - assets/cat.png
     - assets/question.png

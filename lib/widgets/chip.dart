@@ -30,7 +30,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
-              width: 84,
+              width: 116,
               height: 28,
               alignment: Alignment.centerLeft,
               child: new Text(widget.reportList,

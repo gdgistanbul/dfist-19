@@ -7,11 +7,12 @@ import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
-import 'package:dfist19/widgets/bottomSheet.dart';
+import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionsScreen extends StatefulWidget {
   final bool isSessions;
@@ -22,10 +23,14 @@ class SessionsScreen extends StatefulWidget {
   SessionsScreen(this.isSessions);
 }
 
-class _SessionsScreenState extends State<SessionsScreen> {
+class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAliveClientMixin<SessionsScreen> {
+
+  @override
+  bool get wantKeepAlive => true;
+
   FluttieAnimationController shockedEmoji;
   TextEditingController _controller = TextEditingController();
-  var instance = Fluttie();
+
   FocusNode focus = new FocusNode();
   bool isVisible = false;
 
@@ -36,6 +41,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
   List<Schedule> _schedule;
   List<Timeslot> _timeslot;
   List<Session> _newSessionss;
+  List<Session> _newSessionsss;
 
   _onChanged(String value) async {
     _newSessionss.clear();
@@ -48,14 +54,47 @@ class _SessionsScreenState extends State<SessionsScreen> {
           .where(((session) =>
               session.data.title.toLowerCase().contains(value.toLowerCase())))
           .toList();
-
-      _sessions
-          .where(((session) =>
-          session.data.speakers[0].toLowerCase().contains(value.toLowerCase())))
-          .toList();
-
-      _newSessionss.addAll(_sessions);
     });
+  }
+
+  _onFiltered(List<String> value, BuildContext context) async {
+    _newSessionss = new List();
+    _newSessionsss = new List();
+    _newSessionss.clear();
+    if (value.isEmpty) {
+      setState(() {});
+      return;
+    }
+    setState(() {
+      for (String val in value) {
+        for (Session session in _sessions) {
+          if (session.data.tags != null) {
+            for (String tag in session.data.tags) {
+              if (tag.contains(val)) {
+                print(tag);
+                print(session.data.title);
+                _newSessionsss.add(session);
+                _newSessionss = _newSessionsss;
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
+  List<String> favList;
+
+  _addIdToSF(List<String> value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("favList", value);
+    print(prefs.getStringList("favList").length);
+    print(favList.length);
+  }
+  _getSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    favList = prefs.getStringList("favList");
+    print(favList.length);
   }
 
   @override
@@ -66,7 +105,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
         isVisible = false;
       }
     });
-    prepareAnimation();
+    _controller = new TextEditingController();
     _sessions = new List();
     _schedule = new List();
     _timeslot = new List();
@@ -76,19 +115,13 @@ class _SessionsScreenState extends State<SessionsScreen> {
 
   @override
   dispose() {
-//    SessionItem().prepareAnimation();
     super.dispose();
     _controller.dispose();
   }
 
-  prepareAnimation() async {
-    var emojiComposition =
-        await instance.loadAnimationFromAsset("assets/animations/anim.json");
-    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-  }
-
   @override
   Widget build(BuildContext context) {
+    setState(() => context);
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).requestFocus(focus);
@@ -305,7 +338,6 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                                       for (var i = 0;
                                                           i < _sessions.length;
                                                           i++) {
-                                                        print(_sessions.length);
                                                         if (_sessionItem
                                                                 .items[index]
                                                                 .toString() ==
@@ -369,12 +401,19 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                                             .format("HH:mm")
                                                             .toString();
                                                       }
-
                                                       return SessionItem(
+                                                        key: ValueKey(_session
+                                                            .data.title),
 //                                                        shockedEmoji:
 //                                                            shockedEmoji,
 //                                                        instance: instance,
-                                                        speaker: _session.data.speakers!=null? _session.data.speakers : null ,
+                                                        id: _session.id,
+                                                        speaker: _session.data
+                                                                    .speakers !=
+                                                                null
+                                                            ? _session
+                                                                .data.speakers
+                                                            : null,
                                                         title:
                                                             _session.data.title,
                                                         time: '$starts - $ends',
@@ -429,6 +468,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: _newSessionss.length,
+                                    primary: true,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       Session _session = _newSessionss[index];
@@ -456,12 +496,11 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                           }
                                         }
                                       }
-
                                       return SessionItem(
+                                        key: ValueKey(_session.data.title),
 //                                                shockedEmoji: shockedEmoji,
 //                                                instance: instance,
-                                        speaker: _session.data.speakers !=
-                                                    null
+                                        speaker: _session.data.speakers != null
                                             ? _session.data.speakers
                                             : null,
                                         title: _session.data.title,
@@ -487,7 +526,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                                                     ? _track
                                                                     : " ")),
                                           );
-                                        },
+                                        }
                                       );
                                     },
                                   );
@@ -503,6 +542,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
   }
 
   Widget _search(BuildContext context) {
+    setState(() => context);
+    context = this.context;
     return Column(
       children: <Widget>[
         Card(
@@ -563,7 +604,7 @@ class _SessionsScreenState extends State<SessionsScreen> {
                   color: Colors.grey,
                 ),
                 suffixIcon: new Visibility(
-                  visible: isVisible,
+                  visible: focus.hasFocus,
                   child: IconButton(
                     icon: Icon(
                       Icons.clear,
@@ -590,6 +631,8 @@ class _SessionsScreenState extends State<SessionsScreen> {
   }
 
   void _showModalSheet(BuildContext context) {
+    setState(()=> context);
+    context = this.context;
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
@@ -644,7 +687,31 @@ class _SessionsScreenState extends State<SessionsScreen> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 64.0),
-                  child: BottomSheetList(),
+                  child: Container(
+                    child: new GridView.builder(
+                        itemCount: reportList.length,
+                        gridDelegate:
+                            new SliverGridDelegateWithFixedCrossAxisCount(
+                                childAspectRatio: 3.5, crossAxisCount: 2),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(left: 16.0, right: 16.0),
+                            child: Container(
+                                child: Center(
+                              child: MultiSelectChip(
+                                colorList[index],
+                                reportList[index],
+                                onSelectionChanged: (selectedList) {
+                                  setState(() {
+                                    selectedReportList.addAll(selectedList);
+                                  });
+                                },
+                              ),
+                            )),
+                          );
+                        }),
+                  ),
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
@@ -672,7 +739,10 @@ class _SessionsScreenState extends State<SessionsScreen> {
                                 )),
                           ),
                         ),
-                        onTap:() {
+                        onTap: () {
+                          _controller.text = " ";
+                          _onFiltered(selectedReportList, context);
+                          selectedReportList.clear();
                           Navigator.pop(context);
                           FocusScope.of(context).requestFocus(new FocusNode());
                         },
@@ -685,4 +755,27 @@ class _SessionsScreenState extends State<SessionsScreen> {
           );
         });
   }
+
+  List<String> reportList = [
+    "Robotics & assistant",
+    "Mobile Technologies",
+    "Web Technologies",
+    "Cloud",
+    "Machine Learning",
+    "Firebase",
+    "Design",
+  ];
+
+  List<Color> colorList = [
+    Color(0xff7AD7E0),
+    Color(0xff84E07A),
+    Color(0xffFECC92),
+    Color(0xff7A9DE0),
+    Color(0xffE17F7F),
+    Color(0xffFECC92),
+    Color(0xffE07AB3),
+  ];
+  List<String> selectedReportList = List();
+
+
 }
