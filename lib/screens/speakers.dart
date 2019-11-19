@@ -2,14 +2,11 @@ import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/SheduleResponse.dart';
-import 'package:dfist19/data/SpeakerData.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/Timeslot.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/utils/API.dart';
-import 'package:dfist19/widgets/searchWidget.dart';
-import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +16,11 @@ class SpeakerScreen extends StatefulWidget {
   _SpeakerScreenState createState() => _SpeakerScreenState();
 }
 
-class _SpeakerScreenState extends State<SpeakerScreen> {
+class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveClientMixin<SpeakerScreen> {
+
+  @override
+  bool get wantKeepAlive => true;
+
   final FocusNode focus = new FocusNode();
   TextEditingController controller = TextEditingController();
   bool isVisible = false;

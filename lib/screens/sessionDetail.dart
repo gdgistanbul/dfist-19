@@ -1,12 +1,10 @@
-import 'dart:async';
-import 'dart:convert';
 import 'dart:io' show Platform;
-
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -41,22 +39,22 @@ class _SessionDetailState extends State<SessionDetail> {
   SpeakerResponse data = new SpeakerResponse();
   List<Speaker> speakers;
 
-  _getSessionSpaker() {
-    if (widget.session.data.speakers != null &&
-        widget.session.data.speakers.length > 0) {
-      API.getSessionSpaker(widget.session.data.speakers[0]).then((response) {
-        setState(() {
-          data = response;
-          speakers = response.speakers;
-        });
-      });
-    }
-  }
+//  _getSessionSpaker() {
+//    if (widget.session.data.speakers != null &&
+//        widget.session.data.speakers.length > 0) {
+//      API.getSessionSpaker(widget.session.data.speakers[0]).then((response) {
+//        setState(() {
+//          data = response;
+//          speakers = response.speakers;
+//        });
+//      });
+//    }
+//  }
 
   @override
   void initState() {
     super.initState();
-    _getSessionSpaker();
+//    _getSessionSpaker();
   }
 
   @override
@@ -138,63 +136,63 @@ class _SessionDetailState extends State<SessionDetail> {
                                   )),
                             ),
                           ),
+                          widget.session.data.speakers == null ?
+                          Container()
+                              :
                           Container(
-                            child: speakers == null
-                                ? Container()
-                                : Container(
-                                    height: 180,
-                                    width: 180,
-                                    child: Center(
-                                      child: SpeakerItem(
-                                        name: "${speakers[0].data.name}",
-                                        img: speakers[0].data.photoUrl,
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            new MaterialPageRoute(
-                                                builder: (context) =>
-                                                    new SpeakerDetail(
-                                                        speaker: speakers[0],
-                                                        time: widget.time,
-                                                        track: widget.track)),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ),
-//                            Container(
-//                         child: GridView.builder(
-//                           itemCount: speakers.length,
-//                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                               crossAxisCount: 2),
-//                           itemBuilder: (BuildContext context, int index) {
-//                                        Speaker _speaker = speakers[index];
-//                                        return Container(
-//                                          height: 180,
-//                                          width: 180,
-//                                          child: Center(
-//                                            child: SpeakerItem(
-//                                              name: "${_speaker.data.name}",
-//                                              img: _speaker.data.photoUrl,
-//                                              onPressed: () {
-//                                                Navigator.push(
-//                                                  context,
-//                                                  new MaterialPageRoute(
-//                                                      builder: (context) =>
-//                                                          new SpeakerDetail(
-//                                                              speaker:
-//                                                              _speaker,
-//                                                              time: widget.time,
-//                                                              track: widget
-//                                                                  .track)),
-//                                                );
-//                                              },
-//                                            ),
-//                                          ),
-//                                        );
-//                                      },
-//                                    ),
-//                            ),
+                            height: 180,
+                            child: ListView.builder(
+                              primary: false,
+                              shrinkWrap: true,
+                              scrollDirection: Axis.horizontal,
+                              itemCount: widget.session.data.speakers.length,
+                              itemBuilder: (BuildContext context, int index) {
+                                return FutureBuilder<SpeakerResponse>(
+                                    future: API.getSessionSpaker(
+                                        widget.session.data.speakers[index]),
+                                    builder:
+                                        (context, AsyncSnapshot snapshot) {
+                                      if (!snapshot.hasData) {
+                                        return Container(
+                                            height: 180,
+                                            width: 180,
+                                            child: Center(
+                                                child:
+                                                    CircularProgressIndicator()));
+                                      } else {
+                                        data = snapshot.data;
+
+                                        return Container(
+                                          height: 180,
+                                          width: 180,
+                                          child: Center(
+                                            child: SpeakerItem(
+                                              name:
+                                                  "${data.speakers[0].data.name}",
+                                              img: data
+                                                  .speakers[0].data.photoUrl,
+                                              onPressed: () {
+                                                Navigator.push(
+                                                  context,
+                                                  new MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          new SpeakerDetail(
+                                                              speaker:
+                                                                  data.speakers[
+                                                                      0],
+                                                              time:
+                                                                  widget.time,
+                                                              track: widget
+                                                                  .track)),
+                                                );
+                                              },
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    });
+                              },
+                            ),
                           ),
                         ],
                       ),
@@ -210,7 +208,9 @@ class _SessionDetailState extends State<SessionDetail> {
                   child: Container(
                     height: 350,
                     width: MediaQuery.of(context).size.width,
-                    color: Color(0xffdc5144),
+                    color: Constants.color(widget.session.data.tags != null
+                        ? widget.session.data.tags[0]
+                        : ""),
                     child: Align(
                       alignment: Alignment.topRight,
                       child: Container(
@@ -221,7 +221,9 @@ class _SessionDetailState extends State<SessionDetail> {
                             topRight: Radius.circular(10),
                           ),
                           child: Image.asset(
-                            "assets/red.png",
+                            Constants.type(widget.session.data.tags != null
+                                ? widget.session.data.tags[0]
+                                : ""),
                             fit: BoxFit.cover,
                           ),
                         ),

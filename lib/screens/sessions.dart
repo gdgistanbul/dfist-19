@@ -1,5 +1,6 @@
 import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
+import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/data/TimeslotSessions.dart' as Session1;
 import 'package:dfist19/data/SessionsResponse.dart';
@@ -7,6 +8,7 @@ import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
@@ -23,8 +25,8 @@ class SessionsScreen extends StatefulWidget {
   SessionsScreen(this.isSessions);
 }
 
-class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAliveClientMixin<SessionsScreen> {
-
+class _SessionsScreenState extends State<SessionsScreen>
+    with AutomaticKeepAliveClientMixin<SessionsScreen> {
   @override
   bool get wantKeepAlive => true;
 
@@ -54,10 +56,29 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
           .where(((session) =>
               session.data.title.toLowerCase().contains(value.toLowerCase())))
           .toList();
+
+      for (Speaker speaker in dataSpeaker.speakers) {
+        if (speaker.data.name != null &&
+            speaker.data.name.toLowerCase().contains(value.toLowerCase())) {
+          for (Session session in _sessions) {
+            if (session.data.speakers[0] != null &&
+                session.data.speakers[0] == speaker.id)
+              _newSessionss.add(session);
+          }
+        }
+      }
     });
   }
 
-  _onFiltered(List<String> value, BuildContext context) async {
+  _getSpeakers() {
+    API.getSpeakers().then((response) {
+      setState(() {
+        dataSpeaker = response;
+      });
+    });
+  }
+
+  _onFilteredByCategory(List<String> value, BuildContext context) async {
     _newSessionss = new List();
     _newSessionsss = new List();
     _newSessionss.clear();
@@ -83,6 +104,31 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
     });
   }
 
+  _onFilteredByHalls(List<String> value, BuildContext context) async {
+    _newSessionss = new List();
+    _newSessionsss = new List();
+    _newSessionss.clear();
+    if (value.isEmpty) {
+      setState(() {});
+      return;
+    }
+    setState(() {
+      for (String val in value) {
+        for (Session session in _sessions) {
+          for (Timeslot timeslot in _timeslot) {
+            for (var i = 0; i < timeslot.sessions.length; i++) {
+              for (var j = 0; j < timeslot.sessions[i].items.length; j++) {
+                if (timeslot.sessions[i].items[j].toString() == session.id) {
+                  if (i == Constants.hall(val)) _newSessionss.add(session);
+                }
+              }
+            }
+          }
+        }
+      }
+    });
+  }
+
   List<String> favList;
 
   _addIdToSF(List<String> value) async {
@@ -91,6 +137,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
     print(prefs.getStringList("favList").length);
     print(favList.length);
   }
+
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
@@ -105,6 +152,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
         isVisible = false;
       }
     });
+    _getSpeakers();
     _controller = new TextEditingController();
     _sessions = new List();
     _schedule = new List();
@@ -180,7 +228,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                             ],
                           ),
                           onPressed: () {
-                            _showModalSheet(context);
+                            _showModalSheet(context, 0);
                           }),
                       FlatButton(
                           highlightColor: Colors.transparent,
@@ -207,7 +255,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                             ],
                           ),
                           onPressed: () {
-                            _showModalSheet(context);
+                            _showModalSheet(context, 1);
                           })
                     ],
                   ),
@@ -497,37 +545,33 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                                         }
                                       }
                                       return SessionItem(
-                                        key: ValueKey(_session.data.title),
-//                                                shockedEmoji: shockedEmoji,
-//                                                instance: instance,
-                                        speaker: _session.data.speakers != null
-                                            ? _session.data.speakers
-                                            : null,
-                                        title: _session.data.title,
-                                        time: _time != null ? _time : " ",
-                                        track: _track != null ? _track : " ",
-                                        type: _session.data.tags != null
-                                            ? _session.data.tags[0]
-                                            : "",
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder:
-                                                    (context) =>
-                                                        SessionDetail(
-                                                            onPressed: () {},
-                                                            session: _session,
-                                                            time: _time != null
-                                                                ? _time
-                                                                : " ",
-                                                            track:
-                                                                _track != null
-                                                                    ? _track
-                                                                    : " ")),
-                                          );
-                                        }
-                                      );
+                                          key: ValueKey(_session.data.title),
+                                          speaker:
+                                              _session.data.speakers != null
+                                                  ? _session.data.speakers
+                                                  : null,
+                                          title: _session.data.title,
+                                          time: _time != null ? _time : " ",
+                                          track: _track != null ? _track : " ",
+                                          type: _session.data.tags != null
+                                              ? _session.data.tags[0]
+                                              : "",
+                                          onPressed: () {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      SessionDetail(
+                                                          onPressed: () {},
+                                                          session: _session,
+                                                          time: _time != null
+                                                              ? _time
+                                                              : " ",
+                                                          track: _track != null
+                                                              ? _track
+                                                              : " ")),
+                                            );
+                                          });
                                     },
                                   );
                             //
@@ -565,6 +609,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
               focusNode: focus,
               controller: _controller,
               onChanged: _onChanged,
+              textInputAction: TextInputAction.done,
               autocorrect: true,
               onTap: () {
                 FocusScope.of(context).requestFocus(focus);
@@ -574,6 +619,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                 isVisible = false;
               },
               onSubmitted: (text) {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 isVisible = false;
               },
               style: TextStyle(
@@ -630,8 +676,8 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
     );
   }
 
-  void _showModalSheet(BuildContext context) {
-    setState(()=> context);
+  void _showModalSheet(BuildContext context, int from) {
+    setState(() => context);
     context = this.context;
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -661,10 +707,16 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                               fontStyle: FontStyle.normal,
                               letterSpacing: 0,
                             )),
+                        onPressed: (){
+                          selectedReportList.clear();
+                          _newSessionss.clear();
+                          Navigator.pop(context);
+                          FocusScope.of(context).requestFocus(new FocusNode());
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.only(right: 30.0),
-                        child: new Text("Categories",
+                        child: new Text(from == 0 ? "Halls" : "Categories",
                             style: TextStyle(
                               fontFamily: 'RedHatDisplay',
                               color: Color(0xff333d47),
@@ -689,7 +741,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                   padding: const EdgeInsets.only(top: 64.0),
                   child: Container(
                     child: new GridView.builder(
-                        itemCount: reportList.length,
+                        itemCount: from == 0 ? halls.length : reportList.length,
                         gridDelegate:
                             new SliverGridDelegateWithFixedCrossAxisCount(
                                 childAspectRatio: 3.5, crossAxisCount: 2),
@@ -701,7 +753,7 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                                 child: Center(
                               child: MultiSelectChip(
                                 colorList[index],
-                                reportList[index],
+                                from == 0 ? halls[index] : reportList[index],
                                 onSelectionChanged: (selectedList) {
                                   setState(() {
                                     selectedReportList.addAll(selectedList);
@@ -741,7 +793,10 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
                         ),
                         onTap: () {
                           _controller.text = " ";
-                          _onFiltered(selectedReportList, context);
+                          from == 0
+                              ? _onFilteredByHalls(selectedReportList, context)
+                              : _onFilteredByCategory(
+                                  selectedReportList, context);
                           selectedReportList.clear();
                           Navigator.pop(context);
                           FocusScope.of(context).requestFocus(new FocusNode());
@@ -766,6 +821,13 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
     "Design",
   ];
 
+  List<String> halls = [
+    "Bosphorus(Uniq Hall)",
+    "Galata Tower(Glass Room)",
+    "Maiden's Tower",
+    "Hagia Sophia",
+  ];
+
   List<Color> colorList = [
     Color(0xff7AD7E0),
     Color(0xff84E07A),
@@ -776,6 +838,4 @@ class _SessionsScreenState extends State<SessionsScreen> with AutomaticKeepAlive
     Color(0xffE07AB3),
   ];
   List<String> selectedReportList = List();
-
-
 }

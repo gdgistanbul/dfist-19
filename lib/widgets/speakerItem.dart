@@ -19,7 +19,11 @@ class SpeakerItem extends StatefulWidget {
   _SpeakerItemState createState() => _SpeakerItemState();
 }
 
-class _SpeakerItemState extends State<SpeakerItem> {
+class _SpeakerItemState extends State<SpeakerItem>with AutomaticKeepAliveClientMixin<SpeakerItem> {
+
+  @override
+  bool get wantKeepAlive => true;
+
   @override
   Widget build(BuildContext context) {
     print(widget.img);
@@ -29,8 +33,6 @@ class _SpeakerItemState extends State<SpeakerItem> {
         child: ClipRRect(
           borderRadius: BorderRadius.all(Radius.circular(12.0)),
           child: Container(
-            height: MediaQuery.of(context).size.height / 2.5,
-            width: MediaQuery.of(context).size.width,
             child: GestureDetector(
               onTap: widget.onPressed,
               child: Card(
@@ -42,8 +44,9 @@ class _SpeakerItemState extends State<SpeakerItem> {
                     Align(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                        child: new CachedNetworkImage(
+                        child: CachedNetworkImage(
                             imageUrl: widget.img,
+                            key: widget.key,
                             placeholder: (context, url) =>
                                 new SizedBox(
                                   child: new CircularProgressIndicator(),

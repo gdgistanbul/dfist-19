@@ -60,30 +60,31 @@ class _SessionItemState extends State<SessionItem> with AutomaticKeepAliveClient
     print(prefs.getStringList("favList").length);
     print(favList.length);
   }
+
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
     print(favList.length);
   }
 
-  FluttieAnimationController shockedEmoji;
-
-  prepareAnimation() async {
-    bool canBeUsed = await Fluttie.isAvailable();
-    if (!canBeUsed) {
-      print("Animations are not supported on this platform");
-      return;
-    }
-    var instance = Fluttie();
-    var emojiComposition =
-        await instance.loadAnimationFromAsset("assets/animations/anim.json");
-    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-  }
+//  FluttieAnimationController shockedEmoji;
+//
+//  prepareAnimation() async {
+//    bool canBeUsed = await Fluttie.isAvailable();
+//    if (!canBeUsed) {
+//      print("Animations are not supported on this platform");
+//      return;
+//    }
+//    var instance = Fluttie();
+//    var emojiComposition =
+//        await instance.loadAnimationFromAsset("assets/animations/anim.json");
+//    shockedEmoji = await instance.prepareAnimation(emojiComposition);
+//  }
 
   @override
   initState() {
     super.initState();
-    prepareAnimation();
+//    prepareAnimation();
     _getSessionSpaker();
     favList = new List();
     _getSF();
@@ -223,35 +224,35 @@ class _SessionItemState extends State<SessionItem> with AutomaticKeepAliveClient
                       ],
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.bottomRight,
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: GestureDetector(
-                          child: FluttieAnimation(
-                            shockedEmoji,
-                            size: Size(50, 43),
-                          ),
-                          onTap: () {
-                            _getSF();
-                            if (!isAnimated) {
-                              shockedEmoji.start();
-                              if (favList.contains(widget.id)) {
-                                favList.remove(widget.id);
-                                _addIdToSF(favList);
-                              } else {
-                                favList.add(widget.id);
-                                print(widget.id);
-                                _addIdToSF(favList);
-                              }
-                              isAnimated = true;
-                            } else {
-                              isAnimated = false;
-                              shockedEmoji.stopAndReset(rewind: true);
-                            }
-                          }),
-                    ),
-                  ),
+//                  Align(
+//                    alignment: Alignment.bottomRight,
+//                    child: Padding(
+//                      padding: const EdgeInsets.all(8.0),
+//                      child: GestureDetector(
+//                          child: FluttieAnimation(
+//                            shockedEmoji,
+//                            size: Size(50, 43),
+//                          ),
+//                          onTap: () {
+//                            _getSF();
+//                            if (!isAnimated) {
+//                              shockedEmoji.start();
+//                              if (favList.contains(widget.id)) {
+//                                favList.remove(widget.id);
+//                                _addIdToSF(favList);
+//                              } else {
+//                                favList.add(widget.id);
+//                                print(widget.id);
+//                                _addIdToSF(favList);
+//                              }
+//                              isAnimated = true;
+//                            } else {
+//                              isAnimated = false;
+//                              shockedEmoji.stopAndReset(rewind: true);
+//                            }
+//                          }),
+//                    ),
+//                  ),
                 ],
               ),
             ],
@@ -308,7 +309,7 @@ class _SessionItemState extends State<SessionItem> with AutomaticKeepAliveClient
       case "Firebase":
         return Color(0xffFECC92);
       default:
-        return Color(0xff333d47);
+        return Color(0xffF1823B);
     }
   }
 }

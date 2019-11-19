@@ -122,7 +122,7 @@ class InformationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
+              padding: const EdgeInsets.only(right: 24, left: 24, top: 40),
               child: new Text(
                 "Venue",
                 style: TextStyle(
@@ -205,7 +205,7 @@ class InformationScreen extends StatelessWidget {
                   }),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
+              padding: const EdgeInsets.only(right: 24, left: 24, top: 40),
               child: new Text(
                 "Event Organizer",
                 style: TextStyle(
@@ -243,7 +243,7 @@ class InformationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
+              padding: const EdgeInsets.only(right: 24, left: 24, top: 40),
               child: new Text(
                 "Social Media Accounts",
                 style: TextStyle(
@@ -329,7 +329,7 @@ class InformationScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
+              padding: const EdgeInsets.only(right: 24, left: 24, top: 40),
               child: new Text(
                 "Event Sponsors",
                 style: TextStyle(
