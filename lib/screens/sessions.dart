@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/Speaker.dart';
@@ -104,6 +106,7 @@ class _SessionsScreenState extends State<SessionsScreen>
     });
   }
 
+
   _onFilteredByHalls(List<String> value, BuildContext context) async {
     _newSessionss = new List();
     _newSessionsss = new List();
@@ -131,10 +134,28 @@ class _SessionsScreenState extends State<SessionsScreen>
 
   List<String> favList;
 
+  Future<bool> onLikeButtonTap(bool isLiked, String id) async {
+    print(isLiked.toString());
+    if (favList != null) {
+      if (!isLiked) {
+        favList.add(id);
+      } else {
+        favList.remove(id);
+      }
+      print(favList.length);
+      _addIdToSF(favList);
+    } else {
+      favList = new List();
+      favList.add(id);
+      _addIdToSF(favList);
+    }
+    return !isLiked;
+  }
+
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList").length);
+    print(prefs.getStringList("favList")[0]);
     print(favList.length);
   }
 
@@ -144,6 +165,7 @@ class _SessionsScreenState extends State<SessionsScreen>
     print(favList.length);
   }
 
+
   @override
   void initState() {
     this.isVisible;
@@ -152,6 +174,8 @@ class _SessionsScreenState extends State<SessionsScreen>
         isVisible = false;
       }
     });
+    favList = new List();
+    _getSF();
     _getSpeakers();
     _controller = new TextEditingController();
     _sessions = new List();
@@ -452,9 +476,6 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                       return SessionItem(
                                                         key: ValueKey(_session
                                                             .data.title),
-//                                                        shockedEmoji:
-//                                                            shockedEmoji,
-//                                                        instance: instance,
                                                         id: _session.id,
                                                         speaker: _session.data
                                                                     .speakers !=
@@ -482,6 +503,17 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                             ? _session
                                                                 .data.tags[0]
                                                             : "",
+                                                        onTap: (bool isLiked) {
+                                                          print("tapped");
+                                                          return onLikeButtonTap(
+                                                              isLiked,
+                                                              _session.id);
+                                                        },
+                                                        likeVisible: true,
+                                                        isLiked: favList != null
+                                                            ? favList.contains(
+                                                                _session.id)
+                                                            : false,
                                                         onPressed: () {
                                                           Navigator.push(
                                                             context,
@@ -556,6 +588,15 @@ class _SessionsScreenState extends State<SessionsScreen>
                                           type: _session.data.tags != null
                                               ? _session.data.tags[0]
                                               : "",
+                                          onTap: (bool isLiked) {
+                                            print("tapped");
+                                            return onLikeButtonTap(
+                                                isLiked, _session.id);
+                                          },
+                                          likeVisible: true,
+                                          isLiked: favList != null
+                                              ? favList.contains(_session.id)
+                                              : false,
                                           onPressed: () {
                                             Navigator.push(
                                               context,
@@ -707,7 +748,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                               fontStyle: FontStyle.normal,
                               letterSpacing: 0,
                             )),
-                        onPressed: (){
+                        onPressed: () {
                           selectedReportList.clear();
                           _newSessionss.clear();
                           Navigator.pop(context);

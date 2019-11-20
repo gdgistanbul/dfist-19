@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:dfist19/screens/speakers.dart';
 import 'package:flutter/services.dart';
 
+import 'mySessions.dart';
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -97,7 +99,7 @@ class _MainScreenState extends State<MainScreen> {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new SessionsScreen(false)),
+                              builder: (context) => new MySessionsScreen(false)),
                         );
                       },
                     )),
