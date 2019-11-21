@@ -14,16 +14,16 @@ import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttie/fluttie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySessionsScreen extends StatefulWidget {
-  final bool isSessions;
 
   @override
   _MySessionsScreenState createState() => _MySessionsScreenState();
 
-  MySessionsScreen(this.isSessions);
+  MySessionsScreen();
 }
 
 class _MySessionsScreenState extends State<MySessionsScreen>
@@ -198,8 +198,13 @@ class _MySessionsScreenState extends State<MySessionsScreen>
 
   @override
   dispose() {
-    super.dispose();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
     _controller.dispose();
+    super.dispose();
   }
 
   @override
@@ -211,7 +216,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.isSessions ? "Sessions" : "Your Schedule",
+          title: Text("Your Schedule",
               style: TextStyle(
                 fontFamily: 'RedHatDisplay',
                 color: Color(0xff333d47),
@@ -383,7 +388,6 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                                       return onLikeButtonTap(
                                           isLiked, _session.id);
                                     },
-                                    likeVisible: true,
                                     isLiked: favList != null
                                         ? favList.contains(_session.id)
                                         : false,
@@ -448,7 +452,6 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                                       return onLikeButtonTap(
                                           isLiked, _session.id);
                                     },
-                                    likeVisible: false,
                                     isLiked: favList != null
                                         ? favList.contains(_session.id)
                                         : false,

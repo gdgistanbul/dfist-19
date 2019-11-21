@@ -1,9 +1,31 @@
-//import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class InformationScreen extends StatelessWidget {
+class InformationScreen extends StatefulWidget {
+  @override
+  _InformationScreenState createState() => _InformationScreenState();
+}
+
+class _InformationScreenState extends State<InformationScreen> {
+  @override
+  void dispose() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
+    super.dispose();
+  }
+  final Event event = Event(
+    title: 'DevFest Istanbul 2019',
+    description: 'DevFest Istanbul 2019 at Uniq Hall',
+    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
+    startDate: DateTime(2019, 11, 24, 09, 00),
+    endDate: DateTime(2019, 11, 24, 19, 30),
+  );
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -117,7 +139,7 @@ class InformationScreen extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-//                  Add2Calendar.addEvent2Cal(event);
+                  Add2Calendar.addEvent2Cal(event);
                 },
               ),
             ),
@@ -342,6 +364,100 @@ class InformationScreen extends StatelessWidget {
                 textAlign: TextAlign.left,
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only( left: 24.0,top: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  GestureDetector(
+                      child: Container(
+                          height: 60.0, // height of the button
+                          child: Image.asset("assets/ic_peak.png",
+                              fit: BoxFit.fill)),
+                      onTap: () {
+                        _launchURL("https://peak.com/");
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0,top:16),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          child: Image.asset("assets/ic_google.png",
+                              fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://developers.google.com/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0,top:16),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          child:
+                          Image.asset("assets/ic_zeplin.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL("https://zeplin.io/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0,top:16),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 44.0, // height of the button
+                          child: Image.asset("assets/ic_adesso.png",
+                              fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.adesso.com.tr/en/index-3.jsp");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0,top:16),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 35.0, // height of the button
+                          child:
+                          Image.asset("assets/ic_pixery.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.pixerylabs.com/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0,top:16),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 80.0, // height of the button
+                          child:
+                          Image.asset("assets/ic_jetbrains.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://www.jetbrains.com/");
+                        }),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left:24.0),
+                    child: GestureDetector(
+                        child: Container(
+                          height: 120.0, // height of the button
+                          child:
+                          Image.asset("assets/ic_gcloud.png", fit: BoxFit.fill),
+                        ),
+                        onTap: () {
+                          _launchURL(
+                              "https://cloud.google.com/");
+                        }),
+                  )
+                ],
+              ),
+            ),
+
             Padding(
               padding: const EdgeInsets.only(
                   right: 24, left: 24, top: 16, bottom: 24),

@@ -10,6 +10,8 @@ import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 class SpeakerScreen extends StatefulWidget {
   @override
@@ -53,6 +55,26 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
     });
   }
 
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    _getSpeakers();
+    _getSessions();
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
+
+
   _getSchedule() {
     API.getSchedule().then((response) {
       setState(() {
@@ -86,9 +108,13 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
 
   @override
   void dispose() {
-//    SessionItem().prepareAnimation();
-    super.dispose();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
     controller.dispose();
+    super.dispose();
   }
 
   _onChanged(String value) async {
@@ -144,7 +170,16 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
         child: Padding(
           padding: const EdgeInsets.only(left: 12.0, right: 12.0, top: 12),
           child: _newSpeakers.length == 0 || controller.text.isEmpty
-              ? GridView.builder(
+              ?
+          SmartRefresher(
+              enablePullDown: true,
+              controller: _refreshController,
+              onRefresh: _onRefresh,
+              onLoading: _onLoading,
+              header: ClassicHeader(),
+
+              child:
+          GridView.builder(
                   itemCount: speakers.length,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
@@ -190,7 +225,17 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
                       )),
                     );
                   })
-              : GridView.builder(
+          )
+              :
+    SmartRefresher(
+    enablePullDown: true,
+    controller: _refreshController,
+    onRefresh: _onRefresh,
+    onLoading: _onLoading,
+    header: ClassicHeader(),
+
+    child:
+          GridView.builder(
                   itemCount: _newSpeakers.length,
                   gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2),
@@ -235,7 +280,7 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
                         ),
                       )),
                     );
-                  }),
+                  })),
         ),
       ),
     );

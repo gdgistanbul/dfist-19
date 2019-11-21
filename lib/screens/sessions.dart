@@ -8,23 +8,25 @@ import 'package:dfist19/data/TimeslotSessions.dart' as Session1;
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
+import 'package:dfist19/screens/home.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttie/fluttie.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SessionsScreen extends StatefulWidget {
-  final bool isSessions;
 
   @override
   _SessionsScreenState createState() => _SessionsScreenState();
 
-  SessionsScreen(this.isSessions);
+  SessionsScreen();
 }
 
 class _SessionsScreenState extends State<SessionsScreen>
@@ -72,6 +74,29 @@ class _SessionsScreenState extends State<SessionsScreen>
     });
   }
 
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
+
+  void _onRefresh() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    // if failed,use refreshFailed()
+    _refreshController.refreshCompleted();
+  }
+
+  void _onLoading() async {
+    // monitor network fetch
+    await Future.delayed(Duration(milliseconds: 1000));
+    _getSpeakers();
+    API.getSessions().then((response) {
+      setState(() {
+        dataSessions = response;
+      });
+    });
+    if (mounted) setState(() {});
+    _refreshController.loadComplete();
+  }
+
   _getSpeakers() {
     API.getSpeakers().then((response) {
       setState(() {
@@ -105,7 +130,6 @@ class _SessionsScreenState extends State<SessionsScreen>
       }
     });
   }
-
 
   _onFilteredByHalls(List<String> value, BuildContext context) async {
     _newSessionss = new List();
@@ -165,7 +189,6 @@ class _SessionsScreenState extends State<SessionsScreen>
     print(favList.length);
   }
 
-
   @override
   void initState() {
     this.isVisible;
@@ -188,6 +211,11 @@ class _SessionsScreenState extends State<SessionsScreen>
   @override
   dispose() {
     super.dispose();
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
     _controller.dispose();
   }
 
@@ -200,7 +228,12 @@ class _SessionsScreenState extends State<SessionsScreen>
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.isSessions ? "Sessions" : "Your Schedule",
+          leading: new IconButton(
+              icon: new Icon(Icons.arrow_back),
+              onPressed: (){
+                Navigator.pop(context);
+              }),
+          title: Text("Sessions",
               style: TextStyle(
                 fontFamily: 'RedHatDisplay',
                 color: Color(0xff333d47),
@@ -316,7 +349,16 @@ class _SessionsScreenState extends State<SessionsScreen>
                             _sessions = dataSessions.sessions;
                             return _newSessionss.length == 0 ||
                                     _controller.text.isEmpty
-                                ? ListView.builder(
+                                ?
+                            SmartRefresher(
+                                    enablePullDown: true,
+                                    controller: _refreshController,
+                                    onRefresh: _onRefresh,
+                                    onLoading: _onLoading,
+                                    header: ClassicHeader(),
+
+                                child:
+                            ListView.builder(
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: _timeslot.length,
@@ -395,10 +437,11 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                     shrinkWrap: true,
                                                     physics:
                                                         ClampingScrollPhysics(),
-                                                    itemCount: _timeslot[index1]
-                                                        .sessions[index2]
-                                                        .items
-                                                        .length,
+                                                    itemCount:
+                                                        _timeslot[index1]
+                                                            .sessions[index2]
+                                                            .items
+                                                            .length,
                                                     itemBuilder:
                                                         (context, index) {
                                                       Session _session =
@@ -406,9 +449,12 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                       Session1.Session
                                                           _sessionItem =
                                                           _timeslot[index1]
-                                                              .sessions[index2];
+                                                                  .sessions[
+                                                              index2];
                                                       for (var i = 0;
-                                                          i < _sessions.length;
+                                                          i <
+                                                              _sessions
+                                                                  .length;
                                                           i++) {
                                                         if (_sessionItem
                                                                 .items[index]
@@ -425,27 +471,33 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                               .startTime
                                                               .split(":");
                                                       List<String> e =
-                                                          _scheduleItem.endTime
+                                                          _scheduleItem
+                                                              .endTime
                                                               .split(":");
                                                       var startTime = Jiffy({
-                                                        "hour": int.parse(s[0]),
+                                                        "hour":
+                                                            int.parse(s[0]),
                                                         "minute":
                                                             int.parse(s[1])
                                                       });
                                                       var endTime = Jiffy({
-                                                        "hour": int.parse(e[0]),
+                                                        "hour":
+                                                            int.parse(e[0]),
                                                         "minute":
                                                             int.parse(e[1])
                                                       });
                                                       if (_timeslot[index1]
-                                                              .sessions[index2]
+                                                              .sessions[
+                                                                  index2]
                                                               .items
                                                               .length >
                                                           1) {
                                                         if (index == 0) {
-                                                          var endTimeJ = endTime
-                                                            ..subtract(
-                                                                minutes: 20);
+                                                          var endTimeJ =
+                                                              endTime
+                                                                ..subtract(
+                                                                    minutes:
+                                                                        20);
                                                           starts = startTime
                                                               .format("HH:mm")
                                                               .toString();
@@ -483,9 +535,10 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                             ? _session
                                                                 .data.speakers
                                                             : null,
-                                                        title:
-                                                            _session.data.title,
-                                                        time: '$starts - $ends',
+                                                        title: _session
+                                                            .data.title,
+                                                        time:
+                                                            '$starts - $ends',
                                                         track: _schedule[0]
                                                                     .data
                                                                     .tracks[
@@ -494,7 +547,8 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                                 null
                                                             ? _schedule[0]
                                                                 .data
-                                                                .tracks[index2]
+                                                                .tracks[
+                                                                    index2]
                                                                 .title
                                                             : "",
                                                         type: _session.data
@@ -503,16 +557,19 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                             ? _session
                                                                 .data.tags[0]
                                                             : "",
-                                                        onTap: (bool isLiked) {
+                                                        onTap:
+                                                            (bool isLiked) {
                                                           print("tapped");
                                                           return onLikeButtonTap(
                                                               isLiked,
                                                               _session.id);
                                                         },
-                                                        likeVisible: true,
-                                                        isLiked: favList != null
-                                                            ? favList.contains(
-                                                                _session.id)
+                                                        isLiked: favList !=
+                                                                null
+                                                            ? favList
+                                                                .contains(
+                                                                    _session
+                                                                        .id)
                                                             : false,
                                                         onPressed: () {
                                                           Navigator.push(
@@ -544,7 +601,17 @@ class _SessionsScreenState extends State<SessionsScreen>
                                       );
                                     },
                                   )
-                                : ListView.builder(
+                                )
+                                :
+                            SmartRefresher(
+                                enablePullDown: true,
+                                controller: _refreshController,
+                                onRefresh: _onRefresh,
+                                onLoading: _onLoading,
+                                header: ClassicHeader(),
+
+                          child:
+                            ListView.builder(
                                     shrinkWrap: true,
                                     scrollDirection: Axis.vertical,
                                     itemCount: _newSessionss.length,
@@ -560,8 +627,8 @@ class _SessionsScreenState extends State<SessionsScreen>
                                             i++) {
                                           for (var j = 0;
                                               j <
-                                                  timeslot
-                                                      .sessions[i].items.length;
+                                                  timeslot.sessions[i].items
+                                                      .length;
                                               j++) {
                                             if (timeslot.sessions[i].items[j]
                                                     .toString() ==
@@ -584,16 +651,15 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                   : null,
                                           title: _session.data.title,
                                           time: _time != null ? _time : " ",
-                                          track: _track != null ? _track : " ",
+                                          track:
+                                              _track != null ? _track : " ",
                                           type: _session.data.tags != null
                                               ? _session.data.tags[0]
                                               : "",
                                           onTap: (bool isLiked) {
-                                            print("tapped");
                                             return onLikeButtonTap(
                                                 isLiked, _session.id);
                                           },
-                                          likeVisible: true,
                                           isLiked: favList != null
                                               ? favList.contains(_session.id)
                                               : false,
@@ -608,13 +674,15 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                           time: _time != null
                                                               ? _time
                                                               : " ",
-                                                          track: _track != null
-                                                              ? _track
-                                                              : " ")),
+                                                          track:
+                                                              _track != null
+                                                                  ? _track
+                                                                  : " ")),
                                             );
                                           });
                                     },
-                                  );
+                                  )
+                            );
                             //
                           }
                         });

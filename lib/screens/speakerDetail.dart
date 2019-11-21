@@ -229,7 +229,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                         print("tapped");
                         return onLikeButtonTap(isLiked, _session.id);
                       },
-                      likeVisible: true,
                       isLiked: favList != null
                           ? favList.contains(_session.id)
                           : false,

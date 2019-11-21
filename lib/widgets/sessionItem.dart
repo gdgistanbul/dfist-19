@@ -18,7 +18,6 @@ class SessionItem extends StatefulWidget {
   final GestureTapCallback onPressed;
   final LikeButtonTapCallback onTap;
   final bool isLiked;
-  final bool likeVisible;
 
   SessionItem({
     Key key,
@@ -31,7 +30,6 @@ class SessionItem extends StatefulWidget {
     @required this.onPressed,
     @required this.onTap,
     @required this.isLiked,
-    @required this.likeVisible,
   }) : super(key: key);
 
   @override
@@ -234,30 +232,27 @@ class _SessionItemState extends State<SessionItem>
                       ],
                     ),
                   ),
-                  Visibility(
-                    visible: widget.likeVisible,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 18.0),
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Container(
-                          height: 50,
-                          width: 50,
-                          child: LikeButton(
-                              onTap: widget.onTap,
-                            isLiked: widget.isLiked,
-                            likeBuilder: (bool isLiked) {
-                              return Icon(
-                                Icons.favorite,
-                                color: isLiked ? Colors.red : Colors.grey,
-                                size: 30,
-                              );
-                            },
-                          ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 18.0),
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Container(
+                        height: 50,
+                        width: 50,
+                        child: LikeButton(
+                            onTap: widget.onTap,
+                          isLiked: widget.isLiked,
+                          likeBuilder: (bool isLiked) {
+                            return Icon(
+                              isLiked ?  Icons.favorite: Icons.favorite_border,
+                              color: isLiked ? Colors.white : Colors.white,
+                              size: 30,
+                            );
+                          },
+                        ),
 
 //
 //
-                        ),
                       ),
                     ),
                   ),

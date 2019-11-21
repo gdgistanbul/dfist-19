@@ -129,13 +129,17 @@ class _SessionDetailState extends State<SessionDetail> {
                                 child: Card(
                                   color: favList != null
                                       ? favList.contains(
-                                      widget.session.id)? Colors.lightGreen: Color(0xff3196f6)
+                                      widget.session.id)? Color(0xffE15554): Color(0xff3196f6)
                                       : Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(14.0)),
+                                      BorderRadius.circular(14.0)),
                                   child: MaterialButton(
-                                    child: new Text("Add Your Schedule",
+                                    child: new Text(
+                                        favList != null
+                                            ? favList.contains(
+                                            widget.session.id)? "Remove From Schedule": "Add Your Schedule"
+                                            : "Add Your Schedule",
                                         style: TextStyle(
                                           fontFamily: 'RedHatDisplay',
                                           color: Color(0xffffffff),
