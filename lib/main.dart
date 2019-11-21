@@ -1,12 +1,26 @@
+import 'package:dfist19/screens/information.dart';
+import 'package:dfist19/screens/mySessions.dart';
+import 'package:dfist19/screens/sessions.dart';
+import 'package:dfist19/screens/speakers.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'screens/home.dart';
 import 'utils/const.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
+
 
 void main() async {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
+    OneSignal.shared.init(
+        "b4322560-686d-4adf-93a8-974185356f0a",
+        iOSSettings: {
+          OSiOSSettings.autoPrompt: false,
+          OSiOSSettings.inAppLaunchUrl: true
+        }
+    );
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
     runApp(MyApp());
   });
 }
@@ -18,11 +32,9 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isDark = false;
-
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
@@ -38,7 +50,7 @@ class _MyAppState extends State<MyApp> {
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       systemNavigationBarIconBrightness: Brightness.light, // works
-    )); // works
+    ));
     super.reassemble();
   }
   @override

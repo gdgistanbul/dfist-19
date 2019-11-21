@@ -9,6 +9,7 @@ import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttie/fluttie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SpeakerDetail extends StatefulWidget {
   final Speaker speaker;
@@ -18,12 +19,13 @@ class SpeakerDetail extends StatefulWidget {
   var namesGrowable = new List<String>();
   final GestureTapCallback onPressed;
 
-  SpeakerDetail({Key key,
-    @required this.namesGrowable,
-    @required this.onPressed,
-    @required this.time,
-    @required this.track,
-    @required this.speaker})
+  SpeakerDetail(
+      {Key key,
+      @required this.namesGrowable,
+      @required this.onPressed,
+      @required this.time,
+      @required this.track,
+      @required this.speaker})
       : super(key: key);
 
   @override
@@ -46,9 +48,44 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
     });
   }
 
+  List<String> favList;
+
+  Future<bool> onLikeButtonTap(bool isLiked, String id) async {
+    print(isLiked.toString());
+    if (favList != null) {
+      if (!isLiked) {
+        favList.add(id);
+      } else {
+        favList.remove(id);
+      }
+      print(favList.length);
+      _addIdToSF(favList);
+    } else {
+      favList = new List();
+      favList.add(id);
+      _addIdToSF(favList);
+    }
+    return !isLiked;
+  }
+
+  _addIdToSF(List<String> value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("favList", value);
+    print(prefs.getStringList("favList")[0]);
+    print(favList.length);
+  }
+
+  _getSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    favList = prefs.getStringList("favList");
+    print(favList.length);
+  }
+
   @override
   void initState() {
 //    prepareAnimation();
+    favList = new List();
+    _getSF();
     _getSpeakerSessions();
     super.initState();
   }
@@ -93,13 +130,11 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       borderRadius: new BorderRadius.circular(12),
                       child: new CachedNetworkImage(
                           imageUrl: widget.speaker.data.photoUrl,
-                          placeholder: (context, url) =>
-                            SizedBox(
-                              child: CircularProgressIndicator(),
-                              height: 20.0,
-                              width: 20.0,
-                            )
-                      )),
+                          placeholder: (context, url) => SizedBox(
+                                child: CircularProgressIndicator(),
+                                height: 20.0,
+                                width: 20.0,
+                              ))),
                 ),
               ),
               Padding(
@@ -178,7 +213,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       )),
                 ),
               ),
-
               Center(
                 child: ListView.builder(
                   primary: false,
@@ -188,27 +222,31 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       ? 0
                       : sessions.length > 0 ? sessions.length : 0,
                   itemBuilder: (BuildContext context, int index) {
-                    Session _sessions = sessions[index];
+                    Session _session = sessions[index];
 
                     return SessionItem(
-//                      shockedEmoji: shockedEmoji,
-//                      instance: instance,
-                      speaker: _sessions.data.speakers,
-                      title: _sessions.data.title,
+                      onTap: (bool isLiked) {
+                        print("tapped");
+                        return onLikeButtonTap(isLiked, _session.id);
+                      },
+                      isLiked: favList != null
+                          ? favList.contains(_session.id)
+                          : false,
+                      speaker: _session.data.speakers,
+                      title: _session.data.title,
                       time: widget.time,
                       track: widget.track,
-                      type: _sessions.data.tags[0],
+                      type: _session.data.tags[0],
                       onPressed: () {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) =>
-                              new SessionDetail(
-                                onPressed: () {},
-                                session: _sessions,
-                                time: widget.time,
-                                track: widget.track,
-                              )),
+                              builder: (context) => new SessionDetail(
+                                    onPressed: () {},
+                                    session: _session,
+                                    time: widget.time,
+                                    track: widget.track,
+                                  )),
                         );
                       },
                     );

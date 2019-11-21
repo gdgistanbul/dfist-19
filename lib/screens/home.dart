@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:dfist19/screens/speakers.dart';
 import 'package:flutter/services.dart';
 
+import 'mySessions.dart';
+
 class MainScreen extends StatefulWidget {
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -16,9 +18,6 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends State<MainScreen> {
   PageController _pageController;
-
-  SpeakerResponse data = new SpeakerResponse();
-  SessionsResponse sessions = new SessionsResponse();
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +69,15 @@ class _MainScreenState extends State<MainScreen> {
                   child: new SizedBox(
                     height: 40.0,
                     width: 40.0,
-                    child: IconButton(
-                      icon: new Image.asset('assets/notifications.png'),
-                      tooltip: 'Increase volume by 10',
-                      onPressed: () {
-                        setState(() {});
-                      },
+                    child: Visibility(
+                      visible: false,
+                      child: IconButton(
+                        icon: new Image.asset('assets/notifications.png'),
+                        tooltip: 'Increase volume by 10',
+                        onPressed: () {
+                          setState(() {});
+                        },
+                      ),
                     ),
                   ),
                 ),
@@ -97,7 +99,8 @@ class _MainScreenState extends State<MainScreen> {
                         Navigator.push(
                           context,
                           new MaterialPageRoute(
-                              builder: (context) => new SessionsScreen(false)),
+                              builder: (context) =>
+                                  new MySessionsScreen()),
                         );
                       },
                     )),
@@ -119,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
                               context,
                               new MaterialPageRoute(
                                   builder: (context) =>
-                                      new SessionsScreen(true)),
+                                      new SessionsScreen()),
                             );
                           },
                         )),
@@ -137,7 +140,7 @@ class _MainScreenState extends State<MainScreen> {
                             Navigator.push(
                               context,
                               new MaterialPageRoute(
-                                  builder: (context) =>  SpeakerScreen()),
+                                  builder: (context) => SpeakerScreen()),
                             );
                           },
                         )),
@@ -154,34 +157,27 @@ class _MainScreenState extends State<MainScreen> {
   void navigationTapped(int page) {
     _pageController.jumpToPage(page);
   }
-
-  _getSpeakers() {
-    API.getSpeakers().then((response) {
-      setState(() {
-        data = response;
-      });
+  _onChanged() async {
+    setState(() {
+      print("a");
     });
   }
 
-  _getSessions() {
-    API.getSessions().then((response) {
-      setState(() {
-        sessions = response;
-      });
-    });
+  @override
+  void setState(fn) {
+    super.setState(fn);
   }
 
   @override
   void initState() {
     super.initState();
+    _onChanged();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
       systemNavigationBarIconBrightness: Brightness.light, // works
     ));
-    _getSessions();
-    _getSpeakers();
-    _pageController = PageController();
+    _pageController = new PageController();
   }
 
   @override

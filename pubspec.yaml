@@ -20,8 +20,10 @@ dependencies:
 
   fluttie: 0.5.0
 
-
-  #  add_2_calendar: ^1.3.0
+  like_button: ^0.1.9
+  pull_to_refresh: ^1.5.7
+  onesignal_flutter: ^2.0.0
+  add_2_calendar: 1.3.1
 
   firebase_core: 0.4.0+9
 
@@ -87,4 +89,10 @@ flutter:
     - assets/uniq.jpeg
     - assets/path.png
     - assets/app_logo.png
-    - assets/animations/anim.json
+    - assets/ic_zeplin.png
+    - assets/ic_peak.png
+    - assets/ic_google.png
+    - assets/ic_jetbrains.png
+    - assets/ic_adesso.png
+    - assets/ic_pixery.png
+    - assets/ic_gcloud.png

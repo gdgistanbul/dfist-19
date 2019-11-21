@@ -8,6 +8,7 @@ import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool isAndorid = Platform.isAndroid;
 
@@ -39,21 +40,45 @@ class _SessionDetailState extends State<SessionDetail> {
   SpeakerResponse data = new SpeakerResponse();
   List<Speaker> speakers;
 
-//  _getSessionSpaker() {
-//    if (widget.session.data.speakers != null &&
-//        widget.session.data.speakers.length > 0) {
-//      API.getSessionSpaker(widget.session.data.speakers[0]).then((response) {
-//        setState(() {
-//          data = response;
-//          speakers = response.speakers;
-//        });
-//      });
-//    }
-//  }
+  List<String> favList;
+
+  Future<bool> onLikeButtonTap(bool isLiked, String id) async {
+    print(isLiked.toString());
+    if (favList != null) {
+      if (!isLiked) {
+        favList.add(id);
+      } else {
+        favList.remove(id);
+      }
+      print(favList.length);
+      _addIdToSF(favList);
+    } else {
+      favList = new List();
+      favList.add(id);
+      _addIdToSF(favList);
+    }
+    return !isLiked;
+  }
+
+  _addIdToSF(List<String> value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setStringList("favList", value);
+    print(prefs.getStringList("favList")[0]);
+    print(favList.length);
+  }
+
+  _getSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    favList = prefs.getStringList("favList");
+    print(favList.length);
+  }
+
 
   @override
   void initState() {
     super.initState();
+    favList = new List();
+    _getSF();
 //    _getSessionSpaker();
   }
 
@@ -102,12 +127,19 @@ class _SessionDetailState extends State<SessionDetail> {
                               child: Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: Card(
-                                  color: Color(0xff3196f6),
+                                  color: favList != null
+                                      ? favList.contains(
+                                      widget.session.id)? Color(0xffE15554): Color(0xff3196f6)
+                                      : Color(0xff3196f6),
                                   shape: RoundedRectangleBorder(
                                       borderRadius:
-                                          BorderRadius.circular(14.0)),
-                                  child: Center(
-                                    child: new Text("Add Your Schedule",
+                                      BorderRadius.circular(14.0)),
+                                  child: MaterialButton(
+                                    child: new Text(
+                                        favList != null
+                                            ? favList.contains(
+                                            widget.session.id)? "Remove From Schedule": "Add Your Schedule"
+                                            : "Add Your Schedule",
                                         style: TextStyle(
                                           fontFamily: 'RedHatDisplay',
                                           color: Color(0xffffffff),
@@ -116,6 +148,25 @@ class _SessionDetailState extends State<SessionDetail> {
                                           fontStyle: FontStyle.normal,
                                           letterSpacing: 0,
                                         )),
+                                    onPressed:(){
+                                      if (favList != null) {
+                                        setState(() {
+
+                                        });
+                                        if (!favList.contains(widget.session.id)) {
+                                          favList.add(widget.session.id);
+                                          print("added");
+                                        } else {
+                                          favList.remove(widget.session.id);
+                                          print("removed");
+                                        }
+                                        _addIdToSF(favList);
+                                      } else {
+                                        favList = new List();
+                                        favList.add(widget.session.id);
+                                        _addIdToSF(favList);
+                                      }
+                                    } ,
                                   ),
                                 ),
                               ),

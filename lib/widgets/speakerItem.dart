@@ -7,7 +7,6 @@ class SpeakerItem extends StatefulWidget {
   final String name;
   final GestureTapCallback onPressed;
 
-
   SpeakerItem({
     Key key,
     @required this.img,
@@ -19,8 +18,8 @@ class SpeakerItem extends StatefulWidget {
   _SpeakerItemState createState() => _SpeakerItemState();
 }
 
-class _SpeakerItemState extends State<SpeakerItem>with AutomaticKeepAliveClientMixin<SpeakerItem> {
-
+class _SpeakerItemState extends State<SpeakerItem>
+    with AutomaticKeepAliveClientMixin<SpeakerItem> {
   @override
   bool get wantKeepAlive => true;
 
@@ -44,7 +43,8 @@ class _SpeakerItemState extends State<SpeakerItem>with AutomaticKeepAliveClientM
                     Align(
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                        child: CachedNetworkImage(
+                        child:
+                        CachedNetworkImage(
                             imageUrl: widget.img,
                             key: widget.key,
                             placeholder: (context, url) =>
@@ -53,14 +53,11 @@ class _SpeakerItemState extends State<SpeakerItem>with AutomaticKeepAliveClientM
                                   height: 20.0,
                                   width: 20.0,
                                 ),
+                            height: 300,
+                            width: 300,
+                            fit: BoxFit.cover,
                             errorWidget: (context, url, error) => Icon(Icons.error),
-
-                            imageBuilder: (context, imageProvider) =>
-                                Container(
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                            image: imageProvider,
-                                            fit: BoxFit.cover)))),
+                        ),
                       ),
                     ),
                     Align(
