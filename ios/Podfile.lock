@@ -5,6 +5,10 @@ PODS:
   - FMDB (2.7.5):
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
+  - OneSignal (2.11.2)
+  - onesignal_flutter (2.2.0):
+    - Flutter
+    - OneSignal (= 2.11.2)
   - path_provider (0.0.1):
     - Flutter
   - shared_preferences (0.0.1):
@@ -18,6 +22,7 @@ PODS:
 DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
   - fluttie (from `.symlinks/plugins/fluttie/ios`)
+  - onesignal_flutter (from `.symlinks/plugins/onesignal_flutter/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
@@ -26,12 +31,15 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - FMDB
+    - OneSignal
 
 EXTERNAL SOURCES:
   Flutter:
     :path: ".symlinks/flutter/ios"
   fluttie:
     :path: ".symlinks/plugins/fluttie/ios"
+  onesignal_flutter:
+    :path: ".symlinks/plugins/onesignal_flutter/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   shared_preferences:
@@ -45,6 +53,8 @@ SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   fluttie: 2c1be8b7cb5db8a4923b4ea9475d4bf5820c85c4
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
+  OneSignal: 4e3e68bb6c29975286a2fa910cb49132bc6e20bb
+  onesignal_flutter: 5a6041629e3f93a61cf7ae8193c3d1702f2ef78d
   path_provider: fb74bd0465e96b594bb3b5088ee4a4e7bb1f2a9d
   shared_preferences: 430726339841afefe5142b9c1f50cb6bd7793e01
   sqflite: ff1d9da63c06588cc8d1faf7256d741f16989d5a
