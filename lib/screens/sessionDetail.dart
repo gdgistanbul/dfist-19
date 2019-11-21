@@ -6,7 +6,6 @@ import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,9 +30,6 @@ class SessionDetail extends StatefulWidget {
 }
 
 class _SessionDetailState extends State<SessionDetail> {
-  FirebaseDatabase database = FirebaseDatabase.instance;
-
-  DatabaseReference speakerRef;
 
   Speaker speaker;
 
