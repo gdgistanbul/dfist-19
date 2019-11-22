@@ -7,19 +7,9 @@ environment:
   sdk: ">=2.2.0 <3.0.0"
 
 dependencies:
-  flutter_launcher_icons: ^0.7.4
-
   shared_preferences: ^0.5.4+5
-
-  flutter:
-    sdk: flutter
-
   url_launcher: 3.0.0
-
   cupertino_icons: ^0.1.2
-
-  fluttie: 0.5.0
-
   like_button: ^0.1.9
   pull_to_refresh: ^1.5.7
   onesignal_flutter: ^2.0.0
@@ -27,16 +17,18 @@ dependencies:
   fit_image: ^0.1.2
   font_awesome_flutter: 8.5.0
   json_annotation: ^2.0.0
-  cached_network_image: 1.1.1
+#  cached_network_image: 1.1.1
   intl: 0.16.0
   date_format: ^1.0.8
   jiffy: ^2.1.1
+  key_value_store_web: ^1.0.0
 
 
-
+  flutter:
+    sdk: flutter
 
 dev_dependencies:
-  flutter_launcher_icons: "^0.7.3"
+  flutter_launcher_icons: "^0.7.4"
   build_runner:
   json_serializable: ^2.0.0
   flutter_test:

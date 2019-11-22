@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'dart:html';
 import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/Speaker.dart';
@@ -8,18 +8,20 @@ import 'package:dfist19/data/TimeslotSessions.dart' as Session1;
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
-import 'package:dfist19/screens/home.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
+import 'package:dfist19/screens/locale.dart' as Locale;
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
 import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'home.dart';
+
 
 class SessionsScreen extends StatefulWidget {
 
@@ -34,7 +36,6 @@ class _SessionsScreenState extends State<SessionsScreen>
   @override
   bool get wantKeepAlive => true;
 
-  FluttieAnimationController shockedEmoji;
   TextEditingController _controller = TextEditingController();
 
   FocusNode focus = new FocusNode();
@@ -178,8 +179,8 @@ class _SessionsScreenState extends State<SessionsScreen>
 
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList")[0]);
+//    prefs.setStringList("favList", value);
+    Locale.localStorage.setList("favList", value);
     print(favList.length);
   }
 
@@ -558,10 +559,10 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                                 .data.tags[0]
                                                             : "",
                                                         onTap:
-                                                            (bool isLiked) {
+                                                            () {
                                                           print("tapped");
                                                           return onLikeButtonTap(
-                                                              isLiked,
+                                                              false,
                                                               _session.id);
                                                         },
                                                         isLiked: favList !=
@@ -656,9 +657,9 @@ class _SessionsScreenState extends State<SessionsScreen>
                                           type: _session.data.tags != null
                                               ? _session.data.tags[0]
                                               : "",
-                                          onTap: (bool isLiked) {
+                                          onTap: () {
                                             return onLikeButtonTap(
-                                                isLiked, _session.id);
+                                                true, _session.id);
                                           },
                                           isLiked: favList != null
                                               ? favList.contains(_session.id)

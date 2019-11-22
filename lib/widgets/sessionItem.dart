@@ -1,10 +1,7 @@
-import 'dart:async';
-
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:like_button/like_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,7 +13,7 @@ class SessionItem extends StatefulWidget {
   final String track;
   final String type;
   final GestureTapCallback onPressed;
-  final LikeButtonTapCallback onTap;
+  final GestureTapCallback onTap;
   final bool isLiked;
 
   SessionItem({
@@ -65,7 +62,9 @@ class _SessionItemState extends State<SessionItem>
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList").length);
+    print(prefs
+        .getStringList("favList")
+        .length);
     print(favList.length);
   }
 
@@ -113,10 +112,13 @@ class _SessionItemState extends State<SessionItem>
       padding: EdgeInsets.only(top: 8.0, bottom: 8.0),
       child: Container(
         height: 177.0,
-        width: MediaQuery.of(context).size.width / 1.0,
+        width: MediaQuery
+            .of(context)
+            .size
+            .width / 1.0,
         child: Card(
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+          RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           elevation: 3.0,
           color: _cardColor(widget.type),
           child: Column(
@@ -232,6 +234,30 @@ class _SessionItemState extends State<SessionItem>
                       ],
                     ),
                   ),
+//                  Padding(
+//                    padding: const EdgeInsets.only(top: 18.0),
+//                    child: Align(
+//                      alignment: Alignment.centerRight,
+//                      child: Container(
+//                        height: 50,
+//                        width: 50,
+//                        child: LikeButton(
+//                            onTap: widget.onTap,
+//                          isLiked: widget.isLiked,
+//                          likeBuilder: (bool isLiked) {
+//                            return Icon(
+//                              isLiked ?  Icons.favorite: Icons.favorite_border,
+//                              color: isLiked ? Colors.white : Colors.white,
+//                              size: 30,
+//                            );
+//                          },
+//                        ),
+//
+////
+////
+//                      ),
+//                    ),
+//                  ),
                   Padding(
                     padding: const EdgeInsets.only(top: 18.0),
                     child: Align(
@@ -239,16 +265,22 @@ class _SessionItemState extends State<SessionItem>
                       child: Container(
                         height: 50,
                         width: 50,
-                        child: LikeButton(
-                            onTap: widget.onTap,
-                          isLiked: widget.isLiked,
-                          likeBuilder: (bool isLiked) {
-                            return Icon(
-                              isLiked ?  Icons.favorite: Icons.favorite_border,
-                              color: isLiked ? Colors.white : Colors.white,
-                              size: 30,
-                            );
-                          },
+                        child: IconButton(
+                          onPressed: widget.onTap,
+                          icon:Icon(
+                            widget.isLiked ? Icons.favorite : Icons.favorite_border,
+                            color: widget.isLiked ? Colors.white : Colors.white,
+                            size: 30,
+                          ),
+//                          onTap: widget.onTap,
+//                          isLiked: widget.isLiked,
+//                          likeBuilder: (bool isLiked) {
+//                            return Icon(
+//                              isLiked ? Icons.favorite : Icons.favorite_border,
+//                              color: isLiked ? Colors.white : Colors.white,
+//                              size: 30,
+//                            );
+//                          },
                         ),
 
 //
@@ -265,37 +297,6 @@ class _SessionItemState extends State<SessionItem>
       onPressed: widget.onPressed,
     );
   }
-
-
-
-//  onLikeButtonTap(bool isLiked, String id) async {
-//    print(id);
-//    print("tapped");
-//    print(isLiked.toString());
-//
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    if (prefs.getStringList("favList") != null) {
-//      if(isLiked){
-//        prefs.getStringList("favList").add(id);
-//      }else{
-//        prefs.getStringList("favList").remove(id);
-//      }
-//    } else {
-//      favList = new List();
-//      favList.add(id);
-//      print(favList.length);
-//      prefs.setStringList("favList", favList);
-//    }
-////
-////    if (favList.contains(id)) {
-////      favList.remove(id);
-////      _addIdToSF(favList);
-////    } else {
-////      favList.add(id);
-////      print(id);
-////      _addIdToSF(favList);
-////    }
-//  }
 
   _cardType(type) {
     switch (type) {

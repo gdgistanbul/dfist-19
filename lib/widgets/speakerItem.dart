@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
@@ -40,26 +40,26 @@ class _SpeakerItemState extends State<SpeakerItem>
                 elevation: 3.0,
                 child: Stack(
                   children: <Widget>[
-                    Align(
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
-                        child:
-                        CachedNetworkImage(
-                            imageUrl: widget.img,
-                            key: widget.key,
-                            placeholder: (context, url) =>
-                                new SizedBox(
-                                  child: new CircularProgressIndicator(),
-                                  height: 20.0,
-                                  width: 20.0,
-                                ),
-                            height: 300,
-                            width: 300,
-                            fit: BoxFit.cover,
-                            errorWidget: (context, url, error) => Icon(Icons.error),
-                        ),
-                      ),
-                    ),
+//                    Align(
+//                      child: ClipRRect(
+//                        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+//                        child:
+//                        CachedNetworkImage(
+//                            imageUrl: widget.img,
+//                            key: widget.key,
+//                            placeholder: (context, url) =>
+//                                new SizedBox(
+//                                  child: new CircularProgressIndicator(),
+//                                  height: 20.0,
+//                                  width: 20.0,
+//                                ),
+//                            height: 300,
+//                            width: 300,
+//                            fit: BoxFit.cover,
+//                            errorWidget: (context, url, error) => Icon(Icons.error),
+//                        ),
+//                      ),
+//                    ),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: ClipRRect(

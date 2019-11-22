@@ -1,8 +1,5 @@
-import 'package:dfist19/data/SessionsResponse.dart';
-import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/screens/information.dart';
 import 'package:dfist19/screens/sessions.dart';
-import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/rectangleButton.dart';
 import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +7,20 @@ import 'package:dfist19/screens/speakers.dart';
 import 'package:flutter/services.dart';
 
 import 'mySessions.dart';
+
+//class Prefs {
+//  static WebKeyValueStore get prefs =>
+//      WebKeyValueStore(window.localStorage);
+//
+//  static void setStringList(String key, List<String> b) {
+//    prefs.setStringList(key, b);
+//  }
+//
+//  static String getStringList(String key) {
+//    return prefs.getStringList(key) ?? "";
+//  }
+//}
+
 
 class MainScreen extends StatefulWidget {
   @override

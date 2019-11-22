@@ -1,13 +1,14 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:dfist19/data/Schedule.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
-import 'package:dfist19/data/TimeslotSessions.dart' as Session1;
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
+import 'package:dfist19/screens/locale.dart' as Locale;
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
@@ -15,7 +16,7 @@ import 'package:dfist19/widgets/chip.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttie/fluttie.dart';
+import 'package:key_value_store_web/key_value_store_web.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MySessionsScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class MySessionsScreen extends StatefulWidget {
   _MySessionsScreenState createState() => _MySessionsScreenState();
 
   MySessionsScreen();
+
 }
 
 class _MySessionsScreenState extends State<MySessionsScreen>
@@ -31,7 +33,6 @@ class _MySessionsScreenState extends State<MySessionsScreen>
   @override
   bool get wantKeepAlive => true;
 
-  FluttieAnimationController shockedEmoji;
   TextEditingController _controller = TextEditingController();
 
   FocusNode focus = new FocusNode();
@@ -171,7 +172,8 @@ class _MySessionsScreenState extends State<MySessionsScreen>
 
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    favList = prefs.getStringList("favList");
+//    favList = prefs.getStringList("favList");
+    favList = Locale.localStorage.getList("favList") ;
     print(favList.length);
   }
 
@@ -338,6 +340,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                                 }
                               }
                             }
+                            print(favList.length.toString());
                             return favList != null && favList.isNotEmpty? _newSessionss.isNotEmpty || _controller.text.isNotEmpty?
                             ListView.builder(
                               shrinkWrap: true,
@@ -383,10 +386,10 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                                     type: _session.data.tags != null
                                         ? _session.data.tags[0]
                                         : "",
-                                    onTap: (bool isLiked) {
+                                    onTap: () {
                                       print("tapped");
                                       return onLikeButtonTap(
-                                          isLiked, _session.id);
+                                          true, _session.id);
                                     },
                                     isLiked: favList != null
                                         ? favList.contains(_session.id)
@@ -447,10 +450,10 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                                     type: _session.data.tags != null
                                         ? _session.data.tags[0]
                                         : "",
-                                    onTap: (bool isLiked) {
+                                    onTap: () {
                                       print("tapped");
                                       return onLikeButtonTap(
-                                          isLiked, _session.id);
+                                          true, _session.id);
                                     },
                                     isLiked: favList != null
                                         ? favList.contains(_session.id)

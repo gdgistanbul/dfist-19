@@ -1,4 +1,4 @@
-import 'package:cached_network_image/cached_network_image.dart';
+//import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dfist19/data/Session.dart';
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/Speaker.dart';
@@ -8,7 +8,6 @@ import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpeakerDetail extends StatefulWidget {
@@ -33,9 +32,6 @@ class SpeakerDetail extends StatefulWidget {
 }
 
 class _SpeakerDetailState extends State<SpeakerDetail> {
-//  FluttieAnimationController shockedEmoji;
-  var instance = Fluttie();
-
   SessionsResponse data = new SessionsResponse();
   List<Session> sessions;
 
@@ -123,20 +119,20 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
           child: new Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 16),
-                  child: ClipRRect(
-                      borderRadius: new BorderRadius.circular(12),
-                      child: new CachedNetworkImage(
-                          imageUrl: widget.speaker.data.photoUrl,
-                          placeholder: (context, url) => SizedBox(
-                                child: CircularProgressIndicator(),
-                                height: 20.0,
-                                width: 20.0,
-                              ))),
-                ),
-              ),
+//              Center(
+//                child: Padding(
+//                  padding: const EdgeInsets.only(top: 16),
+//                  child: ClipRRect(
+//                      borderRadius: new BorderRadius.circular(12),
+//                      child: new CachedNetworkImage(
+//                          imageUrl: widget.speaker.data.photoUrl,
+//                          placeholder: (context, url) => SizedBox(
+//                                child: CircularProgressIndicator(),
+//                                height: 20.0,
+//                                width: 20.0,
+//                              ))),
+//                ),
+//              ),
               Padding(
                 padding: const EdgeInsets.only(top: 16),
                 child: new Text(widget.speaker.data.name,
@@ -225,9 +221,9 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                     Session _session = sessions[index];
 
                     return SessionItem(
-                      onTap: (bool isLiked) {
+                      onTap: () {
                         print("tapped");
-                        return onLikeButtonTap(isLiked, _session.id);
+                        return onLikeButtonTap(true, _session.id);
                       },
                       isLiked: favList != null
                           ? favList.contains(_session.id)

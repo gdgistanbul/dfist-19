@@ -102,7 +102,7 @@ class _SessionDetailState extends State<SessionDetail> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           SizedBox(
-                            height: isAndorid ? 116 : 130,
+                            height:130,
                           ),
                           Padding(
                               padding: const EdgeInsets.only(top: 150.0),
@@ -303,9 +303,7 @@ class _SessionDetailState extends State<SessionDetail> {
                   leading: Builder(
                     builder: (BuildContext context) {
                       return IconButton(
-                        icon: Icon(isAndorid
-                            ? Icons.arrow_back
-                            : Icons.arrow_back_ios),
+                        icon: Icon( Icons.arrow_back),
                         color: Colors.white,
                         onPressed: () {
                           Navigator.of(context).pop(true);
@@ -322,9 +320,10 @@ class _SessionDetailState extends State<SessionDetail> {
               children: <Widget>[
                 Container(
                   child: SizedBox(
-                    height: isAndorid
-                        ? MediaQuery.of(context).size.height / 60
-                        : 20,
+//                    height: isAndorid
+////                        ? MediaQuery.of(context).size.height / 60
+////                        : 20,
+                    height:20,
                   ),
                 ),
                 Align(

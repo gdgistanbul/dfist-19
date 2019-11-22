@@ -7,6 +7,9 @@ import 'screens/home.dart';
 import 'utils/const.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
+
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
