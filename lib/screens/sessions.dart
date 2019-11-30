@@ -8,15 +8,14 @@ import 'package:dfist19/data/TimeslotSessions.dart' as Session1;
 import 'package:dfist19/data/SessionsResponse.dart';
 import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/Timeslot.dart';
-import 'package:dfist19/screens/home.dart';
 import 'package:dfist19/screens/sessionDetail.dart';
 import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/utils/const.dart';
-import 'package:dfist19/widgets/chip.dart';
+import 'package:dfist19/widgets/bottomSheetItem.dart';
+import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -34,7 +33,6 @@ class _SessionsScreenState extends State<SessionsScreen>
   @override
   bool get wantKeepAlive => true;
 
-  FluttieAnimationController shockedEmoji;
   TextEditingController _controller = TextEditingController();
 
   FocusNode focus = new FocusNode();
@@ -79,6 +77,7 @@ class _SessionsScreenState extends State<SessionsScreen>
 
   void _onRefresh() async {
     // monitor network fetch
+    setState(() {});
     await Future.delayed(Duration(milliseconds: 1000));
     // if failed,use refreshFailed()
     _refreshController.refreshCompleted();
@@ -86,6 +85,7 @@ class _SessionsScreenState extends State<SessionsScreen>
 
   void _onLoading() async {
     // monitor network fetch
+    _getSF();
     await Future.delayed(Duration(milliseconds: 1000));
     _getSpeakers();
     API.getSessions().then((response) {
@@ -119,8 +119,6 @@ class _SessionsScreenState extends State<SessionsScreen>
           if (session.data.tags != null) {
             for (String tag in session.data.tags) {
               if (tag.contains(val)) {
-                print(tag);
-                print(session.data.title);
                 _newSessionsss.add(session);
                 _newSessionss = _newSessionsss;
               }
@@ -159,14 +157,12 @@ class _SessionsScreenState extends State<SessionsScreen>
   List<String> favList;
 
   Future<bool> onLikeButtonTap(bool isLiked, String id) async {
-    print(isLiked.toString());
     if (favList != null) {
       if (!isLiked) {
         favList.add(id);
       } else {
         favList.remove(id);
       }
-      print(favList.length);
       _addIdToSF(favList);
     } else {
       favList = new List();
@@ -179,14 +175,12 @@ class _SessionsScreenState extends State<SessionsScreen>
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList")[0]);
-    print(favList.length);
   }
 
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
-    print(favList.length);
+    setState(() {});
   }
 
   @override
@@ -252,7 +246,11 @@ class _SessionsScreenState extends State<SessionsScreen>
                   child: Padding(
                     padding:
                         EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
-                    child: _search(context),
+                    child: SearchWidget(
+                      onChanged: _onChanged,
+                      controller: _controller,
+                      focus1: focus,
+                    ),
                   ),
                 ),
                 Padding(
@@ -559,7 +557,6 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                             : "",
                                                         onTap:
                                                             (bool isLiked) {
-                                                          print("tapped");
                                                           return onLikeButtonTap(
                                                               isLiked,
                                                               _session.id);
@@ -694,257 +691,41 @@ class _SessionsScreenState extends State<SessionsScreen>
     );
   }
 
-  Widget _search(BuildContext context) {
-    setState(() => context);
-    context = this.context;
-    return Column(
-      children: <Widget>[
-        Card(
-          elevation: 0.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-          semanticContainer: true,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                new BoxShadow(color: Colors.grey[200], blurRadius: 10.0)
-              ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(14.0),
-              ),
-            ),
-            child: TextField(
-              focusNode: focus,
-              controller: _controller,
-              onChanged: _onChanged,
-              textInputAction: TextInputAction.done,
-              autocorrect: true,
-              onTap: () {
-                FocusScope.of(context).requestFocus(focus);
-                isVisible = true;
-              },
-              onEditingComplete: () {
-                isVisible = false;
-              },
-              onSubmitted: (text) {
-                FocusScope.of(context).requestFocus(new FocusNode());
-                isVisible = false;
-              },
-              style: TextStyle(
-                fontFamily: 'RedHatDisplay',
-                color: Color(0xff80848b),
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.normal,
-                letterSpacing: 0,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(14.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14.0),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                hintText: "Search..",
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-                suffixIcon: new Visibility(
-                  visible: focus.hasFocus,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.clear,
-                      color: Colors.grey,
-                    ),
-                    onPressed: _controller.clear,
-                  ),
-                ),
-                hintStyle: TextStyle(
-                  fontFamily: 'RedHatDisplay',
-                  color: Color(0xff80848b),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.normal,
-                  letterSpacing: 0,
-                ),
-              ),
-              maxLines: 1,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  void _showModalSheet(BuildContext context, int from) {
+  _showModalSheet(BuildContext context, int from) {
     setState(() => context);
     context = this.context;
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(32.0),
-          topRight: Radius.circular(32.0),
-        )),
+              topLeft: Radius.circular(32.0),
+              topRight: Radius.circular(32.0),
+            )),
         context: context,
         builder: (context) {
-          return new Container(
-            height: 430,
-            child: new Stack(
-              children: <Widget>[
-                Padding(
-                  padding:
-                      const EdgeInsets.only(bottom: 24.0, top: 14.0, right: 6),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      MaterialButton(
-                        child: new Text("Reset",
-                            style: TextStyle(
-                              fontFamily: 'RedHatDisplay',
-                              color: Color(0xff333d47),
-                              fontSize: 16,
-                              fontWeight: FontWeight.w700,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0,
-                            )),
-                        onPressed: () {
-                          selectedReportList.clear();
-                          _newSessionss.clear();
-                          Navigator.pop(context);
-                          FocusScope.of(context).requestFocus(new FocusNode());
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right: 30.0),
-                        child: new Text(from == 0 ? "Halls" : "Categories",
-                            style: TextStyle(
-                              fontFamily: 'RedHatDisplay',
-                              color: Color(0xff333d47),
-                              fontSize: 20,
-                              fontWeight: FontWeight.w900,
-                              fontStyle: FontStyle.normal,
-                              letterSpacing: 0,
-                            )),
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.clear,
-                            color: Color(0xff333d47), size: 24),
-                        onPressed: () {
-                          Navigator.pop(context);
-                          FocusScope.of(context).requestFocus(new FocusNode());
-                        },
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 64.0),
-                  child: Container(
-                    child: new GridView.builder(
-                        itemCount: from == 0 ? halls.length : reportList.length,
-                        gridDelegate:
-                            new SliverGridDelegateWithFixedCrossAxisCount(
-                                childAspectRatio: 3.5, crossAxisCount: 2),
-                        itemBuilder: (BuildContext context, int index) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.only(left: 16.0, right: 16.0),
-                            child: Container(
-                                child: Center(
-                              child: MultiSelectChip(
-                                colorList[index],
-                                from == 0 ? halls[index] : reportList[index],
-                                onSelectionChanged: (selectedList) {
-                                  setState(() {
-                                    selectedReportList.addAll(selectedList);
-                                  });
-                                },
-                              ),
-                            )),
-                          );
-                        }),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    color: Colors.white,
-                    height: MediaQuery.of(context).size.height / 11,
-                    width: MediaQuery.of(context).size.width,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 16.0, right: 16.0, bottom: 8.0),
-                      child: GestureDetector(
-                        child: Card(
-                          color: Color(0xff3196f6),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(14.0)),
-                          child: Center(
-                            child: new Text("Apply Filter",
-                                style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
-                                  color: Color(0xffffffff),
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w900,
-                                  fontStyle: FontStyle.normal,
-                                  letterSpacing: 0,
-                                )),
-                          ),
-                        ),
-                        onTap: () {
-                          _controller.text = " ";
-                          from == 0
-                              ? _onFilteredByHalls(selectedReportList, context)
-                              : _onFilteredByCategory(
-                                  selectedReportList, context);
-                          selectedReportList.clear();
-                          Navigator.pop(context);
-                          FocusScope.of(context).requestFocus(new FocusNode());
-                        },
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+          return new BottomSheetItem(
+            from : from,
+            onPressed: () {
+              _controller.text = " ";
+              from == 1
+                  ? _onFilteredByCategory(selectedReportList, context)
+                  : _onFilteredByHalls(selectedReportList, context);
+              selectedReportList.clear();
+              Navigator.pop(context);
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            onResetPressed: () {
+              selectedReportList.clear();
+              _newSessionss.clear();
+              Navigator.pop(context);
+              FocusScope.of(context).requestFocus(new FocusNode());
+            },
+            onSelectionChanged: (selectedList) {
+              setState(() {
+                selectedReportList.addAll(selectedList);
+              });
+            },
           );
         });
   }
-
-  List<String> reportList = [
-    "Robotics & assistant",
-    "Mobile Technologies",
-    "Web Technologies",
-    "Cloud",
-    "Machine Learning",
-    "Firebase",
-    "Design",
-  ];
-
-  List<String> halls = [
-    "Bosphorus(Uniq Hall)",
-    "Galata Tower(Glass Room)",
-    "Maiden's Tower",
-    "Hagia Sophia",
-  ];
-
-  List<Color> colorList = [
-    Color(0xff7AD7E0),
-    Color(0xff84E07A),
-    Color(0xffFECC92),
-    Color(0xff7A9DE0),
-    Color(0xffE17F7F),
-    Color(0xffFECC92),
-    Color(0xffE07AB3),
-  ];
   List<String> selectedReportList = List();
 }

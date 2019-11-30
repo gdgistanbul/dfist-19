@@ -18,12 +18,11 @@ class SessionDetail extends StatefulWidget {
   final GestureTapCallback onPressed;
 
   SessionDetail({
-    Key key,
     @required this.session,
     @required this.time,
     @required this.track,
     @required this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   _SessionDetailState createState() => _SessionDetailState();
@@ -39,14 +38,12 @@ class _SessionDetailState extends State<SessionDetail> {
   List<String> favList;
 
   Future<bool> onLikeButtonTap(bool isLiked, String id) async {
-    print(isLiked.toString());
     if (favList != null) {
       if (!isLiked) {
         favList.add(id);
       } else {
         favList.remove(id);
       }
-      print(favList.length);
       _addIdToSF(favList);
     } else {
       favList = new List();
@@ -59,14 +56,12 @@ class _SessionDetailState extends State<SessionDetail> {
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList")[0]);
-    print(favList.length);
   }
 
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
-    print(favList.length);
+    setState(() {});
   }
 
 
@@ -75,11 +70,12 @@ class _SessionDetailState extends State<SessionDetail> {
     super.initState();
     favList = new List();
     _getSF();
-//    _getSessionSpaker();
   }
 
   @override
   void dispose() {
+    setState(() {
+    });
     super.dispose();
   }
 
@@ -151,10 +147,8 @@ class _SessionDetailState extends State<SessionDetail> {
                                         });
                                         if (!favList.contains(widget.session.id)) {
                                           favList.add(widget.session.id);
-                                          print("added");
                                         } else {
                                           favList.remove(widget.session.id);
-                                          print("removed");
                                         }
                                         _addIdToSF(favList);
                                       } else {
@@ -213,7 +207,7 @@ class _SessionDetailState extends State<SessionDetail> {
                                           height: 180,
                                           width: 180,
                                           child: Center(
-                                            child: SpeakerItem(
+                                            child: new SpeakerItem(
                                               name:
                                                   "${data.speakers[0].data.name}",
                                               img: data
@@ -224,13 +218,9 @@ class _SessionDetailState extends State<SessionDetail> {
                                                   new MaterialPageRoute(
                                                       builder: (context) =>
                                                           new SpeakerDetail(
-                                                              speaker:
-                                                                  data.speakers[
-                                                                      0],
-                                                              time:
-                                                                  widget.time,
-                                                              track: widget
-                                                                  .track)),
+                                                              speaker: data.speakers[0],
+                                                              time: widget.time,
+                                                              track: widget.track)),
                                                 );
                                               },
                                             ),
@@ -308,7 +298,7 @@ class _SessionDetailState extends State<SessionDetail> {
                             : Icons.arrow_back_ios),
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.of(context).pop(true);
+                          Navigator.of(context).pop();
                         },
                         tooltip:
                             MaterialLocalizations.of(context).backButtonTooltip,

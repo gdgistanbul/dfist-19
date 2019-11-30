@@ -1,3 +1,4 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,13 +19,13 @@ class _InformationScreenState extends State<InformationScreen> {
     ));
     super.dispose();
   }
-//  final Event event = Event(
-//    title: 'DevFest Istanbul 2019',
-//    description: 'DevFest Istanbul 2019 at Uniq Hall',
-//    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
-//    startDate: DateTime(2019, 11, 24, 09, 00),
-//    endDate: DateTime(2019, 11, 24, 19, 30),
-//  );
+  final Event event = Event(
+    title: 'DevFest Istanbul 2019',
+    description: 'DevFest Istanbul 2019 at Uniq Hall',
+    location: 'Huzur, Maslak Ayazağa Cd. No:4, 34396 Sarıyer/İstanbul',
+    startDate: DateTime(2019, 11, 24, 09, 00),
+    endDate: DateTime(2019, 11, 24, 19, 30),
+  );
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -138,7 +139,7 @@ class _InformationScreenState extends State<InformationScreen> {
                   ),
                 ),
                 onTap: () {
-//                  Add2Calendar.addEvent2Cal(event);
+                  Add2Calendar.addEvent2Cal(event);
                 },
               ),
             ),

@@ -7,6 +7,7 @@ import 'package:dfist19/data/Speaker.dart';
 import 'package:dfist19/data/Timeslot.dart';
 import 'package:dfist19/screens/speakerDetail.dart';
 import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/widgets/searchWidget.dart';
 import 'package:dfist19/widgets/speakerItem.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -40,7 +41,6 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
     API.getSessions().then((response) {
       setState(() {
         dataSessions = response;
-        print("blaalsd" + response.sessions.length.toString());
         _sessions = response.sessions;
       });
     });
@@ -79,10 +79,8 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
     API.getSchedule().then((response) {
       setState(() {
         dataSchedule = response;
-        print("blaalsd" + response.schedule.length.toString());
         _schedule = response.schedule;
         _timeslot = response.schedule[0].data.timeslots;
-        print("blaalsd" + _timeslot.toString());
       });
     });
   }
@@ -153,7 +151,11 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
               Container(
                 child: Padding(
                   padding: EdgeInsets.only(top: 16.0, left: 16.0, right: 10.0),
-                  child: search(context),
+                  child: SearchWidget(
+                    onChanged: _onChanged,
+                    controller: controller,
+                    focus1: focus,
+                  ),
                 ),
               ),
             ],
@@ -215,7 +217,6 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => new SpeakerDetail(
-                                      onPressed: () {},
                                       speaker: speaker,
                                       time: _time != null ? _time : " ",
                                       track: _track != null ? _track : " ")),
@@ -233,7 +234,6 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
     onRefresh: _onRefresh,
     onLoading: _onLoading,
     header: ClassicHeader(),
-
     child:
           GridView.builder(
                   itemCount: _newSpeakers.length,
@@ -271,7 +271,6 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
                               context,
                               new MaterialPageRoute(
                                   builder: (context) => new SpeakerDetail(
-                                      onPressed: () {},
                                       speaker: speaker,
                                       time: _time != null ? _time : " ",
                                       track: _track != null ? _track : " ")),
@@ -286,91 +285,4 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
     );
   }
 
-  Widget search(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Card(
-          elevation: 0.0,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-          semanticContainer: true,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              boxShadow: [
-                new BoxShadow(color: Colors.grey[200], blurRadius: 10.0)
-              ],
-              borderRadius: BorderRadius.all(
-                Radius.circular(14.0),
-              ),
-            ),
-            child: TextField(
-              focusNode: focus,
-              controller: controller,
-              onChanged: _onChanged,
-              autocorrect: true,
-              onTap: () {
-                FocusScope.of(context).requestFocus(focus);
-                isVisible = true;
-              },
-              onEditingComplete: () {
-                isVisible = false;
-              },
-              onSubmitted: (text) {
-                isVisible = false;
-              },
-              style: TextStyle(
-                fontFamily: 'RedHatDisplay',
-                color: Color(0xff80848b),
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.normal,
-                letterSpacing: 0,
-              ),
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(14.0),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14.0),
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: Colors.transparent,
-                  ),
-                  borderRadius: BorderRadius.circular(5.0),
-                ),
-                hintText: "Search..",
-                prefixIcon: Icon(
-                  Icons.search,
-                  color: Colors.grey,
-                ),
-                suffixIcon: new Visibility(
-                  visible: isVisible,
-                  child: IconButton(
-                    icon: Icon(
-                      Icons.clear,
-                      color: Colors.grey,
-                    ),
-                    onPressed: controller.clear,
-                  ),
-                ),
-                hintStyle: TextStyle(
-                  fontFamily: 'RedHatDisplay',
-                  color: Color(0xff80848b),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w500,
-                  fontStyle: FontStyle.normal,
-                  letterSpacing: 0,
-                ),
-              ),
-              maxLines: 1,
-//                  controller: _searchControl,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
 }

@@ -10,7 +10,6 @@ const baseUrl = "https://us-central1-dfist19.cloudfunctions.net/helu-restful";
 class API {
   static Future<SpeakerResponse> getSpeakers() async {
     final response = await http.get(baseUrl);
-
     if (response.statusCode == 200) {
       return SpeakerResponse.fromJson(json.decode(response.body));
     } else {
@@ -20,7 +19,6 @@ class API {
 
   static Future<SessionsResponse> getSessions() async {
     final response = await http.get("$baseUrl/sessions");
-
     if (response.statusCode == 200) {
       print("200 donderdim");
       return SessionsResponse.fromJson(json.decode(response.body));
@@ -31,9 +29,7 @@ class API {
 
   static Future<SessionsResponse> getSpeakerSessions(String speakerId) async {
     final response = await http.get(baseUrl+"/$speakerId/sessions");
-
     if (response.statusCode == 200) {
-      print("200 donderdim");
       return SessionsResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load post');
@@ -42,9 +38,7 @@ class API {
 
   static Future<SpeakerResponse> getSessionSpaker(String speakerId) async {
     final response = await http.get(baseUrl+"/$speakerId");
-
     if (response.statusCode == 200) {
-      print("200 donderdim");
       return SpeakerResponse.fromJson(json.decode(response.body));
     } else {
       throw Exception('Failed to load post');
@@ -53,7 +47,6 @@ class API {
 
   static Future<ScheduleResponse> getSchedule() async {
     final response = await http.get(baseUrl+"/schedule");
-
     if (response.statusCode == 200) {
       return ScheduleResponse.fromJson(json.decode(response.body));
     } else {

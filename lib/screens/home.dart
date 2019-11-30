@@ -1,8 +1,5 @@
-import 'package:dfist19/data/SessionsResponse.dart';
-import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/screens/information.dart';
 import 'package:dfist19/screens/sessions.dart';
-import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/rectangleButton.dart';
 import 'package:dfist19/widgets/yourScheduleButton.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(children: <Widget>[
+      body:  Stack(children: <Widget>[
         Padding(
           padding: EdgeInsets.only(top: 0.0),
           child: new Image.asset(
@@ -110,7 +107,7 @@ class _MainScreenState extends State<MainScreen> {
                     new Container(
                         color: Colors.transparent,
                         child: RectangleButton(
-                          key: null,
+                          key: UniqueKey(),
                           color: Color(0xff74d5de),
                           text1: "Event",
                           text2: "Schedule",
@@ -129,7 +126,7 @@ class _MainScreenState extends State<MainScreen> {
                     new Container(
                         color: Colors.transparent,
                         child: RectangleButton(
-                          key: null,
+                          key: UniqueKey(),
                           color: Color(0xfffecc92),
                           text1: "All",
                           text2: "Speakers",
@@ -157,21 +154,10 @@ class _MainScreenState extends State<MainScreen> {
   void navigationTapped(int page) {
     _pageController.jumpToPage(page);
   }
-  _onChanged() async {
-    setState(() {
-      print("a");
-    });
-  }
-
-  @override
-  void setState(fn) {
-    super.setState(fn);
-  }
 
   @override
   void initState() {
     super.initState();
-    _onChanged();
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,
       statusBarIconBrightness: Brightness.light,
@@ -196,7 +182,5 @@ class _MainScreenState extends State<MainScreen> {
     _pageController.dispose();
   }
 
-  void onPageChanged(int page) {
-    setState(() {});
-  }
+
 }

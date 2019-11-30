@@ -4,7 +4,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 class SocialMediaList extends StatefulWidget {
   var socialMedia;
-
   var icon;
 
   SocialMediaList({

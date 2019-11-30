@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 
 class SearchWidget extends StatefulWidget {
-  FocusNode focus1;
-  TextEditingController controller;
+  final FocusNode focus1;
+  final TextEditingController controller;
+  final ValueChanged<String> onChanged;
 
   SearchWidget({
     Key key,
     @required this.focus1,
     @required this.controller,
+    @required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -21,7 +23,6 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   void initState() {
     this.isVisible;
-    this.widget.focus1 = FocusNode();
     this.widget.focus1.addListener(() {
       if (widget.focus1.hasFocus) {
         isVisible = false;
@@ -60,10 +61,7 @@ class _SearchWidgetState extends State<SearchWidget> {
             decoration: BoxDecoration(
               color: Colors.white,
               boxShadow: [
-                new BoxShadow(
-                    color: Colors.grey[200],
-                    blurRadius: 10.0
-                )
+                new BoxShadow(color: Colors.grey[200], blurRadius: 10.0)
               ],
               borderRadius: BorderRadius.all(
                 Radius.circular(14.0),
@@ -72,6 +70,8 @@ class _SearchWidgetState extends State<SearchWidget> {
             child: TextField(
               focusNode: focus,
               controller: widget.controller,
+              onChanged: widget.onChanged,
+              textInputAction: TextInputAction.done,
               autocorrect: true,
               onTap: () {
                 FocusScope.of(context).requestFocus(focus);
@@ -81,6 +81,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                 isVisible = false;
               },
               onSubmitted: (text) {
+                FocusScope.of(context).requestFocus(new FocusNode());
                 isVisible = false;
               },
               style: TextStyle(
@@ -111,7 +112,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   color: Colors.grey,
                 ),
                 suffixIcon: new Visibility(
-                  visible: isVisible,
+                  visible: focus.hasFocus,
                   child: IconButton(
                     icon: Icon(
                       Icons.clear,
@@ -130,7 +131,6 @@ class _SearchWidgetState extends State<SearchWidget> {
                 ),
               ),
               maxLines: 1,
-//                  controller: _searchControl,
             ),
           ),
         ),

@@ -13,8 +13,7 @@ void main() async {
       OSiOSSettings.autoPrompt: false,
       OSiOSSettings.inAppLaunchUrl: true
     });
-    OneSignal.shared
-        .setInFocusDisplayType(OSNotificationDisplayType.notification);
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
     runApp(MyApp());
   });
 }
@@ -26,6 +25,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool isDark = false;
+
 
   @override
   void initState() {
@@ -64,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: isDark ? Constants.darkTheme : Constants.lightTheme,
-      home: MainScreen(),
+      home: new MainScreen(),
     );
   }
 }

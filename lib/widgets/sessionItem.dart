@@ -2,9 +2,9 @@ import 'dart:async';
 
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:dfist19/utils/API.dart';
+import 'package:dfist19/utils/const.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:like_button/like_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -62,37 +62,16 @@ class _SessionItemState extends State<SessionItem>
 
   List<String> favList;
 
-  _addIdToSF(List<String> value) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList").length);
-    print(favList.length);
-  }
-
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
     print(favList.length);
   }
 
-//  FluttieAnimationController shockedEmoji;
-//
-//  prepareAnimation() async {
-//    bool canBeUsed = await Fluttie.isAvailable();
-//    if (!canBeUsed) {
-//      print("Animations are not supported on this platform");
-//      return;
-//    }
-//    var instance = Fluttie();
-//    var emojiComposition =
-//        await instance.loadAnimationFromAsset("assets/animations/anim.json");
-//    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-//  }
 
   @override
   initState() {
     super.initState();
-//    prepareAnimation();
     _getSessionSpaker();
     favList = new List();
     _getSF();
@@ -106,7 +85,6 @@ class _SessionItemState extends State<SessionItem>
 
   @override
   Widget build(BuildContext context) {
-    setState(() => context);
     return FlatButton(
       highlightColor: Colors.transparent,
       splashColor: Colors.transparent,
@@ -118,7 +96,7 @@ class _SessionItemState extends State<SessionItem>
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
           elevation: 3.0,
-          color: _cardColor(widget.type),
+          color: Constants.color(widget.type),
           child: Column(
             children: <Widget>[
               Stack(
@@ -135,7 +113,7 @@ class _SessionItemState extends State<SessionItem>
                             topRight: Radius.circular(10),
                           ),
                           child: Image.asset(
-                            "${_cardType(widget.type)}",
+                            "${Constants.type(widget.type)}",
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -212,15 +190,18 @@ class _SessionItemState extends State<SessionItem>
                                     ),
                                     new Padding(
                                       padding: const EdgeInsets.only(left: 5),
-                                      child: Text(
-                                        buffer != null ? buffer.toString() : "",
-                                        style: TextStyle(
-                                            fontFamily: 'RedHatDisplay',
-                                            color: Color(0xffffffff),
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w500,
-                                            fontStyle: FontStyle.normal),
-                                        textAlign: TextAlign.left,
+                                      child: Container(
+                                        width: 300,
+                                        child: Text(
+                                          buffer != null ? buffer.toString() : "",
+                                          style: TextStyle(
+                                              fontFamily: 'RedHatDisplay',
+                                              color: Color(0xffffffff),
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w500,
+                                              fontStyle: FontStyle.normal),
+                                          textAlign: TextAlign.left,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -264,86 +245,5 @@ class _SessionItemState extends State<SessionItem>
       ),
       onPressed: widget.onPressed,
     );
-  }
-
-
-
-//  onLikeButtonTap(bool isLiked, String id) async {
-//    print(id);
-//    print("tapped");
-//    print(isLiked.toString());
-//
-//    SharedPreferences prefs = await SharedPreferences.getInstance();
-//    if (prefs.getStringList("favList") != null) {
-//      if(isLiked){
-//        prefs.getStringList("favList").add(id);
-//      }else{
-//        prefs.getStringList("favList").remove(id);
-//      }
-//    } else {
-//      favList = new List();
-//      favList.add(id);
-//      print(favList.length);
-//      prefs.setStringList("favList", favList);
-//    }
-////
-////    if (favList.contains(id)) {
-////      favList.remove(id);
-////      _addIdToSF(favList);
-////    } else {
-////      favList.add(id);
-////      print(id);
-////      _addIdToSF(favList);
-////    }
-//  }
-
-  _cardType(type) {
-    switch (type) {
-      case "Mobile Technologies":
-        return "assets/red.png";
-      case "Flutter":
-        return "assets/red.png";
-      case "Design":
-        return "assets/red.png";
-      case "Machine Learning & AI":
-        return "assets/cloud.png";
-      case "Machine Learning & Ai":
-        return "assets/cloud.png";
-      case "Cloud":
-        return "assets/cloud.png";
-      case "Web Technologies":
-        return "assets/web.png";
-      case "Robotics & assistant":
-        return "assets/red.png";
-      case "Firebase":
-        return "assets/web.png";
-      default:
-        return "assets/red.png";
-    }
-  }
-
-  _cardColor(type) {
-    switch (type) {
-      case "Mobile Technologies":
-        return Color(0xff84E07A);
-      case "Flutter":
-        return Color(0xff84E07A);
-      case "Design":
-        return Color(0xffE07AB3);
-      case "Cloud":
-        return Color(0xff7A9DE0);
-      case "Machine Learning & AI":
-        return Color(0xffE17F7F);
-      case "Machine Learning & Ai":
-        return Color(0xffE17F7F);
-      case "Web Technologies":
-        return Color(0xffFECC92);
-      case "Robotics & assistant":
-        return Color(0xff7AD7E0);
-      case "Firebase":
-        return Color(0xffFECC92);
-      default:
-        return Color(0xffF1823B);
-    }
   }
 }

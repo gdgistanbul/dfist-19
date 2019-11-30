@@ -8,7 +8,6 @@ import 'package:dfist19/utils/API.dart';
 import 'package:dfist19/widgets/sessionItem.dart';
 import 'package:dfist19/widgets/socialMediaList.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttie/fluttie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SpeakerDetail extends StatefulWidget {
@@ -16,13 +15,8 @@ class SpeakerDetail extends StatefulWidget {
   final String time;
   final String track;
 
-  var namesGrowable = new List<String>();
-  final GestureTapCallback onPressed;
-
   SpeakerDetail(
       {Key key,
-      @required this.namesGrowable,
-      @required this.onPressed,
       @required this.time,
       @required this.track,
       @required this.speaker})
@@ -33,8 +27,6 @@ class SpeakerDetail extends StatefulWidget {
 }
 
 class _SpeakerDetailState extends State<SpeakerDetail> {
-//  FluttieAnimationController shockedEmoji;
-  var instance = Fluttie();
 
   SessionsResponse data = new SessionsResponse();
   List<Session> sessions;
@@ -51,14 +43,12 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   List<String> favList;
 
   Future<bool> onLikeButtonTap(bool isLiked, String id) async {
-    print(isLiked.toString());
     if (favList != null) {
       if (!isLiked) {
         favList.add(id);
       } else {
         favList.remove(id);
       }
-      print(favList.length);
       _addIdToSF(favList);
     } else {
       favList = new List();
@@ -71,19 +61,15 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   _addIdToSF(List<String> value) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("favList", value);
-    print(prefs.getStringList("favList")[0]);
-    print(favList.length);
   }
 
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
-    print(favList.length);
   }
 
   @override
   void initState() {
-//    prepareAnimation();
     favList = new List();
     _getSF();
     _getSpeakerSessions();
@@ -94,12 +80,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   void dispose() {
     super.dispose();
   }
-
-//  prepareAnimation() async {
-//    var emojiComposition =
-//    await instance.loadAnimationFromAsset("assets/animations/anim.json");
-//    shockedEmoji = await instance.prepareAnimation(emojiComposition);
-//  }
 
   @override
   Widget build(BuildContext context) {
@@ -167,21 +147,16 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                       fontStyle: FontStyle.normal,
                     )),
               ),
-              Visibility(
-                visible: widget.namesGrowable != null
-                    ? widget.namesGrowable.length > 2
-                    : false,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 24),
-                  child: new Text("Social Media Accounts",
-                      style: TextStyle(
-                        fontFamily: 'RedHatDisplay',
-                        color: Color(0xff0f3649),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                        fontStyle: FontStyle.normal,
-                      )),
-                ),
+              Padding(
+                padding: const EdgeInsets.only(top: 24),
+                child: new Text("Social Media Accounts",
+                    style: TextStyle(
+                      fontFamily: 'RedHatDisplay',
+                      color: Color(0xff0f3649),
+                      fontSize: 14,
+                      fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    )),
               ),
               Container(
                 height: 50,
@@ -226,7 +201,6 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
 
                     return SessionItem(
                       onTap: (bool isLiked) {
-                        print("tapped");
                         return onLikeButtonTap(isLiked, _session.id);
                       },
                       isLiked: favList != null
