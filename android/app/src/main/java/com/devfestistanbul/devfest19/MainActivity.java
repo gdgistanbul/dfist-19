@@ -1,4 +1,4 @@
-package com.example.dfist19;
+package com.devfestistanbul.devfest19;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;

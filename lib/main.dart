@@ -1,10 +1,19 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 import 'screens/home.dart';
 import 'utils/const.dart';
 
-void main() async{
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+void main() async {
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
+      OSiOSSettings.autoPrompt: false,
+      OSiOSSettings.inAppLaunchUrl: true
+    });
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
     runApp(MyApp());
   });
 }
@@ -15,16 +24,38 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isDark = true;
+  bool isDark = false;
+
 
   @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-      statusBarColor: isDark ? Constants.darkPrimary : Constants.lightPrimary,
-      statusBarIconBrightness: isDark?Brightness.light:Brightness.dark,
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
     ));
+    imageCache.clear();
+  }
+
+  @override
+  void reassemble() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
+    super.reassemble();
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.light,
+      systemNavigationBarIconBrightness: Brightness.light, // works
+    ));
+    super.dispose();
   }
 
   @override
@@ -33,7 +64,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: Constants.appName,
       theme: isDark ? Constants.darkTheme : Constants.lightTheme,
-      home: MainScreen(),
+      home: new MainScreen(),
     );
   }
 }
