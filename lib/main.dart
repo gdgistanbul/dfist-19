@@ -9,15 +9,12 @@ import 'screens/home.dart';
 import 'utils/const.dart';
 
 void main() async {
-  print("yasir was here");
-  runApp(MyApp());
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
-    /*OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
+  /*OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
       OSiOSSettings.autoPrompt: false,
       OSiOSSettings.inAppLaunchUrl: true
     });
     OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);*/
-  });
+  runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
