@@ -1,5 +1,7 @@
+
 import 'dart:io';
 
+import 'package:dfist19/screens/information.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:onesignal_flutter/onesignal_flutter.dart';
@@ -7,14 +9,14 @@ import 'screens/home.dart';
 import 'utils/const.dart';
 
 void main() async {
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
+  print("yasir was here");
+  runApp(MyApp());
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then((_) {
+    /*OneSignal.shared.init("b4322560-686d-4adf-93a8-974185356f0a", iOSSettings: {
       OSiOSSettings.autoPrompt: false,
       OSiOSSettings.inAppLaunchUrl: true
     });
-    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);
-    runApp(MyApp());
+    OneSignal.shared.setInFocusDisplayType(OSNotificationDisplayType.notification);*/
   });
 }
 
@@ -65,6 +67,7 @@ class _MyAppState extends State<MyApp> {
       title: Constants.appName,
       theme: isDark ? Constants.darkTheme : Constants.lightTheme,
       home: new MainScreen(),
+      //home: new InformationScreen(),
     );
   }
 }

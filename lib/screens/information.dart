@@ -30,7 +30,7 @@ class _InformationScreenState extends State<InformationScreen> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Information",
+        title: new Text("Bilgi",
             style: TextStyle(
               fontFamily: 'RedHatDisplay',
               color: Color(0xff333d47),
@@ -50,7 +50,7 @@ class _InformationScreenState extends State<InformationScreen> {
               padding: const EdgeInsets.only(right: 24, left: 24, top: 16),
               child: Center(
                 child: new Text(
-                    "GDG DevFests are large, community-run events that can offer speaker sessions across multiple product areas, all-day hack-a-thons, code labs, and more. ",
+                    "GeekDay, GTÜ Bilgisayar Topluluğu tarafından her yıl düzenlenen, alanında uzman konuşmacılar ve Türkiye'nin her yerinden yüzlerce katılımcıdan oluşan, bilgi ve ??? bir etkinliktir.",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -63,7 +63,7 @@ class _InformationScreenState extends State<InformationScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 24, left: 24, top: 24),
               child: new Text(
-                "Date & Time",
+                "Tarih & Zaman",
                 style: TextStyle(
                   fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
@@ -79,7 +79,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: RichText(
                   text: new TextSpan(children: [
                 new TextSpan(
-                    text: "DevFest Istanbul 2019 will be held on ",
+                    text: "GeekDay, ",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -88,7 +88,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       fontStyle: FontStyle.normal,
                     )),
                 new TextSpan(
-                    text: "24th of November, Sunday ",
+                    text: "29 Şubat 2020, Cumartesi ",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -97,7 +97,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       fontStyle: FontStyle.normal,
                     )),
                 new TextSpan(
-                    text: "between ",
+                    text: "günü, saat ",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
@@ -106,12 +106,21 @@ class _InformationScreenState extends State<InformationScreen> {
                       fontStyle: FontStyle.normal,
                     )),
                 new TextSpan(
-                    text: "09:00 to 19:00",
+                    text: "??:?? ile ??:??",
                     style: TextStyle(
                       fontFamily: 'RedHatDisplay',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
+                      fontStyle: FontStyle.normal,
+                    )),
+                new TextSpan(
+                    text: " arasında düzenlenecektir.",
+                    style: TextStyle(
+                      fontFamily: 'RedHatDisplay',
+                      color: Color(0xff333d47),
+                      fontSize: 16,
+                      fontWeight: FontWeight.w400,
                       fontStyle: FontStyle.normal,
                     )),
               ])),
@@ -126,7 +135,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       borderRadius: BorderRadius.circular(12)),
                   child: Center(
                     child: new Text(
-                      "Add Your Calendar",
+                      "Takvimine Ekle",
                       style: TextStyle(
                         fontFamily: 'RedHatDisplay',
                         color: Colors.white,
@@ -146,7 +155,7 @@ class _InformationScreenState extends State<InformationScreen> {
             Padding(
               padding: const EdgeInsets.only(right: 24, left: 24, top: 40),
               child: new Text(
-                "Venue",
+                "Yer",
                 style: TextStyle(
                   fontFamily: 'RedHatDisplay',
                   color: Color(0xff333d47),
@@ -163,7 +172,7 @@ class _InformationScreenState extends State<InformationScreen> {
                   height: 219,
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: ExactAssetImage('assets/uniq.jpeg'),
+                      image: ExactAssetImage('assets/gtu_kongre_merkezi.jpg'),
                       fit: BoxFit.cover,
                     ),
                     color: Colors.white,
@@ -189,7 +198,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       start: 16,
                       child: Container(
                         height: 50,
-                        child: Text("UNIQ HALL // UNIQ Istanbul",
+                        child: Text("Gebze Teknik Üniversitesi Kongre Merkezi",
                             style: const TextStyle(
                                 color: const Color(0xffffffff),
                                 fontWeight: FontWeight.w700,
@@ -210,7 +219,7 @@ class _InformationScreenState extends State<InformationScreen> {
                         borderRadius: BorderRadius.circular(12)),
                     child: Center(
                       child: new Text(
-                        "Show on Google Maps",
+                        "Google Haritalar'da Göster",
                         style: TextStyle(
                           fontFamily: 'RedHatDisplay',
                           color: Colors.white,
