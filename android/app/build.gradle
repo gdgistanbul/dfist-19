@@ -52,7 +52,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.devfestistanbul.devfest19"
+        applicationId "com.gtubt.geekday2020"
         minSdkVersion 16
         targetSdkVersion 29
         versionCode flutterVersionCode.toInteger()

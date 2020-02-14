@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.devfestistanbul.devfest19">
+    package="com.gtubt.geekday2020">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- io.flutter.app.FlutterApplication is an android.app.Application that
@@ -9,10 +9,10 @@
          FlutterApplication and put your custom class here. -->
     <application
         android:name="io.flutter.app.FlutterApplication"
-        android:label="DevFest istanbul"
+        android:label="GeekDay"
         android:icon="@mipmap/launcher_icon">
         <activity
-            android:name="com.devfestistanbul.devfest19.MainActivity"
+            android:name="com.gtubt.geekday2020.MainActivity"
             android:launchMode="singleTop"
             android:theme="@style/LaunchTheme"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"

@@ -1,4 +1,4 @@
-package com.devfestistanbul.devfest19;
+package com.gtubt.geekday2020;
 
 import android.os.Bundle;
 import io.flutter.app.FlutterActivity;
