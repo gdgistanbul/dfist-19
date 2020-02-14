@@ -5,7 +5,7 @@ import 'package:dfist19/data/SheduleResponse.dart';
 import 'package:dfist19/data/SpeakerResponse.dart';
 import 'package:http/http.dart' as http;
 
-const baseUrl = "https://us-central1-geekday-mobile.cloudfunctions.net/helloWorld";
+const baseUrl = "https://us-central1-geekday-mobile.cloudfunctions.net/geekday";
 
 class API {
   static Future<SpeakerResponse> getSpeakers() async {
