@@ -4,133 +4,912 @@ const url = require('url');
 const spks = {
 	speakers: [
 		{
-			id: "GurolCay",
+			id: "DaronYondem",
 			data: {
-                name: "Mehmet Gürol Çay",
+                name: "Daron Yöndem",
                 tags: [
-                    "Web",
-                    "Keynote"
+                    "None",
                 ],
-                title: "Developer Relations Region Lead",
+                title: "[TITLE]",
                 order: 1,
                 featured: true,
-                company: "Google",
-                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/wtm19-site.appspot.com/o/google.png?alt=media&token=29967743-e249-47f4-bf47-1184a9047c85",
-                country: "Turkey",
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
                 socials: [
                     {
                         "icon": "linkedin",
-                        "link": "https://www.linkedin.com/in/barisyesugey/",
+                        "link": "",
                         "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
                     }
                 ],
-                bio: "Üniversite eğitimini İngiltere'de (Bilgisayar Bilimleri) tamamlayan Barış, Facebook ve Paypal'da satış ve çözüm mühendisi olarak geliştiricilerin platform teknolojilerini uygulama ve servislerine entegre etmesinde destek oldu. Şu anda, Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                shortBio: "Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/mehmet-gurol-cay.jpg?alt=media&token=585c3d92-5dc4-4829-8853-b3ec5492dc11"
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // gurol cay
+		}, // Daron Yöndem
 		{
-			id: "GokceNurErer",
+			id: "HasanBurhanBeytur",
 			data: {
-                name: "Gökçe Nur Erer",
+                name: "Hasan Burhan Beytur",
                 tags: [
-                    "Web",
-                    "Keynote"
+                    "None",
                 ],
-                title: "Developer Relations Region Lead",
+                title: "[TITLE]",
                 order: 1,
                 featured: true,
-                company: "Google",
-                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/wtm19-site.appspot.com/o/google.png?alt=media&token=29967743-e249-47f4-bf47-1184a9047c85",
-                country: "Turkey",
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
                 socials: [
                     {
                         "icon": "linkedin",
-                        "link": "https://www.linkedin.com/in/barisyesugey/",
+                        "link": "",
                         "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
                     }
                 ],
-                bio: "Üniversite eğitimini İngiltere'de (Bilgisayar Bilimleri) tamamlayan Barış, Facebook ve Paypal'da satış ve çözüm mühendisi olarak geliştiricilerin platform teknolojilerini uygulama ve servislerine entegre etmesinde destek oldu. Şu anda, Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                shortBio: "Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/gokce-nur-erer.jpg?alt=media&token=ff30819f-40ff-4ad9-8f91-15128439a620"
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // gokce nur erer
+		}, // Hasan Burhan Beytur
 		{
-			id: "AhmetErgani",
+			id: "OnurYuksektepeli",
 			data: {
-                name: "Ahmet Ergani",
+                name: "Onur Yüksektepeli",
                 tags: [
-                    "Web",
-                    "Keynote"
+                    "None",
                 ],
-                title: "Developer Relations Region Lead",
+                title: "[TITLE]",
                 order: 1,
                 featured: true,
-                company: "Google",
-                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/wtm19-site.appspot.com/o/google.png?alt=media&token=29967743-e249-47f4-bf47-1184a9047c85",
-                country: "Turkey",
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
                 socials: [
                     {
                         "icon": "linkedin",
-                        "link": "https://www.linkedin.com/in/barisyesugey/",
+                        "link": "",
                         "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
                     }
                 ],
-                bio: "Üniversite eğitimini İngiltere'de (Bilgisayar Bilimleri) tamamlayan Barış, Facebook ve Paypal'da satış ve çözüm mühendisi olarak geliştiricilerin platform teknolojilerini uygulama ve servislerine entegre etmesinde destek oldu. Şu anda, Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                shortBio: "Google Ekosistem takiminda, Google Gelistirici Platform ürünlerini Türkiye, Kafkaslar ve Asya bölgeside yasayan geliştiricilere tanitmaktadir.",
-                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/ahmet-ergani.jpg?alt=media&token=ef098d51-ccd4-4022-a6f3-6dbe6e87ab67"
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // ahmet ergani
+		}, // Onur Yüksektepeli
+		{
+			id: "MursidYazar",
+			data: {
+                name: "Mürşid Yazar",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Mürşid Yazar
+		{
+			id: "YigitOzaksut",
+			data: {
+                name: "Yiğit Özaksüt",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Yiğit Özaksüt
+		{
+			id: "FurkanKamaci",
+			data: {
+                name: "Furkan Kamacı",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Furkan Kamacı
+		{
+			id: "AlaaAlnoumi",
+			data: {
+                name: "Alaa Alnoumi",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Alaa Alnoumi
+		{
+			id: "DmitryGalov",
+			data: {
+                name: "Dmitry Galov",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Dmitry Galov
+		{
+			id: "GurayYildirim",
+			data: {
+                name: "Güray Yıldırım",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Güray Yıldırım
+		{
+			id: "UgurTilikoglu",
+			data: {
+                name: "Uğur Tılıkoğlu",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Uğur Tılıkoğlu
+		{
+			id: "SercanYusuf",
+			data: {
+                name: "Sercan Yusuf",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Sercan Yusuf
+		{
+			id: "EbruGuven",
+			data: {
+                name: "Ebru Güven",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Ebru Güven
+		{
+			id: "AlperGercek",
+			data: {
+                name: "Alper Gerçek",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Alper Gerçek
+		{
+			id: "CanSungur",
+			data: {
+                name: "Can Sungur",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Can Sungur
+		{
+			id: "ArdaArican",
+			data: {
+                name: "Arda Arıcan",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Arda Arıcan
+		{
+			id: "OrcunKilic",
+			data: {
+                name: "Orçun Kılıç",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Orçun Kılıç
+		{
+			id: "CanerYildirim",
+			data: {
+                name: "Caner Yıldırım",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Caner Yıldırım
+		{
+			id: "RoySimkes",
+			data: {
+                name: "Roy Simkeş",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Roy Simkeş
+		{
+			id: "DEBUG_SPEAKER",
+			data: {
+                name: "DEBUG_SPEAKER",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // DEBUG (DONT REMOVE UNLESS YOU ASKED YASIR)
 	]
 };
 
 const seshs = {
     sessions: [
+    	{
+            id: "888",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Keynote"
+                ],
+                speakers: [
+                    "DEBUG_SPEAKER"
+                ],
+                title: "Açılış Konuşması",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
         {
             id: "101",
             data: {
-                "complexity": "GDG",
+                "complexity": "Beginner",
                 "tags": [
-                    "Cloud"
+                    "Diğer"
                 ],
                 speakers: [
-                    "GurolCay"
+                    "DEBUG_SPEAKER"
                 ],
-                title: "Gurol Toplanti Yapalim ;)",
+                title: "[HAVELSAN]",
                 language: "Turkish",
-                description: "Progressive Delivery makes it easier to adopt Continuous Delivery, by deploying new versions to a subset of users and evaluating their correctness and performance before rolling them to the totality of the users, and rolled back if not matching some key metrics. Canary deployments is one of the techniques in Progressive Delivery, used in companies like Facebook to roll out new versions gradually. But good news! you don't need to be Facebook to take advantage of it.\n\nWe will demo how to create a fully automated Progressive Delivery pipeline with Canary deployments and rollbacks in Kubernetes using Jenkins X, an open source platform for cloud native CI/CD in Kubernetes, and Flagger, a project that uses Istio and Prometheus to automate Canary rollouts and rollbacks."
+                description: "[SESSION_DESCRIPTION]"
             }
         },
         {
             id: "102",
             data: {
-                "complexity": "GDG",
+                "complexity": "Beginner",
                 "tags": [
-                    "Cloud"
+                    "Web Teknolojileri"
                 ],
                 speakers: [
-                    "GokceNurErer"
+                    "AlaaAlnoumi"
                 ],
-                title: "Nasil Kirpi Olunur?",
-                language: "English",
-                description: "Progressive Delivery makes it easier to adopt Continuous Delivery, by deploying new versions to a subset of users and evaluating their correctness and performance before rolling them to the totality of the users, and rolled back if not matching some key metrics. Canary deployments is one of the techniques in Progressive Delivery, used in companies like Facebook to roll out new versions gradually. But good news! you don't need to be Facebook to take advantage of it.\n\nWe will demo how to create a fully automated Progressive Delivery pipeline with Canary deployments and rollbacks in Kubernetes using Jenkins X, an open source platform for cloud native CI/CD in Kubernetes, and Flagger, a project that uses Istio and Prometheus to automate Canary rollouts and rollbacks."
+                title: "[REACT_NATIVE]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
             }
         },
         {
             id: "103",
             data: {
-                "complexity": "GDG",
+                "complexity": "Beginner",
                 "tags": [
-                    "Cloud"
+                    "Diğer"
                 ],
                 speakers: [
-                    "AhmetErgani"
+                    "DEBUG_SPEAKER"
                 ],
-                title: "Tum Tatilde Nasil Skyrim Oynadim?",
-                language: "English",
-                description: "Progressive Delivery makes it easier to adopt Continuous Delivery, by deploying new versions to a subset of users and evaluating their correctness and performance before rolling them to the totality of the users, and rolled back if not matching some key metrics. Canary deployments is one of the techniques in Progressive Delivery, used in companies like Facebook to roll out new versions gradually. But good news! you don't need to be Facebook to take advantage of it.\n\nWe will demo how to create a fully automated Progressive Delivery pipeline with Canary deployments and rollbacks in Kubernetes using Jenkins X, an open source platform for cloud native CI/CD in Kubernetes, and Flagger, a project that uses Istio and Prometheus to automate Canary rollouts and rollbacks."
+                title: "[INTERTECH]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
             }
         },
+        {
+            id: "104",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Web Teknolojileri"
+                ],
+                speakers: [
+                    "DaronYondem"
+                ],
+                title: "Serverless İle Tek Kişilik Startup'a Nitro Etkisi",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "105",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Diğer"
+                ],
+                speakers: [
+                    "DEBUG_SPEAKER"
+                ],
+                title: "[HAVELSAN]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "106",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Blockchain"
+                ],
+                speakers: [
+                    "EbruGuven"
+                ],
+                title: "[BLOCKCHAIN]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "107",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Diğer"
+                ],
+                speakers: [
+                    "HasanBurhanBeytur"
+                ],
+                title: "Bilgi Yaşı Metriği ve IOT",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "108",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Siber Güvenlik"
+                ],
+                speakers: [
+                    "DmitryGalov"
+                ],
+                title: "[KASPERSKY]",
+                language: "English",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "109",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Diğer"
+                ],
+                speakers: [
+                    "AlperGercek"
+                ],
+                title: "Dijital Dönüşüm",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "110",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Yapay Zeka"
+                ],
+                speakers: [
+                    "OnurYuksektepeli"
+                ],
+                title: "[MICROSOFT_AI]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "111",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Google Teknolojileri"
+                ],
+                speakers: [
+                    "GurayYildirim"
+                ],
+                title: "Kubernetes Nedir, Ne İşe Yarar?",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "112",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Oyun Geliştirme"
+                ],
+                speakers: [
+                    "CanSungur"
+                ],
+                title: "Oyun Dizaynı Üzerine",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "113",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Mobil Teknolojileri"
+                ],
+                speakers: [
+                    "MursidYazar"
+                ],
+                title: "Güncel Mobil Teknolojiler ve Geleceği",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "114",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Diğer"
+                ],
+                speakers: [
+                    "DEBUG_SPEAKER",
+                ],
+                title: "[UNKNOWN]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "115",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Tasarım"
+                ],
+                speakers: [
+                    "OrcunKilic",
+                    "ArdaArican"
+                ],
+                title: "A L G I",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "116",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Mobil Teknolojileri"
+                ],
+                speakers: [
+                    "YigitOzaksut"
+                ],
+                title: "How To Make An Amazing App With Cognitive Services",
+                language: "English",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "117",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Oyun Geliştirme"
+                ],
+                speakers: [
+                    "UgurTilikoglu"
+                ],
+                title: "Yazılım Sektöründen Oyun Sektörüne Geçen Yöneticinin Hatıraları",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "118",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Tasarım"
+                ],
+                speakers: [
+                    "CanerYildirim"
+                ],
+                title: "Design Systems",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "119",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Yapay Zeka"
+                ],
+                speakers: [
+                    "FurkanKamaci"
+                ],
+                title: "[MAKINE_OGRENMESI]",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "120",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Mobil Teknolojileri",
+                    "Google Teknolojileri"
+                ],
+                speakers: [
+                    "SercanYusuf"
+                ],
+                title: "Zero To One With Flutter",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        },
+        {
+            id: "121",
+            data: {
+                "complexity": "Beginner",
+                "tags": [
+                    "Diğer",
+                ],
+                speakers: [
+                    "RoySimkes"
+                ],
+                title: "Yazılımcılığı Nerede Öğrendim?",
+                language: "Turkish",
+                description: "[SESSION_DESCRIPTION]"
+            }
+        }
     ]
 };
 
@@ -142,17 +921,28 @@ const sched = {
                 date: "2020-02-29",
                 tracks: [
                     {
-                        title: "Bosphorus(Uniq Hall)"
+                        title: "[GEEKDAY_HALL_1]"
                     },
                     {
-                        title: "Galata Tower(Glass Room)"
+                        title: "[GEEKDAY_HALL_2]"
                     },
                     {
-                        title: "Maiden's Tower"
+                        title: "[GEEKDAY_HALL_3]"
                     }
                 ],
                 dateReadable: "February 29",
                 timeslots: [
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    888,
+                                ]
+                            }
+                        ],
+                        endTime: "09:30",
+                        startTime: "10:20"
+                    },
                     {
                         sessions: [
                             {
@@ -171,9 +961,135 @@ const sched = {
                                 ]
                             },
                         ],
-                        endTime: "10:00",
-                        startTime: "09:00"
+                        endTime: "10:30",
+                        startTime: "11:20"
                     },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    104,
+                                ]
+                            },
+                            {
+								items: [
+                                    105,
+                                ]
+                            },
+                            {
+								items: [
+                                    106,
+                                ]
+                            },
+                        ],
+                        endTime: "11:30",
+                        startTime: "12:20"
+                    },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    107,
+                                ]
+                            },
+                            {
+								items: [
+                                    108,
+                                ]
+                            },
+                            {
+								items: [
+                                    109,
+                                ]
+                            },
+                        ],
+                        endTime: "12:30",
+                        startTime: "13:20"
+                    },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    110,
+                                ]
+                            },
+                            {
+								items: [
+                                    111,
+                                ]
+                            },
+                            {
+								items: [
+                                    112,
+                                ]
+                            },
+                        ],
+                        endTime: "14:00",
+                        startTime: "14:50"
+                    },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    113,
+                                ]
+                            },
+                            {
+								items: [
+                                    114,
+                                ]
+                            },
+                            {
+								items: [
+                                    115,
+                                ]
+                            },
+                        ],
+                        endTime: "15:00",
+                        startTime: "15:50"
+                    },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    116,
+                                ]
+                            },
+                            {
+								items: [
+                                    117,
+                                ]
+                            },
+                            {
+								items: [
+                                    118,
+                                ]
+                            },
+                        ],
+                        endTime: "16:00",
+                        startTime: "16:50"
+                    },
+                    {
+                        sessions: [
+                            {
+                                items: [
+                                    119,
+                                ]
+                            },
+                            {
+								items: [
+                                    120,
+                                ]
+                            },
+                            {
+								items: [
+                                    121,
+                                ]
+                            },
+                        ],
+                        endTime: "17:00",
+                        startTime: "17:50"
+                    }
                 ]
             }
         }
