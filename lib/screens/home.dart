@@ -128,7 +128,7 @@ class _MainScreenState extends State<MainScreen> {
                           text2: "Konuşmacılar",
                           width: 70,
                           height: 70,
-                          image: 'assets/empty.png',
+                          image: 'assets/megaphone.png',
                           onPressed: () {
                             Navigator.push(
                               context,

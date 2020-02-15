@@ -244,7 +244,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                           child: Row(
                             children: <Widget>[
                               Text(
-                                "Salonlar",
+                                "Salon",
                                 style: TextStyle(
                                   fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),

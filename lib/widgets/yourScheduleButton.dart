@@ -39,7 +39,7 @@ class YourScheduleButton extends StatelessWidget {
                         child: Row(
                           children: <Widget>[
                             Text(
-                              "Takvimim",
+                              "Takvimim ",
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
