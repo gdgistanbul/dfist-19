@@ -135,7 +135,7 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
       appBar: new AppBar(
         title: new Text("Speakers",
             style: TextStyle(
-              fontFamily: 'RedHatDisplay',
+              fontFamily: 'NunitoSans',
               color: Color(0xff333d47),
               fontSize: 20,
               fontWeight: FontWeight.w700,

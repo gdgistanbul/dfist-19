@@ -35,7 +35,7 @@ class _MultiSelectChipState extends State<MultiSelectChip> {
               alignment: Alignment.centerLeft,
               child: new Text(widget.reportList,
                   style: TextStyle(
-                    fontFamily: 'RedHatDisplay',
+                    fontFamily: 'NunitoSans',
                     color: selectedChoices.contains(widget.reportList)
                         ? Color(0xffffffff)
                         : Color(0xff7090a7),

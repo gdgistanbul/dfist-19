@@ -229,7 +229,7 @@ class _SessionsScreenState extends State<SessionsScreen>
               }),
           title: Text("Sessions",
               style: TextStyle(
-                fontFamily: 'RedHatDisplay',
+                fontFamily: 'NunitoSans',
                 color: Color(0xff333d47),
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -266,7 +266,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                               Text(
                                 "Halls",
                                 style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
+                                  fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -293,7 +293,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                               Text(
                                 "Category",
                                 style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
+                                  fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -393,7 +393,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                                                       "${_scheduleItem.startTime}-${_scheduleItem.endTime}",
                                                       style: TextStyle(
                                                         fontFamily:
-                                                            'RedHatDisplay',
+                                                            'NunitoSans',
                                                         color:
                                                             Color(0xff333d47),
                                                         fontSize: 12,

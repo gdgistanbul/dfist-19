@@ -60,7 +60,7 @@ class RectangleButton extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
-                                    fontFamily: "RedHatDisplay",
+                                    fontFamily: "NunitoSans",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 18.0,
                                     letterSpacing: 0),
@@ -71,7 +71,7 @@ class RectangleButton extends StatelessWidget {
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w700,
-                                    fontFamily: "RedHatDisplay",
+                                    fontFamily: "NunitoSans",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 18.0,
                                     letterSpacing: 0),

@@ -77,7 +77,7 @@ class _SpeakerItemState extends State<SpeakerItem>
                             child: Text(
                               "${widget.name}",
                               style: TextStyle(
-                                fontFamily: 'RedHatDisplay',
+                                fontFamily: 'NunitoSans',
                                 color: Color(0xffffffff),
                                 fontSize: 14,
                                 fontWeight: FontWeight.w700,

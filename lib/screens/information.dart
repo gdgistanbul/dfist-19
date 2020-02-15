@@ -32,7 +32,7 @@ class _InformationScreenState extends State<InformationScreen> {
       appBar: new AppBar(
         title: new Text("Bilgi",
             style: TextStyle(
-              fontFamily: 'RedHatDisplay',
+              fontFamily: 'NunitoSans',
               color: Color(0xff333d47),
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -52,7 +52,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 child: new Text(
                     "GeekDay, GTÜ Bilgisayar Topluluğu tarafından her yıl düzenlenen, alanında uzman konuşmacılar ve Türkiye'nin her yerinden yüzlerce katılımcıdan oluşan, bilgi ve ??? bir etkinliktir.",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -65,7 +65,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: new Text(
                 "Tarih & Zaman",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay',
+                  fontFamily: 'NunitoSans',
                   color: Color(0xff333d47),
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -81,7 +81,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 new TextSpan(
                     text: "GeekDay, ",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -90,7 +90,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 new TextSpan(
                     text: "29 Şubat 2020, Cumartesi ",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -99,7 +99,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 new TextSpan(
                     text: "günü, saat ",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -108,7 +108,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 new TextSpan(
                     text: "??:?? ile ??:??",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -117,7 +117,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 new TextSpan(
                     text: " arasında düzenlenecektir.",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -137,7 +137,7 @@ class _InformationScreenState extends State<InformationScreen> {
                     child: new Text(
                       "Takvimine Ekle",
                       style: TextStyle(
-                        fontFamily: 'RedHatDisplay',
+                        fontFamily: 'NunitoSans',
                         color: Colors.white,
                         fontSize: 16,
                         fontWeight: FontWeight.w700,
@@ -157,7 +157,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: new Text(
                 "Yer",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay',
+                  fontFamily: 'NunitoSans',
                   color: Color(0xff333d47),
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -202,7 +202,7 @@ class _InformationScreenState extends State<InformationScreen> {
                             style: const TextStyle(
                                 color: const Color(0xffffffff),
                                 fontWeight: FontWeight.w700,
-                                fontFamily: "RedHatDisplay",
+                                fontFamily: "NunitoSans",
                                 fontStyle: FontStyle.normal,
                                 fontSize: 14.0)),
                       ),
@@ -221,7 +221,7 @@ class _InformationScreenState extends State<InformationScreen> {
                       child: new Text(
                         "Google Haritalar'da Göster",
                         style: TextStyle(
-                          fontFamily: 'RedHatDisplay',
+                          fontFamily: 'NunitoSans',
                           color: Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -240,7 +240,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: new Text(
                 "Event Organizer",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay',
+                  fontFamily: 'NunitoSans',
                   color: Color(0xff333d47),
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -265,7 +265,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 child: new Text(
                     "Google Developers Groups (GDG) - are open and volunteer geek communities that create exciting projects and share experience about Google technologies with a passion.",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -278,7 +278,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: new Text(
                 "Social Media Accounts",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay',
+                  fontFamily: 'NunitoSans',
                   color: Color(0xff333d47),
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -364,7 +364,7 @@ class _InformationScreenState extends State<InformationScreen> {
               child: new Text(
                 "Event Sponsors",
                 style: TextStyle(
-                  fontFamily: 'RedHatDisplay',
+                  fontFamily: 'NunitoSans',
                   color: Color(0xff333d47),
                   fontSize: 20,
                   fontWeight: FontWeight.w700,
@@ -474,7 +474,7 @@ class _InformationScreenState extends State<InformationScreen> {
                 child: new Text(
                     "DevFest are non-profit, community driven events. Without the sponsors we can not make it. Please support our sponsors.",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,

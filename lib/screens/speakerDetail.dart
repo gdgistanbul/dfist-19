@@ -87,7 +87,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
       appBar: new AppBar(
         title: new Text("Speaker Detail",
             style: TextStyle(
-              fontFamily: 'RedHatDisplay',
+              fontFamily: 'NunitoSans',
               color: Color(0xff333d47),
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -121,7 +121,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 16),
                 child: new Text(widget.speaker.data.name,
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 24,
                       fontWeight: FontWeight.w700,
@@ -130,7 +130,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               new Text(widget.speaker.data.title,
                   style: TextStyle(
-                    fontFamily: 'RedHatDisplay',
+                    fontFamily: 'NunitoSans',
                     color: Color(0xff333d47),
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
@@ -140,7 +140,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 16.0),
                 child: new Text(widget.speaker.data.bio,
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff333d47),
                       fontSize: 16,
                       fontWeight: FontWeight.w400,
@@ -151,7 +151,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 padding: const EdgeInsets.only(top: 24),
                 child: new Text("Social Media Accounts",
                     style: TextStyle(
-                      fontFamily: 'RedHatDisplay',
+                      fontFamily: 'NunitoSans',
                       color: Color(0xff0f3649),
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
@@ -180,7 +180,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                   padding: const EdgeInsets.only(top: 24),
                   child: new Text("Sessions",
                       style: TextStyle(
-                        fontFamily: 'RedHatDisplay',
+                        fontFamily: 'NunitoSans',
                         color: Color(0xff333d47),
                         fontSize: 20,
                         fontWeight: FontWeight.w700,

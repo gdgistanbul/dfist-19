@@ -30,7 +30,7 @@ class YourScheduleButton extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(6),
                   child: Container(
-                    color: Color(0xfffd8369),
+                    color: Color(0xffeb8b27),
                     width: MediaQuery.of(context).size.width,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 16),
@@ -43,7 +43,7 @@ class YourScheduleButton extends StatelessWidget {
                               style: TextStyle(
                                   color: Colors.white,
                                   fontWeight: FontWeight.w700,
-                                  fontFamily: "RedHatDisplay",
+                                  fontFamily: "NunitoSans",
                                   fontStyle: FontStyle.normal,
                                   fontSize: 18.0,
                                   letterSpacing: 0),
@@ -64,13 +64,13 @@ class YourScheduleButton extends StatelessWidget {
               Align(
                 alignment: Alignment.bottomRight,
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 3.0, bottom: 3.0),
+                  padding: const EdgeInsets.only(right: 10.0, bottom: 7.5),
                   child: Container(
                     width: 84,
                     height: 86,
                     child: new SizedBox(
                       child: new FitImage(
-                        child: new Image.asset('assets/cat.png'),
+                        child: new Image.asset('assets/schedule.png'),
                         fit: BoxFit.cover,
                       ),
                     ),

@@ -209,7 +209,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
         appBar: AppBar(
           title: Text("Your Schedule",
               style: TextStyle(
-                fontFamily: 'RedHatDisplay',
+                fontFamily: 'NunitoSans',
                 color: Color(0xff333d47),
                 fontSize: 20,
                 fontWeight: FontWeight.w700,
@@ -246,7 +246,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                               Text(
                                 "Halls",
                                 style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
+                                  fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,
@@ -273,7 +273,7 @@ class _MySessionsScreenState extends State<MySessionsScreen>
                               Text(
                                 "Category",
                                 style: TextStyle(
-                                  fontFamily: 'RedHatDisplay',
+                                  fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),
                                   fontSize: 16,
                                   fontWeight: FontWeight.w500,

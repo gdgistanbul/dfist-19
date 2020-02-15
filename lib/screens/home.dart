@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body:  Stack(children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(top: 0.0),
+          padding: EdgeInsets.only(top: 200.0),
           child: new Image.asset(
             'assets/tickets.png',
             fit: BoxFit.fill,
@@ -54,10 +54,6 @@ class _MainScreenState extends State<MainScreen> {
                       },
                     ),
                   ),
-                ),
-                Image(
-                  image: new AssetImage('assets/logo.png'),
-                  width: 170,
                 ),
                 Padding(
                   padding: EdgeInsets.only(
@@ -108,12 +104,12 @@ class _MainScreenState extends State<MainScreen> {
                         color: Colors.transparent,
                         child: RectangleButton(
                           key: UniqueKey(),
-                          color: Color(0xff74d5de),
+                          color: Color(0xffc53b69),
                           text1: "Event",
                           text2: "Schedule",
                           width: 80,
                           height: 90,
-                          image: 'assets/newspaper.png',
+                          image: 'assets/empty.png',
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -127,12 +123,12 @@ class _MainScreenState extends State<MainScreen> {
                         color: Colors.transparent,
                         child: RectangleButton(
                           key: UniqueKey(),
-                          color: Color(0xfffecc92),
+                          color: Color(0xff6ab34d),
                           text1: "All",
                           text2: "Speakers",
                           width: 60,
                           height: 90,
-                          image: 'assets/question.png',
+                          image: 'assets/empty.png',
                           onPressed: () {
                             Navigator.push(
                               context,

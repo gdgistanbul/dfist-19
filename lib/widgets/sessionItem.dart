@@ -132,7 +132,7 @@ class _SessionItemState extends State<SessionItem>
                               TextSpan(
                                   text: widget.time,
                                   style: TextStyle(
-                                      fontFamily: 'RedHatDisplay',
+                                      fontFamily: 'NunitoSans',
                                       color: Color(0xffffffff),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w500,
@@ -140,7 +140,7 @@ class _SessionItemState extends State<SessionItem>
                               TextSpan(
                                   text: " // " + widget.track,
                                   style: TextStyle(
-                                      fontFamily: 'RedHatDisplay',
+                                      fontFamily: 'NunitoSans',
                                       color: Color(0xffffffff),
                                       fontSize: 14,
                                       fontWeight: FontWeight.w700,
@@ -158,7 +158,7 @@ class _SessionItemState extends State<SessionItem>
                             child: Text(
                               widget.title,
                               style: TextStyle(
-                                fontFamily: 'RedHatDisplay',
+                                fontFamily: 'NunitoSans',
                                 color: Color(0xffffffff),
                                 fontSize: 18,
                                 fontWeight: FontWeight.w700,
@@ -195,7 +195,7 @@ class _SessionItemState extends State<SessionItem>
                                         child: Text(
                                           buffer != null ? buffer.toString() : "",
                                           style: TextStyle(
-                                              fontFamily: 'RedHatDisplay',
+                                              fontFamily: 'NunitoSans',
                                               color: Color(0xffffffff),
                                               fontSize: 14,
                                               fontWeight: FontWeight.w500,

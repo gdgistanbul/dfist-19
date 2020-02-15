@@ -35,7 +35,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                 MaterialButton(
                     child: new Text("Reset",
                         style: TextStyle(
-                          fontFamily: 'RedHatDisplay',
+                          fontFamily: 'NunitoSans',
                           color: Color(0xff333d47),
                           fontSize: 16,
                           fontWeight: FontWeight.w700,
@@ -48,7 +48,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                   padding: const EdgeInsets.only(right: 30.0),
                   child: new Text(widget.from == 0 ? "Halls" : "Categories",
                       style: TextStyle(
-                        fontFamily: 'RedHatDisplay',
+                        fontFamily: 'NunitoSans',
                         color: Color(0xff333d47),
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
@@ -108,7 +108,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                       child: Center(
                         child: new Text("Apply Filter",
                             style: TextStyle(
-                              fontFamily: 'RedHatDisplay',
+                              fontFamily: 'NunitoSans',
                               color: Color(0xffffffff),
                               fontSize: 14,
                               fontWeight: FontWeight.w900,
@@ -169,15 +169,15 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
   ];
 
   List<Color> colorList = [
-    Color(0xff7AD7E0),
-    Color(0xff84E07A),
-    Color(0xffFECC92),
-    Color(0xff7A9DE0),
-    Color(0xffE17F7F),
-    Color(0xffFECC92),
-    Color(0xffE07AB3),
-    Color(0xffE07AB3),
-    Color(0xffE07AB3),
-    Color(0xffE07AB3),
+    Color(0xff2397d4),
+    Color(0xff2397d4),
+    Color(0xff6ab34d),
+    Color(0xffec4436),
+    Color(0xffe36c2d),
+    Color(0xffa93287),
+    Color(0xff517ec0),
+    Color(0xff2ba953),
+    Color(0xfffabc14),
+    Color(0xffc53b69),
   ];
 }
