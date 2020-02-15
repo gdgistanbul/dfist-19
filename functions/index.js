@@ -2,10 +2,10 @@ const functions = require('firebase-functions');
 const url = require('url');
 
 const spks = {
-	speakers: [
-		{
-			id: "DaronYondem",
-			data: {
+    speakers: [
+        {
+            id: "DaronYondem",
+            data: {
                 name: "Daron Yöndem",
                 tags: [
                     "None",
@@ -32,10 +32,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Daron Yöndem
-		{
-			id: "HasanBurhanBeytur",
-			data: {
+        }, // Daron Yöndem
+        {
+            id: "HasanBurhanBeytur",
+            data: {
                 name: "Hasan Burhan Beytur",
                 tags: [
                     "None",
@@ -62,10 +62,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Hasan Burhan Beytur
-		{
-			id: "OnurYuksektepeli",
-			data: {
+        }, // Hasan Burhan Beytur
+        {
+            id: "OnurYuksektepeli",
+            data: {
                 name: "Onur Yüksektepeli",
                 tags: [
                     "None",
@@ -92,11 +92,11 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Onur Yüksektepeli
-		{
-			id: "MustafaKara",
-			data: {
-                name: "MustafaKara",
+        }, // Onur Yüksektepeli
+        {
+            id: "MustafaKara",
+            data: {
+                name: "Mustafa Kara",
                 tags: [
                     "None",
                 ],
@@ -122,10 +122,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Mustafa Kara
-		{
-			id: "MursidYazar",
-			data: {
+        }, // Mustafa Kara
+        {
+            id: "MursidYazar",
+            data: {
                 name: "Mürşid Yazar",
                 tags: [
                     "None",
@@ -152,10 +152,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Mürşid Yazar
-		{
-			id: "YigitOzaksut",
-			data: {
+        }, // Mürşid Yazar
+        {
+            id: "YigitOzaksut",
+            data: {
                 name: "Yiğit Özaksüt",
                 tags: [
                     "None",
@@ -182,10 +182,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Yiğit Özaksüt
-		{
-			id: "FurkanKamaci",
-			data: {
+        }, // Yiğit Özaksüt
+        {
+            id: "FurkanKamaci",
+            data: {
                 name: "Furkan Kamacı",
                 tags: [
                     "None",
@@ -212,10 +212,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Furkan Kamacı
-		{
-			id: "AlaaAlnuaimi",
-			data: {
+        }, // Furkan Kamacı
+        {
+            id: "AlaaAlnuaimi",
+            data: {
                 name: "Alaa Alnuaimi",
                 tags: [
                     "None",
@@ -242,10 +242,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Alaa Alnuaimi
-		{
-			id: "DmitryGalov",
-			data: {
+        }, // Alaa Alnuaimi
+        {
+            id: "DmitryGalov",
+            data: {
                 name: "Dmitry Galov",
                 tags: [
                     "None",
@@ -272,10 +272,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Dmitry Galov
-		{
-			id: "GurayYildirim",
-			data: {
+        }, // Dmitry Galov
+        {
+            id: "GurayYildirim",
+            data: {
                 name: "Güray Yıldırım",
                 tags: [
                     "None",
@@ -302,10 +302,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Güray Yıldırım
-		{
-			id: "UgurTilikoglu",
-			data: {
+        }, // Güray Yıldırım
+        {
+            id: "UgurTilikoglu",
+            data: {
                 name: "Uğur Tılıkoğlu",
                 tags: [
                     "None",
@@ -332,10 +332,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Uğur Tılıkoğlu
-		{
-			id: "SercanYusuf",
-			data: {
+        }, // Uğur Tılıkoğlu
+        {
+            id: "SercanYusuf",
+            data: {
                 name: "Sercan Yusuf",
                 tags: [
                     "None",
@@ -362,10 +362,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Sercan Yusuf
-		{
-			id: "EbruGuven",
-			data: {
+        }, // Sercan Yusuf
+        {
+            id: "EbruGuven",
+            data: {
                 name: "Ebru Güven",
                 tags: [
                     "None",
@@ -392,10 +392,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Ebru Güven
-		{
-			id: "BasakBurcuYigit",
-			data: {
+        }, // Ebru Güven
+        {
+            id: "BasakBurcuYigit",
+            data: {
                 name: "Başak Burcu Yiğit",
                 tags: [
                     "None",
@@ -422,10 +422,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Başak Burcu Yiğit
-		{
-			id: "AlperGercek",
-			data: {
+        }, // Başak Burcu Yiğit
+        {
+            id: "AlperGercek",
+            data: {
                 name: "Alper Gerçek",
                 tags: [
                     "None",
@@ -452,10 +452,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Alper Gerçek
-		{
-			id: "CanSungur",
-			data: {
+        }, // Alper Gerçek
+        {
+            id: "CanSungur",
+            data: {
                 name: "Can Sungur",
                 tags: [
                     "None",
@@ -482,10 +482,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Can Sungur
-		{
-			id: "ArdaArican",
-			data: {
+        }, // Can Sungur
+        {
+            id: "ArdaArican",
+            data: {
                 name: "Arda Arıcan",
                 tags: [
                     "None",
@@ -512,10 +512,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Arda Arıcan
-		{
-			id: "OrcunKilic",
-			data: {
+        }, // Arda Arıcan
+        {
+            id: "OrcunKilic",
+            data: {
                 name: "Orçun Kılıç",
                 tags: [
                     "None",
@@ -542,10 +542,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Orçun Kılıç
-		{
-			id: "CanerYildirim",
-			data: {
+        }, // Orçun Kılıç
+        {
+            id: "CanerYildirim",
+            data: {
                 name: "Caner Yıldırım",
                 tags: [
                     "None",
@@ -572,10 +572,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Caner Yıldırım
-		{
-			id: "RoySimkes",
-			data: {
+        }, // Caner Yıldırım
+        {
+            id: "RoySimkes",
+            data: {
                 name: "Roy Simkeş",
                 tags: [
                     "None",
@@ -602,10 +602,10 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Roy Simkeş
-		{
-			id: "DEBUG_SPEAKER",
-			data: {
+        }, // Roy Simkeş
+        {
+            id: "DEBUG_SPEAKER",
+            data: {
                 name: "DEBUG_SPEAKER",
                 tags: [
                     "None",
@@ -632,8 +632,8 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // DEBUG (DONT REMOVE UNLESS YOU ASKED YASIR)
-	]
+        }, // DEBUG (DONT REMOVE UNLESS YOU ASKED YASIR)
+    ]
 };
 
 const seshs = {
@@ -676,9 +676,9 @@ const seshs = {
                     "Web Teknolojileri"
                 ],
                 speakers: [
-                    "AlaaAlnoumi"
+                    "AlaaAlnuaimi"
                 ],
-                title: "[REACT_NATIVE]",
+                title: "React Native İle Mobil Uygulama",
                 language: "Turkish",
                 description: "[SESSION_DESCRIPTION]"
             }
@@ -739,7 +739,7 @@ const seshs = {
                     "EbruGuven",
                     "BasakBurcuYigit"
                 ],
-                title: "[BLOCKCHAIN]",
+                title: "Bitcoin ve Blockzincir",
                 language: "Turkish",
                 description: "[SESSION_DESCRIPTION]"
             }
@@ -800,7 +800,7 @@ const seshs = {
                     "OnurYuksektepeli",
                     "MustafaKara"
                 ],
-                title: "[MICROSOFT_AI]",
+                title: "Microsoft Yapay Zeka Servisleri İş Başında",
                 language: "Turkish",
                 description: "[SESSION_DESCRIPTION]"
             }
@@ -876,7 +876,7 @@ const seshs = {
                     "OrcunKilic",
                     "ArdaArican"
                 ],
-                title: "A L G I",
+                title: "ALGI",
                 language: "Turkish",
                 description: "[SESSION_DESCRIPTION]"
             }
@@ -936,7 +936,7 @@ const seshs = {
                 speakers: [
                     "FurkanKamaci"
                 ],
-                title: "[MAKINE_OGRENMESI]",
+                title: "Makine Öğrenmesi",
                 language: "Turkish",
                 description: "[SESSION_DESCRIPTION]"
             }
