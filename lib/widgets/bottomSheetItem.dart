@@ -33,7 +33,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 MaterialButton(
-                    child: new Text("Reset",
+                    child: new Text("Sıfırla",
                         style: TextStyle(
                           fontFamily: 'NunitoSans',
                           color: Color(0xff333d47),
@@ -46,7 +46,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(right: 30.0),
-                  child: new Text(widget.from == 0 ? "Halls" : "Categories",
+                  child: new Text(widget.from == 0 ? "Salon" : "Kategori",
                       style: TextStyle(
                         fontFamily: 'NunitoSans',
                         color: Color(0xff333d47),
@@ -106,7 +106,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(14.0)),
                       child: Center(
-                        child: new Text("Apply Filter",
+                        child: new Text("Filtreyi Uygula",
                             style: TextStyle(
                               fontFamily: 'NunitoSans',
                               color: Color(0xffffffff),

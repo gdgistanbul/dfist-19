@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
                     width: 40.0,
                     child: IconButton(
                       icon: new Image.asset('assets/info.png'),
-                      tooltip: 'Increase volume by 10',
+                      tooltip: 'Sesi 10 arttır',
                       onPressed: () {
                         setState(() {
                           Navigator.push(
@@ -66,7 +66,7 @@ class _MainScreenState extends State<MainScreen> {
                       visible: false,
                       child: IconButton(
                         icon: new Image.asset('assets/notifications.png'),
-                        tooltip: 'Increase volume by 10',
+                        tooltip: 'Sesi 10 arttır',
                         onPressed: () {
                           setState(() {});
                         },
@@ -105,11 +105,11 @@ class _MainScreenState extends State<MainScreen> {
                         child: RectangleButton(
                           key: UniqueKey(),
                           color: Color(0xffc53b69),
-                          text1: "Event",
-                          text2: "Schedule",
+                          text1: "Etkinlik",
+                          text2: "Takvimi",
                           width: 80,
                           height: 90,
-                          image: 'assets/empty.png',
+                          image: 'assets/newspaper.png',
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -124,8 +124,8 @@ class _MainScreenState extends State<MainScreen> {
                         child: RectangleButton(
                           key: UniqueKey(),
                           color: Color(0xff6ab34d),
-                          text1: "All",
-                          text2: "Speakers",
+                          text1: "Tüm",
+                          text2: "Konuşmacılar",
                           width: 60,
                           height: 90,
                           image: 'assets/empty.png',

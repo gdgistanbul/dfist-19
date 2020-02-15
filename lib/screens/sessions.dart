@@ -227,7 +227,7 @@ class _SessionsScreenState extends State<SessionsScreen>
               onPressed: (){
                 Navigator.pop(context);
               }),
-          title: Text("Sessions",
+          title: Text("Etkinlik Takvimi",
               style: TextStyle(
                 fontFamily: 'NunitoSans',
                 color: Color(0xff333d47),
@@ -264,7 +264,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                           child: Row(
                             children: <Widget>[
                               Text(
-                                "Halls",
+                                "Salon",
                                 style: TextStyle(
                                   fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),
@@ -291,7 +291,7 @@ class _SessionsScreenState extends State<SessionsScreen>
                           child: Row(
                             children: <Widget>[
                               Text(
-                                "Category",
+                                "Kategori",
                                 style: TextStyle(
                                   fontFamily: 'NunitoSans',
                                   color: Color(0xff373a42),

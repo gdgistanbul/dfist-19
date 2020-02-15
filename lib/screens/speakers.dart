@@ -133,7 +133,7 @@ class _SpeakerScreenState extends State<SpeakerScreen>with AutomaticKeepAliveCli
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Speakers",
+        title: new Text("Konuşmacılar",
             style: TextStyle(
               fontFamily: 'NunitoSans',
               color: Color(0xff333d47),

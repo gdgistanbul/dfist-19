@@ -130,8 +130,8 @@ class _SessionDetailState extends State<SessionDetail> {
                                     child: new Text(
                                         favList != null
                                             ? favList.contains(
-                                            widget.session.id)? "Remove From Schedule": "Add Your Schedule"
-                                            : "Add Your Schedule",
+                                            widget.session.id)? "Takvimimden Çıkar": "Takvimime Ekle"
+                                            : "Takvimime Ekle",
                                         style: TextStyle(
                                           fontFamily: 'NunitoSans',
                                           color: Color(0xffffffff),
@@ -281,7 +281,7 @@ class _SessionDetailState extends State<SessionDetail> {
                   centerTitle: true,
                   elevation: 0.0,
                   backgroundColor: Colors.transparent,
-                  title: new Text("Session Detail",
+                  title: new Text("Konuşma Hakkında",
                       style: TextStyle(
                         fontFamily: 'NunitoSans',
                         color: Color(0xffffffff),

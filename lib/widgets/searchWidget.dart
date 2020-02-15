@@ -106,7 +106,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ),
                   borderRadius: BorderRadius.circular(5.0),
                 ),
-                hintText: "Search..",
+                hintText: "Ara...",
                 prefixIcon: Icon(
                   Icons.search,
                   color: Colors.grey,

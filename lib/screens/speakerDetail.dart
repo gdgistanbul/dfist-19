@@ -85,7 +85,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
-        title: new Text("Speaker Detail",
+        title: new Text("Konuşmacı Hakkında",
             style: TextStyle(
               fontFamily: 'NunitoSans',
               color: Color(0xff333d47),
@@ -149,7 +149,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 24),
-                child: new Text("Social Media Accounts",
+                child: new Text("Sosyal Medya'da",
                     style: TextStyle(
                       fontFamily: 'NunitoSans',
                       color: Color(0xff0f3649),
@@ -178,7 +178,7 @@ class _SpeakerDetailState extends State<SpeakerDetail> {
                 visible: sessions == null ? false : true,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 24),
-                  child: new Text("Sessions",
+                  child: new Text("Geekday'de",
                       style: TextStyle(
                         fontFamily: 'NunitoSans',
                         color: Color(0xff333d47),
