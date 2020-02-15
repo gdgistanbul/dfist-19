@@ -89,25 +89,27 @@ class Constants {
   static Color color(type) {
     switch (type) {
       case "Google Teknolojileri":
-        return Color(0xff84E07A);
+        return Color(0xff2397d4);
       case "Mobil Teknolojileri":
-        return Color(0xff84E07A);
+        return Color(0xff2397d4);
       case "Web Teknolojileri":
-        return Color(0xffE07AB3);
+        return Color(0xff6ab34d);
       case "Tasarım":
-        return Color(0xff7A9DE0);
+        return Color(0xffec4436);
       case "Oyun Geliştirme":
-        return Color(0xffE17F7F);
+        return Color(0xffe36c2d);
       case "Yapay Zeka":
-        return Color(0xffE17F7F);
+        return Color(0xffa93287);
       case "Siber Güvenlik":
-        return Color(0xffFECC92);
+        return Color(0xff517ec0);
       case "Blockchain":
-        return Color(0xff7AD7E0);
+        return Color(0xff2ba953);
       case "IOT":
-        return Color(0xffFECC92);
+        return Color(0xfffabc14);
+      case "Keynote":
+        return Color(0xff00b9f0);
       default:
-        return Color(0xffF1823B);
+        return Color(0xffc53b69);
     }
   }
 }
