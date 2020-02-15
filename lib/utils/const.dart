@@ -75,11 +75,11 @@ class Constants {
 
   static int hall(type) {
     switch (type) {
-      case "[GEEKDAY_HALL_1]":
+      case "Salon 1":
         return 0;
-      case "[GEEKDAY_HALL_2]":
+      case "Salon 2":
         return 1;
-      case "[GEEKDAY_HALL_3]":
+      case "Salon 3":
         return 2;
       default:
         return 0;

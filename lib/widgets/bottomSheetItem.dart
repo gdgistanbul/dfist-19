@@ -78,7 +78,7 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
                       padding:
-                      const EdgeInsets.only(left: 16.0, right: 16.0),
+                      const EdgeInsets.only(left: 8.0, right: 8.0),
                       child: Container(
                           child: Center(
                             child: MultiSelectChip(
@@ -163,9 +163,9 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
   ];
 
   List<String> halls = [
-    "[GEEKDAY_HALL_1]",
-    "[GEEKDAY_HALL_2]",
-    "[GEEKDAY_HALL_3]",
+    "Salon 1",
+    "Salon 2",
+    "Salon 3",
   ];
 
   List<Color> colorList = [

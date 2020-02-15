@@ -921,13 +921,13 @@ const sched = {
                 date: "2020-02-29",
                 tracks: [
                     {
-                        title: "[GEEKDAY_HALL_1]"
+                        title: "Salon 1"
                     },
                     {
-                        title: "[GEEKDAY_HALL_2]"
+                        title: "Salon 2"
                     },
                     {
-                        title: "[GEEKDAY_HALL_3]"
+                        title: "Salon 3"
                     }
                 ],
                 dateReadable: "February 29",
