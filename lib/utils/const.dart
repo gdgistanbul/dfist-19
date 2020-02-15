@@ -51,25 +51,25 @@ class Constants {
   static String type(type) {
     switch (type) {
       case "Google Teknolojileri":
-        return "assets/red.png";
+        return "assets/empty.png";
       case "Mobil Teknolojileri":
-        return "assets/red.png";
+        return "assets/empty.png";
       case "Web Teknolojileri":
-        return "assets/red.png";
+        return "assets/empty.png";
       case "Tasarım":
-        return "assets/cloud.png";
+        return "assets/empty.png";
       case "Oyun Geliştirme":
-        return "assets/cloud.png";
+        return "assets/empty.png";
       case "Yapay Zeka":
-        return "assets/cloud.png";
+        return "assets/empty.png";
       case "Siber Güvenlik":
-        return "assets/web.png";
+        return "assets/empty.png";
       case "Blockchain":
-        return "assets/red.png";
+        return "assets/empty.png";
       case "IOT":
-        return "assets/web.png";
+        return "assets/empty.png";
       default:
-        return "assets/red.png";
+        return "assets/empty.png";
     }
   }
 

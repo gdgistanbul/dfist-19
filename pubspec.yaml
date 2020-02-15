@@ -79,7 +79,6 @@ flutter:
     - assets/people.png
     - assets/cat.png
     - assets/question.png
-    - assets/newspaper.png
     - assets/uniq.jpeg
     - assets/path.png
     - assets/app_logo.png
@@ -93,3 +92,5 @@ flutter:
     - assets/gtu_kongre_merkezi.jpg
     - assets/empty.png
     - assets/schedule.png
+    - assets/clock.png
+    - assets/megaphone.png

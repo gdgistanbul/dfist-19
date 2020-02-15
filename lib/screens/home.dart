@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     return Scaffold(
       body:  Stack(children: <Widget>[
         Padding(
-          padding: EdgeInsets.only(top: 200.0),
+          padding: EdgeInsets.only(top: 0.0),
           child: new Image.asset(
             'assets/tickets.png',
             fit: BoxFit.fill,
@@ -108,8 +108,8 @@ class _MainScreenState extends State<MainScreen> {
                           text1: "Etkinlik",
                           text2: "Takvimi",
                           width: 80,
-                          height: 90,
-                          image: 'assets/newspaper.png',
+                          height: 80,
+                          image: 'assets/clock.png',
                           onPressed: () {
                             Navigator.push(
                               context,
@@ -126,8 +126,8 @@ class _MainScreenState extends State<MainScreen> {
                           color: Color(0xff6ab34d),
                           text1: "Tüm",
                           text2: "Konuşmacılar",
-                          width: 60,
-                          height: 90,
+                          width: 70,
+                          height: 70,
                           image: 'assets/empty.png',
                           onPressed: () {
                             Navigator.push(
