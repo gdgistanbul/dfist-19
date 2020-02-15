@@ -218,29 +218,29 @@ const spks = {
             data: {
                 name: "Alaa Alnuaimi",
                 tags: [
-                    "None",
+                    "Mobil Teknolojileri",
                 ],
-                title: "[TITLE]",
+                title: "Creative Director, Founder",
                 order: 1,
                 featured: true,
-                company: "[COMPANY]",
-                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
-                country: "[COUNTRY]",
+                company: "-99 design studio",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/dfist19.appspot.com/o/minus.png?alt=media&token=833e5e8d-3cc7-4347-b47b-72ab468d16d2",
+                country: "Turkey",
                 socials: [
                     {
-                        "icon": "linkedin",
-                        "link": "",
-                        "name": "Linkedin"
+                        "name": "Twitter",
+                        "icon": "twitter",
+                        "link": "https://twitter.com/alacaesar"
                     },
                     {
-                        "icon": "twitter",
-                        "link": "",
-                        "name": "Twitter"
+                        "icon": "github",
+                        "link": "https://github.com/alacaesar",
+                        "name": "Github"
                     }
                 ],
-                bio: "[LONG_BIO]",
-                shortBio: "[SHORT_BIO]",
-                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+                bio: "My name is Alaa Alnuaimi, I am a designer and developer living in Istanbul. I work as creative director at -99 design studio, which I have also co-founded. I also hold the position of Front-end team leader at Proj-e Software. For the last two years code jury at Awwwards. Raised by a painter and sculptor I have a great deal of passion for fine art and calligraphy. I am lucky to have both design and technical background, allowing me to work across both disciplines.",
+                shortBio: "My name is Alaa Alnuaimi, I am a designer and developer living in Istanbul.",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/alaa-alnuaimi.png?alt=media&token=03139eb2-5957-49ae-8f47-3822d053bd65"
             }
         }, // Alaa Alnuaimi
         {
