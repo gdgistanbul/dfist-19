@@ -50,23 +50,23 @@ class Constants {
 
   static String type(type) {
     switch (type) {
-      case "Mobile Technologies":
+      case "Google Teknolojileri":
         return "assets/red.png";
-      case "Flutter":
+      case "Mobil Teknolojileri":
         return "assets/red.png";
-      case "Design":
+      case "Web Teknolojileri":
         return "assets/red.png";
-      case "Machine Learning & AI":
+      case "Tasarım":
         return "assets/cloud.png";
-      case "Machine Learning & Ai":
+      case "Oyun Geliştirme":
         return "assets/cloud.png";
-      case "Cloud":
+      case "Yapay Zeka":
         return "assets/cloud.png";
-      case "Web Technologies":
+      case "Siber Güvenlik":
         return "assets/web.png";
-      case "Robotics & assistant":
+      case "Blockchain":
         return "assets/red.png";
-      case "Firebase":
+      case "IOT":
         return "assets/web.png";
       default:
         return "assets/red.png";
@@ -75,14 +75,12 @@ class Constants {
 
   static int hall(type) {
     switch (type) {
-      case "Bosphorus(Uniq Hall)":
+      case "[GEEKDAY_HALL_1]":
         return 0;
-      case "Galata Tower(Glass Room)":
+      case "[GEEKDAY_HALL_2]":
         return 1;
-      case "Maiden's Tower":
+      case "[GEEKDAY_HALL_3]":
         return 2;
-      case "Hagia Sophia":
-        return 3;
       default:
         return 0;
     }
@@ -90,23 +88,23 @@ class Constants {
 
   static Color color(type) {
     switch (type) {
-      case "Mobile Technologies":
+      case "Google Teknolojileri":
         return Color(0xff84E07A);
-      case "Flutter":
+      case "Mobil Teknolojileri":
         return Color(0xff84E07A);
-      case "Design":
+      case "Web Teknolojileri":
         return Color(0xffE07AB3);
-      case "Cloud":
+      case "Tasarım":
         return Color(0xff7A9DE0);
-      case "Machine Learning & AI":
+      case "Oyun Geliştirme":
         return Color(0xffE17F7F);
-      case "Machine Learning & Ai":
+      case "Yapay Zeka":
         return Color(0xffE17F7F);
-      case "Web Technologies":
+      case "Siber Güvenlik":
         return Color(0xffFECC92);
-      case "Robotics & assistant":
+      case "Blockchain":
         return Color(0xff7AD7E0);
-      case "Firebase":
+      case "IOT":
         return Color(0xffFECC92);
       default:
         return Color(0xffF1823B);

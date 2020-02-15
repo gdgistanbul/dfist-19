@@ -150,20 +150,22 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
 //  FocusScope.of(context).requestFocus(new FocusNode());
 
   List<String> reportList = [
-    "Robotics & assistant",
-    "Mobile Technologies",
-    "Web Technologies",
-    "Cloud",
-    "Machine Learning",
-    "Firebase",
-    "Design",
+    "Google Teknolojileri",
+    "Mobil Teknolojileri",
+    "Web Teknolojileri",
+    "Tasarım",
+    "Oyun Geliştirme",
+    "Yapay Zeka",
+    "Siber Güvenlik",
+    "Blockchain",
+    "IOT",
+    "Diğer",
   ];
 
   List<String> halls = [
-    "Bosphorus(Uniq Hall)",
-    "Galata Tower(Glass Room)",
-    "Maiden's Tower",
-    "Hagia Sophia",
+    "[GEEKDAY_HALL_1]",
+    "[GEEKDAY_HALL_2]",
+    "[GEEKDAY_HALL_3]",
   ];
 
   List<Color> colorList = [
@@ -173,6 +175,9 @@ class _BottomSheetItemState extends State<BottomSheetItem> {
     Color(0xff7A9DE0),
     Color(0xffE17F7F),
     Color(0xffFECC92),
+    Color(0xffE07AB3),
+    Color(0xffE07AB3),
+    Color(0xffE07AB3),
     Color(0xffE07AB3),
   ];
 }
