@@ -94,6 +94,36 @@ const spks = {
             }
 		}, // Onur Yüksektepeli
 		{
+			id: "MustafaKara",
+			data: {
+                name: "MustafaKara",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Mustafa Kara
+		{
 			id: "MursidYazar",
 			data: {
                 name: "Mürşid Yazar",
@@ -184,9 +214,9 @@ const spks = {
             }
 		}, // Furkan Kamacı
 		{
-			id: "AlaaAlnoumi",
+			id: "AlaaAlnuaimi",
 			data: {
-                name: "Alaa Alnoumi",
+                name: "Alaa Alnuaimi",
                 tags: [
                     "None",
                 ],
@@ -212,7 +242,7 @@ const spks = {
                 shortBio: "[SHORT_BIO]",
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
-		}, // Alaa Alnoumi
+		}, // Alaa Alnuaimi
 		{
 			id: "DmitryGalov",
 			data: {
@@ -363,6 +393,36 @@ const spks = {
                 photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
             }
 		}, // Ebru Güven
+		{
+			id: "BasakBurcuYigit",
+			data: {
+                name: "Başak Burcu Yiğit",
+                tags: [
+                    "None",
+                ],
+                title: "[TITLE]",
+                order: 1,
+                featured: true,
+                company: "[COMPANY]",
+                companyLogoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/company_default.png?alt=media&token=71effa2c-c65c-4870-ac6e-c77656c1c228",
+                country: "[COUNTRY]",
+                socials: [
+                    {
+                        "icon": "linkedin",
+                        "link": "",
+                        "name": "Linkedin"
+                    },
+                    {
+                        "icon": "twitter",
+                        "link": "",
+                        "name": "Twitter"
+                    }
+                ],
+                bio: "[LONG_BIO]",
+                shortBio: "[SHORT_BIO]",
+                photoUrl: "https://firebasestorage.googleapis.com/v0/b/geekday-mobile.appspot.com/o/pfp_default.png?alt=media&token=2cb3d30e-f689-4204-b91d-8de6eedd90e2"
+            }
+		}, // Başak Burcu Yiğit
 		{
 			id: "AlperGercek",
 			data: {
@@ -676,7 +736,8 @@ const seshs = {
                     "Blockchain"
                 ],
                 speakers: [
-                    "EbruGuven"
+                    "EbruGuven",
+                    "BasakBurcuYigit"
                 ],
                 title: "[BLOCKCHAIN]",
                 language: "Turkish",
@@ -736,7 +797,8 @@ const seshs = {
                     "Yapay Zeka"
                 ],
                 speakers: [
-                    "OnurYuksektepeli"
+                    "OnurYuksektepeli",
+                    "MustafaKara"
                 ],
                 title: "[MICROSOFT_AI]",
                 language: "Turkish",
