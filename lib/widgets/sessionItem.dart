@@ -48,13 +48,18 @@ class _SessionItemState extends State<SessionItem>
 
   _getSessionSpaker() async {
     buffer.clear();
+    var cnt = 0;
     if (widget.speaker != null && widget.speaker.isNotEmpty) {
       for (String speaker in widget.speaker)
         API.getSessionSpaker(speaker).then((response) {
           setState(() {
             data = response;
             buffer.write(data.speakers[0].data.name);
-            if (widget.speaker.length > 1) buffer.write(" ");
+            if (widget.speaker.length - 1 == cnt)
+              buffer.write(" ");
+            else
+              buffer.write(", ");
+            cnt++;
           });
         });
     }
