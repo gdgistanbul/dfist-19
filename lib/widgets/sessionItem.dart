@@ -70,7 +70,6 @@ class _SessionItemState extends State<SessionItem>
   _getSF() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     favList = prefs.getStringList("favList");
-    print(favList.length);
   }
 
 
